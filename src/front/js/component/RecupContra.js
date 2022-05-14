@@ -11,24 +11,9 @@ import React from "react";
         placeholder="email@example.com"
       />
     </div>
-    <div classname="form-group">
-      <label for="exampleDropdownFormPassword1">Contraseña</label>
-      <input
-        type="password"
-        classname="form-control"
-        id="exampleDropdownFormPassword1"
-        placeholder="Contraseña"
-      />
-    </div>
     <button type="submit" classname="btn btn-primary">
-      Ingresar
+      Enviar
     </button>
   </form>
   <div classname="dropdown-divider"></div>
-  <a classname="dropdown-item" href="#">
-    ¿Quieres adoptar?.... Regístrate
-  </a>
-  <a classname="dropdown-item" href="#">
-    ¿Olvidaste tu contraseña?
-  </a>
 </div>;

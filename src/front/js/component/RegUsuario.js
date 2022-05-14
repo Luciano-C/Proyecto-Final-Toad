@@ -21,13 +21,11 @@ import React from "react";
       />
     </div>
     <button type="submit" classname="btn btn-primary">
-      Ingresar
+      Enviar
     </button>
   </form>
   <div classname="dropdown-divider"></div>
-  <a classname="dropdown-item" href="#">
-    ¿Quieres adoptar?.... Regístrate
-  </a>
+
   <a classname="dropdown-item" href="#">
     ¿Olvidaste tu contraseña?
   </a>
