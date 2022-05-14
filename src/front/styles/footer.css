@@ -1,0 +1,16 @@
+.appLogo {
+  height: 22vh;
+  width: 20vh;
+  margin: 0 0 0 2%;
+}
+
+.teamLogo {
+  height: 20vh;
+  width: 20vh;
+  margin: 0 0% 0 0;
+}
+
+.logoContainer {
+  width: 20%;
+  align-items: center;
+}
