@@ -5,3 +5,15 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+
+.imagen {
+  width: 80px;
+  height: 80px;
+  padding: 0%;
+  margin: auto;
+}
+
+.col {
+  padding-left: 20px;
+  justify-content: flex-end;
+}
