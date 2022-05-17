@@ -10,6 +10,7 @@ export const CrearMascota = () => {
   const [tamaño, setTamaño] = useState("");
   const [nivelActividad, setNivelActividad] = useState("");
   const [otrosCuidados, setOtrosCuidados] = useState("");
+  const [foto, setFoto] = useState("");
 
   const inputHandler = (valor, funcion) => {
     funcion(valor);
@@ -102,7 +103,14 @@ export const CrearMascota = () => {
 
         <div className="mb-3">
           <label className="form-label">Subir foto</label>
-          <input type="file" className="form-control" />
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => {
+              setFoto(e.target.value[0]);
+              console.log(foto);
+            }}
+          />
         </div>
         <button className="btn btn-primary">Añadir Mascota</button>
       </div>
