@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Axios from "axios";
 
 import "../../styles/crearMascota.css";
 
@@ -11,18 +12,38 @@ export const CrearMascota = () => {
   const [nivelActividad, setNivelActividad] = useState("");
   const [otrosCuidados, setOtrosCuidados] = useState("");
   const [foto, setFoto] = useState("");
+  const [URLFoto, setURLFoto] = useState(
+    "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652804030/fkr55gcbx3uywcij7f2z.jpg"
+  );
 
   const inputHandler = (valor, funcion) => {
     funcion(valor);
     console.log(valor);
   };
 
+  const handleUpload = () => {
+    const formData = new FormData();
+    formData.append("file", foto);
+    formData.append("upload_preset", process.env.CLOUDINARY_PRESET_NAME);
+
+    const cloudName = process.env.CLOUDINARE_CLOUD_NAME;
+    Axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, formData)
+      .then((response) => {
+        console.log(response);
+        setURLFoto(response.data.url);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const añadirMascotaHandler = () => {
+    if (foto) {
+      handleUpload();
+    }
+  };
+
   return (
     <div className="d-flex justify-content-around">
-      <img
-        className="fotoDoggo"
-        src="https://wallpaperaccess.com/full/1730273.jpg"
-      />
+      <img className="fotoDoggo" src={URLFoto} />
       <div className="d-flex flex-column">
         <div className="mb-3">
           <label className="form-label">Nombre</label>
@@ -107,12 +128,16 @@ export const CrearMascota = () => {
             type="file"
             className="form-control"
             onChange={(e) => {
-              setFoto(e.target.value[0]);
-              console.log(foto);
+              setFoto(e.target.files[0]);
             }}
           />
         </div>
-        <button className="btn btn-primary">Añadir Mascota</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => añadirMascotaHandler()}
+        >
+          Añadir Mascota
+        </button>
       </div>
     </div>
   );
