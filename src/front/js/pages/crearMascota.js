@@ -13,7 +13,7 @@ export const CrearMascota = () => {
   const [otrosCuidados, setOtrosCuidados] = useState("");
   const [foto, setFoto] = useState("");
   const [URLFoto, setURLFoto] = useState(
-    "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652804030/fkr55gcbx3uywcij7f2z.jpg"
+    `https://res.cloudinary.com/${process.env.CLOUDINARE_CLOUD_NAME}/image/upload/v1652804030/fkr55gcbx3uywcij7f2z.jpg`
   );
 
   const inputHandler = (valor, funcion) => {
@@ -22,17 +22,25 @@ export const CrearMascota = () => {
   };
 
   const handleUpload = () => {
-    const formData = new FormData();
-    formData.append("file", foto);
-    formData.append("upload_preset", process.env.CLOUDINARY_PRESET_NAME);
+    console.log(foto);
+    if (foto.type === "image/jpeg" || foto.type === "image/png") {
+      const formData = new FormData();
+      formData.append("file", foto);
+      formData.append("upload_preset", process.env.CLOUDINARY_PRESET_NAME);
 
-    const cloudName = process.env.CLOUDINARE_CLOUD_NAME;
-    Axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, formData)
-      .then((response) => {
-        console.log(response);
-        setURLFoto(response.data.url);
-      })
-      .catch((error) => console.log(error));
+      const cloudName = process.env.CLOUDINARE_CLOUD_NAME;
+      Axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
+        formData
+      )
+        .then((response) => {
+          console.log(response);
+          setURLFoto(response.data.url);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      alert("Adjunte una imagen de tipo jpg o png");
+    }
   };
 
   const añadirMascotaHandler = () => {
@@ -123,10 +131,16 @@ export const CrearMascota = () => {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Subir foto</label>
+          <label className="form-label d-flex justify-content-between">
+            <span>Subir foto</span>
+            <span className="text-secondary">
+              Formatos permitidos: jpg, png
+            </span>
+          </label>
           <input
             type="file"
-            className="form-control"
+            className="form-control uploadInput"
+            accept="image/*"
             onChange={(e) => {
               setFoto(e.target.files[0]);
             }}
