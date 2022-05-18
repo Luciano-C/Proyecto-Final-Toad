@@ -6,3 +6,12 @@
 .uploadInput {
   width: 25em;
 }
+
+.errorInput {
+  font-size: small;
+  color: red;
+}
+
+.inputCampo {
+  height: 5em;
+}
