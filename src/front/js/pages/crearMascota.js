@@ -94,7 +94,7 @@ export const CrearMascota = () => {
   };
 
   //Realiza fetch a api interna
-  const añadirMascotaHandler = () => {
+  const añadirMascotaDB = () => {
     if (foto) {
       handleUpload();
     }
@@ -205,10 +205,7 @@ export const CrearMascota = () => {
             }}
           />
         </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => añadirMascotaHandler()}
-        >
+        <button className="btn btn-primary" onClick={() => añadirMascotaDB()}>
           Añadir Mascota
         </button>
       </div>
