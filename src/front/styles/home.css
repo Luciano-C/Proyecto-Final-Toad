@@ -17,3 +17,18 @@
   padding-left: 20px;
   justify-content: flex-end;
 }
+
+.carousel-inner {
+  height: 500px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.card {
+  margin: auto;
+  margin-top: 40px;
+}
+
+.page {
+  padding-top: 45px;
+}
