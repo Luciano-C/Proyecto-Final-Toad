@@ -22,3 +22,4 @@ def get_mascotas():
     todas_mascotas = Mascota.query.all()
     todas_mascotas = list(map(lambda x: x.serialize(), todas_mascotas))
     return jsonify(todas_mascotas), 200
+
