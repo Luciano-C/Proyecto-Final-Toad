@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class User(db.Model):
-    __tablename__= "usuarios"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
@@ -28,10 +27,9 @@ class User(db.Model):
         }
 
 class Mascota(db.Model):
-    __tablename__= "mascotas"
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(120), nullable=False)
-    edad = db.Column(Integer, nullable=False)
+    edad = db.Column(db.Integer, nullable=False)
     especie = db.Column(db.String(120), nullable=False)
     sexo = db.Column(db.String(6), nullable=False)
     tamaño = db.Column(db.String(7), nullable=False)
@@ -56,10 +54,11 @@ class Mascota(db.Model):
         }
 
 class Usuario_Mascota(db.Model):
-    __tablename__= "usuario_mascota"
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, ForeignKey('usuarios.id'))
-    id_mascota = db.Column(db.Integer, ForeignKey('mascotas.id'))
+    id_usuario = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id_mascota = db.Column(db.Integer, db.ForeignKey("mascota.id"))
+    rel_usuario = db.relationship(User)
+    rel_mascota = db.relationship(Mascota)
     
     def serialize(self):
         return {
