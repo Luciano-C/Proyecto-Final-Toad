@@ -34,11 +34,11 @@ class Mascota(db.Model):
     sexo = db.Column(db.String(6), nullable=False)
     tamaño = db.Column(db.String(7), nullable=False)
     nivel_actividad = db.Column(db.String(7), nullable=False)
-    otros_cuidados = db.Column(db.String(200), nullable=False)
+    otros_cuidados = db.Column(db.String(200), nullable=True)
     url_foto = db.Column(db.String(200), nullable=True)
 
     def __repr__(self):
-        return f'<User {self.nombre}>'
+        return f'<Mascota {self.nombre}>'
 
     def serialize(self):
         return {
@@ -57,8 +57,8 @@ class Usuario_Mascota(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey("user.id"))
     id_mascota = db.Column(db.Integer, db.ForeignKey("mascota.id"))
-    rel_usuario = db.relationship(User)
-    rel_mascota = db.relationship(Mascota)
+    rel_usuario = db.relationship("User")
+    rel_mascota = db.relationship("Mascota")
     
     def serialize(self):
         return {

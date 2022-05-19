@@ -23,3 +23,22 @@ def get_mascotas():
     todas_mascotas = list(map(lambda x: x.serialize(), todas_mascotas))
     return jsonify(todas_mascotas), 200
 
+@api.route("/user/<int:user_id>/crear-mascota", methods=["POST"])
+def crear_mascota(user_id):
+    data = request.get_json()
+    nueva_mascota = Mascota()
+    #perro_1 = {"nombre": "Rex", "edad": 5, "especie": "perro", "sexo": "Macho", "tamaño": "Mediano", "nivel_actividad": "Alto", "otros_cuidados": "Ninguno", "url_foto": "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652914840/qxe66pkjkgrfu6z7f6t2.jpg"}
+    nueva_mascota.nombre = data["nombre"]
+    nueva_mascota.edad = data["edad"]
+    nueva_mascota.especie = data["especie"]
+    nueva_mascota.sexo = data["sexo"]
+    nueva_mascota.tamaño = data["tamaño"]
+    nueva_mascota.nivel_actividad = data["nivel_actividad"]
+    nueva_mascota.otros_cuidados = data["otros_cuidados"]
+    nueva_mascota.url_foto = data["url_foto"]
+
+    db.session.add(nueva_mascota)
+    db.session.commit()
+
+    return f"Mascota añadida para usuario {user_id}"
+
