@@ -5,13 +5,14 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import { Login } from "./pages/login";
+import { RegUsuario } from "./pages/regUsuario";
+import { RecupContra } from "./pages/recupContra";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Login } from "./component/login";
-import { RegUsuario } from "./component/RegUsuario";
-import { RecupContra } from "./component/RecupContra";
+import { RecupContraForm } from "./component/recupContraForm";
 
 //create your first component
 const Layout = () => {
@@ -38,7 +39,7 @@ const Layout = () => {
               <RegUsuario />
             </Route>
             <Route exact path="/resetpass">
-              <RecupContra />
+              <RecupContraForm />
             </Route>
             <Route exact path="/single/:theid">
               <Single />

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Navbar } from "../component/navbar";
-import { RegUsuario } from "../component/RegUsuario";
+import { RegUsuarioForm } from "../component/regUsuarioForm";
 import { Footer } from "../component/footer";
 
 export const RegUsuario = () => {
@@ -9,7 +9,7 @@ export const RegUsuario = () => {
 
   return (
     <div className="regUsuarios">
-      <RegUsuario />
+      <RegUsuarioForm />
     </div>
   );
 };

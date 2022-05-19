@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-export const Login = () => (
+export const LoginForm = () => (
   <div className="container">
-    <div className="dropdown-menu">
+    <div className="">
       <form className="px-4 py-3">
         <div className="form-group">
-          <label for="exampleDropdownFormEmail1">Email</label>
+          <label htmlFor="exampleDropdownFormEmail1">Email</label>
           <input
             type="email"
             className="form-control"
@@ -14,7 +14,7 @@ export const Login = () => (
           />
         </div>
         <div className="form-group">
-          <label for="exampleDropdownFormPassword1">Contraseña</label>
+          <label htmlFor="exampleDropdownFormPassword1">Contraseña</label>
           <input
             type="password"
             className="form-control"

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-export const RecupContra = () => (
-  <div classname="dropdown-menu">
+export const RegUsuarioForm = () => (
+  <div classname="">
     <form classname="px-4 py-3">
       <div classname="form-group">
         <label for="exampleDropdownFormEmail1">Email</label>
@@ -12,10 +12,23 @@ export const RecupContra = () => (
           placeholder="email@example.com"
         />
       </div>
+      <div classname="form-group">
+        <label for="exampleDropdownFormPassword1">Contraseña</label>
+        <input
+          type="password"
+          classname="form-control"
+          id="exampleDropdownFormPassword1"
+          placeholder="Contraseña"
+        />
+      </div>
       <button type="submit" classname="btn btn-primary">
         Enviar
       </button>
     </form>
     <div classname="dropdown-divider"></div>
+
+    <a classname="dropdown-item" href="#">
+      ¿Olvidaste tu contraseña?
+    </a>
   </div>
 );
