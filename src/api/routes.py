@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Mascota, Usuario_Mascota
 from api.utils import generate_sitemap, APIException
 
+
 api = Blueprint('api', __name__)
 
 
@@ -23,6 +24,31 @@ def get_usuarios():
     todos_usuarios = list(map(lambda x: x.serialize(), todos_usuarios))
     return jsonify(todos_usuarios), 200
 
+
+
+@api.route("/crear-usuario", methods=["POST"])
+def crear_usuario():
+    data = request.get_json()
+    # {"email": "mariob@aol.com", "password": 1234, "nombre": "mario", "apellidos": "bros", "telefono": "123456678", "direccion": "alguna tuberia" }
+    check_ususario = User.query.filter_by(email=data["email"]).first()
+    if check_ususario:
+        return jsonify({"mensaje": "Usuario ya existe en base de datos"})
+    else:
+        nuevo_usuario = User()
+        nuevo_usuario.email = data["email"]
+        nuevo_usuario.password = data["password"]
+        nuevo_usuario.nombre = data["nombre"]
+        nuevo_usuario.apellidos = data["apellidos"]
+        nuevo_usuario.telefono = data["telefono"]
+        nuevo_usuario.direccion = data["direccion"]
+
+        db.session.add(nuevo_usuario)
+        db.session.commit()
+
+        return jsonify(nuevo_usuario.serialize())
+
+
+
 @api.route("/mascotas", methods=["GET"])
 def get_mascotas():
     todas_mascotas = Mascota.query.all()
@@ -32,9 +58,9 @@ def get_mascotas():
 
 @api.route("/crear-mascota", methods=["POST"])
 def crear_mascota():
+    #perro_1 = {"nombre": "Juanito", "edad": 2, "especie": "perro", "sexo": "Macho", "tamaño": "Mediano", "nivel_actividad": "Alto", "otros_cuidados": "Ninguno", "url_foto": "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652914840/qxe66pkjkgrfu6z7f6t2.jpg"}
     data = request.get_json()
     nueva_mascota = Mascota()
-    #perro_1 = {"nombre": "Rex", "edad": 5, "especie": "perro", "sexo": "Macho", "tamaño": "Mediano", "nivel_actividad": "Alto", "otros_cuidados": "Ninguno", "url_foto": "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652914840/qxe66pkjkgrfu6z7f6t2.jpg"}
     nueva_mascota.nombre = data["nombre"]
     nueva_mascota.edad = data["edad"]
     nueva_mascota.especie = data["especie"]
@@ -47,16 +73,25 @@ def crear_mascota():
     db.session.add(nueva_mascota)
     db.session.commit()
 
-    return f"Mascota añadida"
+    return jsonify(nueva_mascota.serialize())
 
-@api.route("/añadir-usuario-mascota/id_usuario=<int:id_usuario>/id_mascota=<int:id_mascota>", methods=["POST"])
-def añadir_usuario_mascota(id_usuario, id_mascota):
-    #data = request.get_json()
-    nuevo_usuario_mascota = Usuario_Mascota()
-    nuevo_usuario_mascota.id_usuario = id_usuario
-    nuevo_usuario_mascota.id_mascota = id_mascota
+@api.route("/crear-usuario-mascota/", methods=["POST"])
+def añadir_usuario_mascota():
+    #usuario_mascota = {"id_usuario" = 1, "id_mascota" = 10}
+    data = request.get_json()
+    id_u = data["id_usuario"]
+    id_m = data["id_mascota"]
+    check_usuario_mascota = Usuario_Mascota.query.filter_by(id_usuario=id_u, id_mascota = id_m).first()
+    if check_usuario_mascota:
+        return jsonify({"mensaje": "Esta mascota ya está registrada a este dueño"})
+    
+    else:
 
-    db.session.add(nuevo_usuario_mascota)
-    db.session.commit()
+        nuevo_usuario_mascota = Usuario_Mascota()
+        nuevo_usuario_mascota.id_usuario = id_u
+        nuevo_usuario_mascota.id_mascota = id_m
 
-    return "Dueño añadido"
+        db.session.add(nuevo_usuario_mascota)
+        db.session.commit()
+
+        return jsonify(nuevo_usuario_mascota.serialize())
