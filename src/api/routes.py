@@ -4,9 +4,12 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Mascota, Usuario_Mascota
 from api.utils import generate_sitemap, APIException
+import datetime
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 
 api = Blueprint('api', __name__)
+jwt = Blueprint('jwt', __name__)
 
 
 @api.route('/hello', methods=['POST', 'GET'])
