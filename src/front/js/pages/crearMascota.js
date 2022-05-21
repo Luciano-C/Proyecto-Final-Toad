@@ -23,9 +23,10 @@ export const CrearMascota = () => {
   const [errorNivelActividad, setErrorNivelActividad] = useState("");
   const [errorOtrosCuidados, setErrorOtrosCuidados] = useState("");
 
+  const [idUsuario, setIdUsuario] = useState(1);
+
   const inputHandler = (valor, funcion) => {
     funcion(valor);
-    console.log(valor);
   };
 
   // Verifica que inputs sean correctos
@@ -95,8 +96,69 @@ export const CrearMascota = () => {
 
   //Realiza fetch a api interna
   const añadirMascotaDB = () => {
-    if (foto) {
-      handleUpload();
+    const hayError =
+      errorNombre &&
+      errorEdad &&
+      errorEspecie &&
+      errorSexo &&
+      errorTamaño &&
+      errorNivelActividad;
+
+    if (!hayError) {
+      if (foto) {
+        handleUpload();
+      }
+      // Fetch para crear mascota
+      var crearMascotaHeaders = new Headers();
+      crearMascotaHeaders.append("Content-Type", "application/json");
+
+      var crearMascotaRaw = JSON.stringify({
+        nombre: nombre,
+        edad: edad,
+        especie: especie,
+        sexo: sexo,
+        tamaño: tamaño,
+        nivel_actividad: nivelActividad,
+        otros_cuidados: otrosCuidados,
+        url_foto: URLFoto,
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: crearMascotaHeaders,
+        body: crearMascotaRaw,
+        redirect: "follow",
+      };
+
+      fetch(process.env.BACKEND_URL + "/api/crear-mascota", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result.id);
+          let idMascota = result.id;
+          var crearUsuarioMascotaHeaders = new Headers();
+          crearUsuarioMascotaHeaders.append("Content-Type", "application/json");
+
+          var crearUsuarioMascotaRaw = JSON.stringify({
+            id_usuario: idUsuario,
+            id_mascota: idMascota,
+          });
+
+          var requestOptions = {
+            method: "POST",
+            headers: crearUsuarioMascotaHeaders,
+            body: crearUsuarioMascotaRaw,
+            redirect: "follow",
+          };
+
+          fetch(
+            process.env.BACKEND_URL + "/api/crear-usuario-mascota/",
+            requestOptions
+          )
+            .then((response) => response.json())
+            .then((result) => console.log(result))
+            .catch((error) => console.log("error", error));
+        })
+        .catch((error) => console.log("error", error));
     }
   };
 
