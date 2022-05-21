@@ -1,26 +1,25 @@
 import React, { Component, useContext } from "react";
+import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
 
 export const Card = (props) => {
+  const { store, actions } = useContext(Context);
   return (
-    <div class="card" style={{ width: "18rem" }}>
-      <img
-        src="https://www.thesprucepets.com/thmb/bzdiSVEaF7gjQ_GKtKprxKnqOtE=/2124x1195/smart/filters:no_upscale()/GoldenPuppy185743593-56a9c1f23df78cf772aa4a33.jpg"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Mascota</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <Link to="/demo">
-          <button className="cardButton btn btn-lg btn-danger outline-info">
-            Leer más
-          </button>
-        </Link>
+    <div className="col">
+      <div className="card" style={{ width: "18rem" }}>
+        <img src={props.objeto.url_foto} className="card-img-top" alt="..." />
+        <div className="card-body">
+          <h5 className="card-title">{props.objeto.nombre}</h5>
+          <p className="card-text">{props.objeto.edad}</p>
+          <p className="card-text">{props.objeto.especie}</p>
+          <p className="card-text">{props.objeto.sexo}</p>
+          <Link to="/pet">
+            <button className="cardButton btn btn-lg btn-danger outline-info">
+              Leer más
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

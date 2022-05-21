@@ -13,14 +13,9 @@ export const Home = () => {
         <Carousel />
       </div>
       <div className="row">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {store.mascotas.map(function (objeto, index) {
+          return <Card objeto={objeto} index={index} />;
+        })}
       </div>
       <div className="page">
         <nav aria-label="page">

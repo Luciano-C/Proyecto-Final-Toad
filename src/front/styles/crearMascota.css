@@ -1,0 +1,17 @@
+.fotoDoggo {
+  height: 40em;
+  width: 40em;
+}
+
+.uploadInput {
+  width: 25em;
+}
+
+.errorInput {
+  font-size: small;
+  color: red;
+}
+
+.inputCampo {
+  height: 5em;
+}

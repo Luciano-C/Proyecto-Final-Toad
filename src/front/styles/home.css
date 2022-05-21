@@ -32,3 +32,10 @@
 .page {
   padding-top: 45px;
 }
+
+.card-img-top {
+  height: 250px;
+  width: 260px;
+  padding: auto;
+  margin: auto;
+}
