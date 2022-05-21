@@ -1,38 +1,40 @@
 import React from "react";
 
 export const LoginForm = () => (
-  <div className="container">
-    <div className="">
-      <form className="px-4 py-3">
-        <div className="form-group">
-          <label htmlFor="exampleDropdownFormEmail1">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleDropdownFormEmail1"
-            placeholder="email@example.com"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleDropdownFormPassword1">Contraseña</label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleDropdownFormPassword1"
-            placeholder="Contraseña"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Ingresar
-        </button>
-      </form>
-      <div className="dropdown-divider"></div>
-      <a className="dropdown-item" href="#">
-        ¿Quieres adoptar?.... Regístrate
-      </a>
-      <a className="dropdown-item" href="#">
-        ¿Olvidaste tu contraseña?
-      </a>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col"></div>
+      <div class="col">
+        <form className="">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">
+              Contraseña
+            </label>
+            <input type="password" class="form-control" />
+          </div>
+          <div className="col-auto">
+            <button type="submit" className="btn btn-primary mb-3">
+              Ingresar 😸
+            </button>
+            <br />
+            <a className="mb-3" href="#">
+              ¿Quieres adoptar?... Regístrate 😻
+            </a>
+          </div>
+        </form>
+      </div>
+      <div className="col"></div>
     </div>
   </div>
 );
