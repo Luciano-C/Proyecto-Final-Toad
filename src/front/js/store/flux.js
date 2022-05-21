@@ -14,12 +14,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      mascotas: [
-        { nombre: "perrito1", edad: "5", raza: "quiltro" },
-        { nombre: "perrito2", edad: "6", raza: "labrador" },
-      ],
+      mascotas: [],
     },
     actions: {
+      getMascotas: () => {
+        fetch(process.env.BACKEND_URL + "/api/mascotas")
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            setStore({ mascotas: result });
+          })
+          .catch((error) => console.log("error", error));
+      },
+
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");

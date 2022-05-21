@@ -5,7 +5,7 @@ import "../../styles/home.css";
 
 export const Navbar = () => {
   return (
-    <div className="container">
+    <div className="display-flex">
       <nav className="navbar navbar bg-light mb-3">
         <div className="logo">
           <Link to="/">

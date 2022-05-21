@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
+import { Pet } from "./pages/pet";
 import { Single } from "./pages/single";
 import { CrearMascota } from "./pages/crearMascota";
 import { Login } from "./pages/login";
@@ -33,8 +33,8 @@ const Layout = () => {
             <Route exact path="/crear-mascota">
               <CrearMascota />
             </Route>
-            <Route exact path="/demo">
-              <Demo />
+            <Route exact path="/pet">
+              <Pet />
             </Route>
             <Route exact path="/demo">
               <Demo />
