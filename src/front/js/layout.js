@@ -6,10 +6,14 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { CrearMascota } from "./pages/crearMascota";
+import { Login } from "./pages/login";
+import { RegUsuario } from "./pages/regUsuario";
+import { RecupContra } from "./pages/recupContra";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { RecupContraForm } from "./component/recupContraForm";
 
 //create your first component
 const Layout = () => {
@@ -31,6 +35,18 @@ const Layout = () => {
             </Route>
             <Route exact path="/demo">
               <Demo />
+            </Route>
+            <Route exact path="/demo">
+              <Demo />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/regusers">
+              <RegUsuario />
+            </Route>
+            <Route exact path="/resetpass">
+              <RecupContraForm />
             </Route>
             <Route exact path="/single/:theid">
               <Single />

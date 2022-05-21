@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Navbar } from "../component/navbar";
-import { LoginForm } from "../component/loginForm";
+import { RegUsuarioForm } from "../component/regUsuarioForm";
 import { Footer } from "../component/footer";
 
-export const Login = () => {
+export const RegUsuario = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="login">
-      <LoginForm />
+    <div className="regUsuarios">
+      <RegUsuarioForm />
     </div>
   );
 };
