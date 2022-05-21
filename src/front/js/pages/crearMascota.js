@@ -133,7 +133,6 @@ export const CrearMascota = () => {
       fetch(process.env.BACKEND_URL + "/api/crear-mascota", requestOptions)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result.id);
           let idMascota = result.id;
           var crearUsuarioMascotaHeaders = new Headers();
           crearUsuarioMascotaHeaders.append("Content-Type", "application/json");
