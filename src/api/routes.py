@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Mascota, Usuario_Mascota
+from api.models import db, Users, Mascota, Usuario_Mascota
 from api.utils import generate_sitemap, APIException
 import datetime
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -23,7 +23,7 @@ def handle_hello():
 
 @api.route("/usuarios", methods=["GET"])
 def get_usuarios():
-    todos_usuarios = User.query.all()
+    todos_usuarios = Users.query.all()
     todos_usuarios = list(map(lambda x: x.serialize(), todos_usuarios))
     return jsonify(todos_usuarios), 200
 
@@ -33,11 +33,11 @@ def get_usuarios():
 def crear_usuario():
     data = request.get_json()
     # {"email": "mariob@aol.com", "password": 1234, "nombre": "mario", "apellidos": "bros", "telefono": "123456678", "direccion": "alguna tuberia" }
-    check_ususario = User.query.filter_by(email=data["email"]).first()
+    check_ususario = Users.query.filter_by(email=data["email"]).first()
     if check_ususario:
         return jsonify({"mensaje": "Usuario ya existe en base de datos"})
     else:
-        nuevo_usuario = User()
+        nuevo_usuario = Users()
         nuevo_usuario.email = data["email"]
         nuevo_usuario.password = data["password"]
         nuevo_usuario.nombre = data["nombre"]
