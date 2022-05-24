@@ -36,7 +36,7 @@ const Layout = () => {
             <Route exact path="/crear-mascota">
               <CrearMascota />
             </Route>
-            <Route exact path="/pet">
+            <Route exact path="/pet/:id">
               <Pet />
             </Route>
 

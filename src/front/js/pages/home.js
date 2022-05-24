@@ -6,7 +6,6 @@ import { Carousel } from "../component/carousel";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-
   return (
     <div className="text-center">
       <div className="carousel">
@@ -14,7 +13,7 @@ export const Home = () => {
       </div>
       <div className="row">
         {store.mascotas.map(function (objeto, index) {
-          return <Card objeto={objeto} index={index} />;
+          return <Card key={index} objeto={objeto} index={index} />;
         })}
       </div>
       <div className="page">
