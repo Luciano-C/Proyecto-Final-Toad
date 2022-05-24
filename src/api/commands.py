@@ -19,11 +19,17 @@ def setup_commands(app):
     @click.argument("count") # argument of out command
     def insert_test_data(count):
         print("Creating test users")
+        nombres = ["Jorge", "María", "Bob", "Ana"]
+        apellidos = ["Martinez Lopez", "Rodriguez Gomez", "Rojas Ahumada"]
+
         for x in range(1, int(count) + 1):
             user = Users()
             user.email = "test_user" + str(x) + "@test.com"
             user.password = "123456"
-            #user.is_active = True
+            user.nombre = random.choice(nombres)
+            user.apellidos = random.choice(apellidos)
+            user.telefono = "981234568"
+            user.direccion = "Callequenoexiste 123"
             db.session.add(user)
             db.session.commit()
             print("User: ", user.email, " created.")
