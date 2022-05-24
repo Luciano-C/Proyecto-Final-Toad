@@ -13,19 +13,19 @@ export const Navbar = () => {
           </Link>
         </div>
         <div className="col">
-          <Link to="/">
+          <Link to="/app">
             <button className="btn btn-ligth" type="button">
-              ADOPTA
+              Quiénes somos?
             </button>
           </Link>
-          <Link to="/">
+          <Link to="/adopta">
             <button className="btn btn-ligth" type="button">
-              REQUISITOS DE ADOPCIÓN
+              Adopta
             </button>
           </Link>
-          <Link to="/">
+          <Link to="/contacto">
             <button className="btn btn-ligth" type="button">
-              COMO ADOPTAR
+              Contacto
             </button>
           </Link>
         </div>

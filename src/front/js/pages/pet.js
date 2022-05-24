@@ -2,18 +2,26 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
+import { Card } from "../component/card";
 
-export const Pet = () => {
+export const Pet = (props) => {
   const { id } = useParams();
   const { store, actions } = useContext(Context);
 
   return (
     <div className="container">
       <div className="card mb-5">
-        <img src={store.mascotas[0]?.url_foto} className="card-img" alt="..." />
+        <img
+          src={store.mascotas[0]?.url_foto}
+          className="card-img d-block w-100"
+          alt="..."
+        />
         <div className="card-body">
           <h1 className="card-title">
-            <strong>{store.mascotas.map((nombre) => nombre + 1)}</strong>
+            <strong>{store.mascotas.map((id) => id.nombre)}</strong>
+            {store.mascotas.map(function (id) {
+              return <li> {id.nombre}</li>;
+            })}
           </h1>
           <h3 className="card-text">
             <strong>Raza: </strong>
