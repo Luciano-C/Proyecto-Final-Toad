@@ -86,7 +86,7 @@ export const CrearMascota = () => {
       )
         .then((response) => {
           console.log(response);
-          setURLFoto(response.data.url);
+          setURLFoto(response.data.secure_url);
         })
         .catch((error) => console.log(error));
     } else {
