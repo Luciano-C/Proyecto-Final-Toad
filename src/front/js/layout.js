@@ -13,6 +13,7 @@ import injectContext from "./store/appContext";
 import { Adopta } from "./pages/adopta";
 import { App } from "./pages/app";
 import { Contacto } from "./pages/contacto";
+import { FormularioAdopcion } from "./pages/formularioAdopcion";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -35,6 +36,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/crear-mascota">
               <CrearMascota />
+            </Route>
+            <Route exact path="/formulario-adopcion">
+              <FormularioAdopcion />
             </Route>
             <Route exact path="/pet/:id">
               <Pet />

@@ -1,0 +1,22 @@
+.errorInput {
+  color: red;
+  margin-top: 1vh;
+}
+
+.inputCampo {
+  margin-bottom: 6vh;
+  width: 100%;
+}
+
+.preguntasContainer {
+  width: 100vh;
+}
+
+.perroCartel {
+  height: 40em;
+  width: 40em;
+}
+
+.textoPregunta {
+  font-size: 2.2vh;
+}
