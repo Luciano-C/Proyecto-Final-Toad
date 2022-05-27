@@ -31,7 +31,7 @@ export const Navbar = () => {
         </div>
         <div className="ml-auto">
           <Link to="/login">
-            <button className="btn btn-dark" href="#">
+            <button className="btn btn-dark" href="/login">
               <i className="fas fa-user"> Iniciar sesión </i>
             </button>
           </Link>
