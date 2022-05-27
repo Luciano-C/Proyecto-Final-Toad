@@ -24,7 +24,7 @@ export const InputDatosContacto = (props) => {
           actions.setRespuestasDatosContacto(arrayRespuestas);
         }}
         value={respuesta}
-        maxLength={500}
+        maxLength={100}
       ></input>
     </div>
   );
