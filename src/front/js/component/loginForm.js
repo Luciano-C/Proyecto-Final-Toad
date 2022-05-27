@@ -28,8 +28,12 @@ export const LoginForm = () => (
               Ingresar 😸
             </button>
             <br />
-            <a className="mb-3" href="#">
+            <a className="mb-3" href="/regusers">
               ¿Quieres adoptar?... Regístrate 😻
+            </a>
+            <br />
+            <a className="mb-3" href="/resetpass">
+              ¿Olvidaste tu contraseña?
             </a>
           </div>
         </form>
