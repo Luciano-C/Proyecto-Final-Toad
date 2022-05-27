@@ -1,6 +1,7 @@
 
 import click
-from api.models import db, User, Mascota, Usuario_Mascota
+import random
+from api.models import db, Users, Mascota, Usuario_Mascota
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -18,11 +19,17 @@ def setup_commands(app):
     @click.argument("count") # argument of out command
     def insert_test_data(count):
         print("Creating test users")
+        nombres = ["Jorge", "María", "Bob", "Ana"]
+        apellidos = ["Martinez Lopez", "Rodriguez Gomez", "Rojas Ahumada"]
+
         for x in range(1, int(count) + 1):
-            user = User()
+            user = Users()
             user.email = "test_user" + str(x) + "@test.com"
             user.password = "123456"
-            user.is_active = True
+            user.nombre = random.choice(nombres)
+            user.apellidos = random.choice(apellidos)
+            user.telefono = "981234568"
+            user.direccion = "Callequenoexiste 123"
             db.session.add(user)
             db.session.commit()
             print("User: ", user.email, " created.")
@@ -32,22 +39,34 @@ def setup_commands(app):
         ### Insert the code to populate others tables if needed
 
     @app.cli.command("insertar-mascotas-prueba")
-    def insert_pets_data():
+    @click.argument("count")
+    def insert_pets_data(count):
         print("Creating pets")
-        perro_1 = {"nombre": "Rex", "edad": 5, "especie": "Perro", "sexo": "Macho", "tamaño": "Mediano", "nivel_actividad": "Alto", "otros_cuidados": "Ninguno", "url_foto": "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652914840/qxe66pkjkgrfu6z7f6t2.jpg"}
-        perro_2 = {"nombre": "Frank", "edad": 8, "especie": "Perro alien", "sexo": "Macho", "tamaño": "Chico", "nivel_actividad": "Bajo", "otros_cuidados": "Ninguno", "url_foto": "https://mx.web.img3.acsta.net/r_654_368/newsv7/19/06/15/15/49/2289976.jpg"}
-        lista_perros = [perro_1, perro_2]
-        print(perro_1["nombre"])
-        for perro in lista_perros:
+        nombres = ["Chocolate", "Orejas", "Coco", "Bentley", "Ollie"]
+        edades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        sexos = ["Macho", "Hembra"]
+        tamaños = ["Chico", "Mediano", "Grande"]
+        niveles_act = ["Bajo", "Mediano", "Alto"]
+        urls_foto = [
+            "https://static.nationalgeographic.es/files/styles/image_3200/public/01-stray-dogs-nationalgeographic_1927666.webp?w=1600&h=900", 
+            "https://nupec.com/wp-content/uploads/2020/07/Captura-de-pantalla-2020-07-24-a-las-17.33.44.png", 
+            "https://ichef.bbci.co.uk/news/800/cpsprodpb/15665/production/_107435678_perro1.jpg.webp", 
+            "https://media.traveler.es/photos/613760adcb06ad0f20e11980/master/w_1600,c_limit/202931.jpg",
+            "https://www.semana.com/resizer/mZMAc-3bQx6FyEUgCZFUzBOmHYc=/1200x675/filters:format(jpg):quality(50)//cloudfront-us-east-1.images.arcpublishing.com/semana/HQHVR5EYHJE2JI5SMUGY5NDLTM.jpg"
+        ]
+
+        #perro_1 = {"nombre": "Rex", "edad": 5, "especie": "Perro", "sexo": "Macho", "tamaño": "Mediano", "nivel_actividad": "Alto", "otros_cuidados": "Ninguno", "url_foto": "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652914840/qxe66pkjkgrfu6z7f6t2.jpg"}
+    
+        for x in range(1, int(count) + 1):
             mascota = Mascota()
-            mascota.nombre = perro["nombre"]
-            mascota.edad = perro["edad"]
-            mascota.especie = perro["especie"]
-            mascota.sexo = perro["sexo"]
-            mascota.tamaño = perro["tamaño"]
-            mascota.nivel_actividad = perro["nivel_actividad"]
-            mascota.otros_cuidados = perro["otros_cuidados"]
-            mascota.url_foto = perro["url_foto"]
+            mascota.nombre = random.choice(nombres)
+            mascota.edad = random.choice(edades)
+            mascota.especie = "Perro"
+            mascota.sexo = random.choice(sexos)
+            mascota.tamaño = random.choice(tamaños)
+            mascota.nivel_actividad = random.choice(niveles_act)
+            mascota.otros_cuidados = "Ninguno"
+            mascota.url_foto = random.choice(urls_foto)
         
             db.session.add(mascota)
             db.session.commit()

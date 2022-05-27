@@ -86,13 +86,71 @@ export const CrearMascota = () => {
       )
         .then((response) => {
           console.log(response);
-          setURLFoto(response.data.url);
+          setURLFoto(response.data.secure_url);
         })
         .catch((error) => console.log(error));
     } else {
       alert("Adjunte una imagen de tipo jpg o png");
     }
   };
+
+  // Fetch para crear mascota
+  const fetchCrearMascota = () => {
+    var crearMascotaHeaders = new Headers();
+    crearMascotaHeaders.append("Content-Type", "application/json");
+    var crearMascotaRaw = JSON.stringify({
+      nombre: nombre,
+      edad: edad,
+      especie: especie,
+      sexo: sexo,
+      tamaño: tamaño,
+      nivel_actividad: nivelActividad,
+      otros_cuidados: otrosCuidados,
+      url_foto: URLFoto,
+    });
+    var requestOptions = {
+      method: "POST",
+      headers: crearMascotaHeaders,
+      body: crearMascotaRaw,
+      redirect: "follow",
+    };
+    fetch(process.env.BACKEND_URL + "/api/crear-mascota", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        let idMascota = result.id;
+        var crearUsuarioMascotaHeaders = new Headers();
+        crearUsuarioMascotaHeaders.append("Content-Type", "application/json");
+        var crearUsuarioMascotaRaw = JSON.stringify({
+          id_usuario: idUsuario,
+          id_mascota: idMascota,
+        });
+        var requestOptions = {
+          method: "POST",
+          headers: crearUsuarioMascotaHeaders,
+          body: crearUsuarioMascotaRaw,
+          redirect: "follow",
+        };
+        fetch(
+          process.env.BACKEND_URL + "/api/crear-usuario-mascota/",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      })
+      .catch((error) => console.log("error", error));
+    alert("Mascota creada.");
+  };
+
+  // useEffect que re-renderiza cuando cambia la URL de la foto
+  useEffect(() => {
+    if (
+      URLFoto !=
+      `https://res.cloudinary.com/${process.env.CLOUDINARE_CLOUD_NAME}/image/upload/v1652804030/fkr55gcbx3uywcij7f2z.jpg`
+    ) {
+      fetchCrearMascota();
+    }
+  }, [URLFoto]);
 
   //Realiza fetch a api interna
   const añadirMascotaDB = () => {
@@ -107,57 +165,11 @@ export const CrearMascota = () => {
     if (!hayError) {
       if (foto) {
         handleUpload();
+      } else {
+        fetchCrearMascota();
       }
-      // Fetch para crear mascota
-      var crearMascotaHeaders = new Headers();
-      crearMascotaHeaders.append("Content-Type", "application/json");
-
-      var crearMascotaRaw = JSON.stringify({
-        nombre: nombre,
-        edad: edad,
-        especie: especie,
-        sexo: sexo,
-        tamaño: tamaño,
-        nivel_actividad: nivelActividad,
-        otros_cuidados: otrosCuidados,
-        url_foto: URLFoto,
-      });
-
-      var requestOptions = {
-        method: "POST",
-        headers: crearMascotaHeaders,
-        body: crearMascotaRaw,
-        redirect: "follow",
-      };
-
-      fetch(process.env.BACKEND_URL + "/api/crear-mascota", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          let idMascota = result.id;
-          var crearUsuarioMascotaHeaders = new Headers();
-          crearUsuarioMascotaHeaders.append("Content-Type", "application/json");
-
-          var crearUsuarioMascotaRaw = JSON.stringify({
-            id_usuario: idUsuario,
-            id_mascota: idMascota,
-          });
-
-          var requestOptions = {
-            method: "POST",
-            headers: crearUsuarioMascotaHeaders,
-            body: crearUsuarioMascotaRaw,
-            redirect: "follow",
-          };
-
-          fetch(
-            process.env.BACKEND_URL + "/api/crear-usuario-mascota/",
-            requestOptions
-          )
-            .then((response) => response.json())
-            .then((result) => console.log(result))
-            .catch((error) => console.log("error", error));
-        })
-        .catch((error) => console.log("error", error));
+    } else {
+      alert("Por favor llene los campos requeridos.");
     }
   };
 

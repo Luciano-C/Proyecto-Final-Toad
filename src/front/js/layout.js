@@ -10,6 +10,9 @@ import { Login } from "./pages/login";
 import { RegUsuario } from "./pages/regUsuario";
 import { RecupContra } from "./pages/recupContra";
 import injectContext from "./store/appContext";
+import { Adopta } from "./pages/adopta";
+import { App } from "./pages/app";
+import { Contacto } from "./pages/contacto";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -33,7 +36,7 @@ const Layout = () => {
             <Route exact path="/crear-mascota">
               <CrearMascota />
             </Route>
-            <Route exact path="/pet">
+            <Route exact path="/pet/:id">
               <Pet />
             </Route>
             <Route exact path="/login">
@@ -47,6 +50,15 @@ const Layout = () => {
             </Route>
             <Route exact path="/single/:theid">
               <Single />
+            </Route>
+            <Route exact path="/adopta">
+              <Adopta />
+            </Route>
+            <Route exact path="/app">
+              <App />
+            </Route>
+            <Route exact path="/contacto">
+              <Contacto />
             </Route>
             <Route>
               <h1>Not found!</h1>

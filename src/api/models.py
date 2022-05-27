@@ -2,11 +2,10 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class User(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    #is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     nombre = db.Column(db.String(120), nullable=True)
     apellidos = db.Column(db.String(120), nullable=True)
     telefono = db.Column(db.String(20), nullable=True)
@@ -55,9 +54,9 @@ class Mascota(db.Model):
 
 class Usuario_Mascota(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey("user.id"))
+    id_usuario = db.Column(db.Integer, db.ForeignKey("users.id"))
     id_mascota = db.Column(db.Integer, db.ForeignKey("mascota.id"))
-    rel_usuario = db.relationship("User")
+    rel_usuario = db.relationship("Users")
     rel_mascota = db.relationship("Mascota")
     
     def serialize(self):

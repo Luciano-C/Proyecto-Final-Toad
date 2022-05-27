@@ -14,7 +14,7 @@ export const Card = (props) => {
           <p className="card-text">{props.objeto.edad}</p>
           <p className="card-text">{props.objeto.especie}</p>
           <p className="card-text">{props.objeto.sexo}</p>
-          <Link to="/pet">
+          <Link to={"/pet" + "/" + props.index}>
             <button className="cardButton btn btn-lg btn-danger outline-info">
               Leer más
             </button>

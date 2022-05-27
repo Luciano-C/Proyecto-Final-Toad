@@ -11,6 +11,8 @@
   height: 80px;
   padding: 0%;
   margin: auto;
+  box-shadow: 10px 10px 10px rgb(180, 178, 174);
+  border-radius: 50%;
 }
 
 .col {
@@ -38,4 +40,23 @@
   width: 260px;
   padding: auto;
   margin: auto;
+}
+
+.d-block {
+  width: 2000px;
+  height: 600px;
+}
+
+.mision {
+  color: red;
+  font-size: 100px;
+  font-weight: 150px;
+  font-family: cursive;
+}
+
+.textM {
+  color: black;
+  font-size: 30px;
+  font-weight: 200px;
+  text-justify: newspaper;
 }

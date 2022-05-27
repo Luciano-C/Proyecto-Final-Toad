@@ -1,8 +1,21 @@
 import React, { Component } from "react";
-import { useContext } from "react/cjs/react.production.min";
+import { useContext, useState } from "react/cjs/react.production.min";
 import { Context } from "../store/appContext";
 
 const { actions } = useContext(Context);
+
+const Registro = () => {
+  const [inputNombre, setNombre] = useState("");
+  const [inputApellido, setApellido] = useState("");
+  const [inputEmail, setEmail] = useState("");
+  const [inputContraseña, setConstraseña] = useState("");
+
+  const validaEnvio = (e) => {
+    e.preventDefault();
+
+    console.log("Registro enviado");
+  };
+};
 
 export const RegUsuarioForm = () => (
   <div class="container">
