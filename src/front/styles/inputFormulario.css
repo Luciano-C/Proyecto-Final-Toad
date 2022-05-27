@@ -8,7 +8,8 @@
   width: 100%;
 }
 
-.preguntasContainer {
+.preguntasContainer,
+.formularioContacto {
   width: 100vh;
 }
 
