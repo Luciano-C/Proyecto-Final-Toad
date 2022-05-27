@@ -1,7 +1,7 @@
 
 import click
 import random
-from api.models import db, Users, Mascota, Usuario_Mascota
+from api.models import db, Users, Mascota, Usuario_Mascota, Formulario_Adopcion, Candidato_Mascota_Formulario
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -72,4 +72,23 @@ def setup_commands(app):
             db.session.commit()
             print(f"Perro {mascota.nombre} creado")
         print("Todos los perros creados")
+
+    @app.cli.command("insertar-formularios-prueba")
+    @click.argument("count")
+    def insert_pets_data(count):
+        print("Creando formularios")
+        for x in range(1, int(count) + 1):
+            formulario = Formulario_Adopcion()
+            formulario.pregunta_1 = "respuesta"
+            formulario.pregunta_2 = "respuesta"
+            formulario.pregunta_3 = "respuesta"
+            formulario.pregunta_4 = "respuesta"
+            formulario.pregunta_5 = "respuesta"
+            formulario.pregunta_6 = "respuesta"
+            formulario.pregunta_7 = "respuesta"
+
+            db.session.add(formulario)
+            db.session.commit()
+            print(f"Formulario {x} creado")
+        print(f"Formularios creados")
 

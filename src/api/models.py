@@ -65,3 +65,45 @@ class Usuario_Mascota(db.Model):
             "id_usuario": self.id_usuario,
             "id_mascota": self.id_mascota    
         }
+
+
+
+class Formulario_Adopcion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    pregunta_1 = db.Column(db.String(500), nullable=True)
+    pregunta_2 = db.Column(db.String(500), nullable=True)
+    pregunta_3 = db.Column(db.String(500), nullable=True)
+    pregunta_4 = db.Column(db.String(500), nullable=True)
+    pregunta_5 = db.Column(db.String(500), nullable=True)
+    pregunta_6 = db.Column(db.String(500), nullable=True)
+    pregunta_7 = db.Column(db.String(500), nullable=True)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "pregunta_1": self.pregunta_1,
+            "pregunta_2": self.pregunta_2,
+            "pregunta_3": self.pregunta_3,
+            "pregunta_4": self.pregunta_4,
+            "pregunta_5": self.pregunta_5,
+            "pregunta_6": self.pregunta_6,
+            "pregunta_7": self.pregunta_7,    
+        }
+
+class Candidato_Mascota_Formulario(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_candidato = db.Column(db.Integer, db.ForeignKey("users.id"))
+    id_mascota = db.Column(db.Integer, db.ForeignKey("mascota.id"))
+    id_formulario = db.Column(db.Integer, db.ForeignKey("formulario__adopcion.id"))
+    rel_usuario = db.relationship("Users")
+    rel_mascota = db.relationship("Mascota")
+    rel_formulario = db.relationship("Formulario_Adopcion")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "id_usuario": self.id_usuario,
+            "id_mascota": self.id_mascota,
+            "id_formulario": self.id_formulario    
+        }
+    
