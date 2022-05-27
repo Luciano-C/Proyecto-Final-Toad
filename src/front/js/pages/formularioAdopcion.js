@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { preguntas } from "../contants/preguntasFormulario";
-import { campos } from "../contants/camposDatosContacto";
+import { preguntas } from "../constants/preguntasFormulario";
+import { campos } from "../constants/camposDatosContacto";
 import { InputFormulario } from "../component/inputFormulario";
 import { InputDatosContacto } from "../component/inputDatosContacto";
 import perroCartel from "../../img/perro-cartel.png";
@@ -13,17 +13,17 @@ export const FormularioAdopcion = () => {
   // Añade un elemento vacío por pregunta a la lista de respuesta para que no hayan errores con los índices.
   useEffect(() => {
     let respuestasDatosContacto = store.respuestasDatosContacto;
-    let respuestas = store.respuestasFormularioAdopcion;
+    let respuestasFormulario = store.respuestasFormularioAdopcion;
 
     campos.forEach((x) => {
       respuestasDatosContacto.push("");
     });
 
     preguntas.forEach((x) => {
-      respuestas.push("");
+      respuestasFormulario.push("");
     });
     actions.setRespuestasDatosContacto(respuestasDatosContacto);
-    actions.setRespuestasFormularioAdopcion(respuestas);
+    actions.setRespuestasFormularioAdopcion(respuestasFormulario);
   }, []);
 
   return (

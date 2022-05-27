@@ -27,12 +27,39 @@ def get_usuarios():
     todos_usuarios = list(map(lambda x: x.serialize(), todos_usuarios))
     return jsonify(todos_usuarios), 200
 
+@api.route("/get-usuario-email", methods=["GET"])
+def get_user_by_email():
+    # Ejemplo Body: {"email": "test_user1@test.com"}
+    data = request.get_json()
+    usuario = Users.query.filter_by(email=data["email"]).first()
+    if usuario:
+        return jsonify(usuario.serialize()), 200
+    else:
+        return jsonify({"mensaje": "El usuario no existe en la base de datos"}), 200
 
+
+@api.route("/editar-usuario", methods=["PUT"])
+def editar_usuario():
+    data = request.get_json()
+    usuario_a_editar = Users.query.filter_by(id=data["id"]).first()
+    if usuario_a_editar:
+        usuario_a_editar.email = data["email"]
+        usuario_a_editar.password = data["password"]
+        usuario_a_editar.nombre = data["nombre"]
+        usuario_a_editar.apellidos = data["apellidos"]
+        usuario_a_editar.telefono = data["telefono"]
+        usuario_a_editar.direccion = data["direccion"] 
+
+        db.session.commit()
+        return jsonify(usuario_a_editar.serialize()), 200
+    else:
+        return jsonify({"mensaje": "El usuario no existe en la base de datos"}), 200
+        
 
 @api.route("/crear-usuario", methods=["POST"])
 def crear_usuario():
     data = request.get_json()
-    # {"email": "mariob@aol.com", "password": 1234, "nombre": "mario", "apellidos": "bros", "telefono": "123456678", "direccion": "alguna tuberia" }
+    # Ejemplo Body: {"email": "mariob@aol.com", "password": 1234, "nombre": "mario", "apellidos": "bros", "telefono": "123456678", "direccion": "alguna tuberia" }
     check_ususario = Users.query.filter_by(email=data["email"]).first()
     if check_ususario:
         return jsonify({"mensaje": "Usuario ya existe en base de datos"})
@@ -61,7 +88,7 @@ def get_mascotas():
 
 @api.route("/crear-mascota", methods=["POST"])
 def crear_mascota():
-    #perro_1 = {"nombre": "Juanito", "edad": 2, "especie": "perro", "sexo": "Macho", "tamaño": "Mediano", "nivel_actividad": "Alto", "otros_cuidados": "Ninguno", "url_foto": "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652914840/qxe66pkjkgrfu6z7f6t2.jpg"}
+    #Ejemplo Body = {"nombre": "Juanito", "edad": 2, "especie": "perro", "sexo": "Macho", "tamaño": "Mediano", "nivel_actividad": "Alto", "otros_cuidados": "Ninguno", "url_foto": "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652914840/qxe66pkjkgrfu6z7f6t2.jpg"}
     data = request.get_json()
     nueva_mascota = Mascota()
     nueva_mascota.nombre = data["nombre"]
@@ -80,7 +107,7 @@ def crear_mascota():
 
 @api.route("/crear-usuario-mascota/", methods=["POST"])
 def añadir_usuario_mascota():
-    #usuario_mascota = {"id_usuario" = 1, "id_mascota" = 10}
+    #Ejemplo Body = {"id_usuario" = 1, "id_mascota" = 10}
     data = request.get_json()
     id_u = data["id_usuario"]
     id_m = data["id_mascota"]
