@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Users, Mascota, Usuario_Mascota
+from api.models import db, Users, Mascota, Usuario_Mascota, Formulario_Adopcion, Candidato_Mascota_Formulario
 from api.utils import generate_sitemap, APIException
 import datetime
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -107,7 +107,7 @@ def crear_mascota():
 
 @api.route("/crear-usuario-mascota/", methods=["POST"])
 def añadir_usuario_mascota():
-    #Ejemplo Body = {"id_usuario" = 1, "id_mascota" = 10}
+    #Ejemplo Body = {"id_usuario": 1, "id_mascota": 10}
     data = request.get_json()
     id_u = data["id_usuario"]
     id_m = data["id_mascota"]
@@ -125,3 +125,51 @@ def añadir_usuario_mascota():
         db.session.commit()
 
         return jsonify(nuevo_usuario_mascota.serialize())
+
+@api.route("/formularios", methods=["GET"])
+def get_formularios():
+    todos_formularios = Formulario_Adopcion.query.all()
+    todos_formularios = list(map(lambda x: x.serialize(), todos_formularios))
+    return jsonify(todos_formularios), 200
+
+@api.route("/crear-formulario", methods=["POST"])
+def crear_formulario():
+    data = request.get_json()
+    # Ejemplo Body: {"pregunta_1": "respuesta", "pregunta_2": "respuesta", "pregunta_3": "respuesta", "pregunta_4": "respuesta", "pregunta_5": "respuesta", "pregunta_6": "respuesta", "pregunta_7": "respuesta"}
+   
+    nuevo_formulario = Formulario_Adopcion()
+    nuevo_formulario.pregunta_1 = data["pregunta_1"]
+    nuevo_formulario.pregunta_2 = data["pregunta_2"]
+    nuevo_formulario.pregunta_3 = data["pregunta_3"]
+    nuevo_formulario.pregunta_4 = data["pregunta_4"]
+    nuevo_formulario.pregunta_5 = data["pregunta_5"]
+    nuevo_formulario.pregunta_6 = data["pregunta_6"]
+    nuevo_formulario.pregunta_7 = data["pregunta_7"]
+ 
+    db.session.add(nuevo_formulario)
+    db.session.commit()
+
+    return jsonify(nuevo_formulario.serialize())
+
+@api.route("/crear-candidato-mascota-formulario")
+def crear_candidato_mascota_formulario():
+    data = request.get_json()
+    # Ejemplo body: {"id_usuario": 1, "id_mascota": 10, "id_formulario": 1}
+    id_u = data["id_usuario"]
+    id_m = data["id_mascota"]
+    id_f = data["id_formulario"]
+    check_candidato_mascota_formulario = Candidato_Mascota_Formulario.query.filter_by(id_usuario=id_u, id_mascota = id_m, id_formulario = id_f).first()
+    if check_candidato_mascota_formulario:
+        return jsonify({"mensaje": "Este candidato ya está postulando a adoptar esta mascota"})
+    
+    else:
+
+        nuevo_candidato_mascota_formulario = Candidato_Mascota_Formulario()
+        nuevo_candidato_mascota_formulario.id_usuario = id_u
+        nuevo_candidato_mascota_formulario.id_mascota = id_m
+        nuevo_candidato_mascota_formulario.id_formulario = id_f
+
+        db.session.add(nuevo_candidato_mascota_formulario)
+        db.session.commit()
+
+        return jsonify(nuevo_candidato_mascota_formulario.serialize())
