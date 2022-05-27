@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { preguntas } from "../contants/preguntasFormulario";
+import { campos } from "../contants/camposDatosContacto";
 import { InputFormulario } from "../component/inputFormulario";
-import { DatosContacto } from "../component/datosContacto";
+import { InputDatosContacto } from "../component/inputDatosContacto";
 import perroCartel from "../../img/perro-cartel.png";
 
 export const FormularioAdopcion = () => {
@@ -11,12 +12,18 @@ export const FormularioAdopcion = () => {
 
   // Añade un elemento vacío por pregunta a la lista de respuesta para que no hayan errores con los índices.
   useEffect(() => {
+    let respuestasDatosContacto = store.respuestasDatosContacto;
     let respuestas = store.respuestasFormularioAdopcion;
+
+    campos.forEach((x) => {
+      respuestasDatosContacto.push("");
+    });
+
     preguntas.forEach((x) => {
       respuestas.push("");
     });
+    actions.setRespuestasDatosContacto(respuestasDatosContacto);
     actions.setRespuestasFormularioAdopcion(respuestas);
-    console.log(store.respuestasFormularioAdopcion);
   }, []);
 
   return (
@@ -25,7 +32,13 @@ export const FormularioAdopcion = () => {
         <img className="perroCartel" src={perroCartel} />
 
         {isDatosContacto ? (
-          <DatosContacto />
+          <ul>
+            {campos.map((x, i) => (
+              <div key={`d${i}`} className="d-flex preguntasContainer">
+                <InputDatosContacto key={`IDC${i}`} campo={x.campo} index={i} />
+              </div>
+            ))}
+          </ul>
         ) : (
           <ul>
             {preguntas.map((x, i) => (
@@ -45,7 +58,12 @@ export const FormularioAdopcion = () => {
           <button
             className="btn btn-danger"
             onClick={() => {
-              setIsDatoContacto(false);
+              console.log(store.respuestasDatosContacto);
+              if (store.respuestasDatosContacto.includes("")) {
+                alert("Complete todos los campos");
+              } else {
+                setIsDatoContacto(false);
+              }
             }}
           >
             Continuar

@@ -15,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       mascotas: [],
+      respuestasDatosContacto: [],
       respuestasFormularioAdopcion: [],
     },
     actions: {
@@ -31,6 +32,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+
+      setRespuestasDatosContacto: (respuestas) => {
+        setStore({ respuestasDatosContacto: respuestas });
       },
 
       setRespuestasFormularioAdopcion: (respuestas) => {
