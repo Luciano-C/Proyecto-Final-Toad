@@ -14,6 +14,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      user: [
+        {
+          currentEmail: "",
+          currentPassword: "",
+          //token:"",
+        },
+      ],
+
       mascotas: [],
       respuestasDatosContacto: [],
       respuestasFormularioAdopcion: [],
@@ -30,7 +38,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       login: (email, password) => {
-        console.log("este es el email y password", email, password);
+        setStore({});
+        console.log("email y password desde flux", email, password);
       },
 
       getMascotas: () => {

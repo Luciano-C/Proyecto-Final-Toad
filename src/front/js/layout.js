@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import notfound from "../img/notfound.gif";
 
 import { Home } from "./pages/home";
 import { Pet } from "./pages/pet";
@@ -65,7 +66,12 @@ const Layout = () => {
               <Contacto />
             </Route>
             <Route>
-              <h1>Not found!</h1>
+              <h1>
+                Not found!
+                <div>
+                  <img src={notfound} />
+                </div>
+              </h1>
             </Route>
           </Switch>
           <Footer />

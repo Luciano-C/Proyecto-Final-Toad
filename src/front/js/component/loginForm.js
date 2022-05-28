@@ -1,44 +1,63 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
 
-export const LoginForm = () => (
-  <div class="container">
-    <div class="row align-items-start">
-      <div class="col"></div>
-      <div class="col">
-        <form className="">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleFormControlInput1"
-              placeholder="name@example.com"
-            />
+export const LoginForm = () => {
+  const { store, actions } = useContext(Context);
+  const [emailInput, setEmail] = useState("");
+  const [passwordInput, setPassword] = useState("");
+
+  if (!store.token) {
+    return (
+      <div className="container">
+        <div className="row align-items-start">
+          <div className="col"></div>
+          <div className="col">
+            <form className="">
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="name@example.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="col-auto">
+                <button
+                  type="submit"
+                  className="btn btn-outline-danger outline-info btn-lg"
+                  onClick={() => {
+                    emailInput, passwordInput;
+                    actions.login(emailInput, passwordInput);
+                    console.log(emailInput, passwordInput);
+                  }}
+                >
+                  Ingresar 😸
+                </button>
+                <br />
+                <a className="mb-3" href="/regusers">
+                  ¿Quieres adoptar?... Regístrate 😻
+                </a>
+                <br />
+                <a className="mb-3" href="/resetpass">
+                  ¿Olvidaste tu contraseña?
+                </a>
+              </div>
+            </form>
           </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">
-              Contraseña
-            </label>
-            <input type="password" class="form-control" />
-          </div>
-          <div className="col-auto">
-            <button type="submit" className="btn btn-primary mb-3">
-              Ingresar 😸
-            </button>
-            <br />
-            <a className="mb-3" href="/regusers">
-              ¿Quieres adoptar?... Regístrate 😻
-            </a>
-            <br />
-            <a className="mb-3" href="/resetpass">
-              ¿Olvidaste tu contraseña?
-            </a>
-          </div>
-        </form>
+          <div className="col"></div>
+        </div>
       </div>
-      <div className="col"></div>
-    </div>
-  </div>
-);
+    );
+  } else {
+    return <formulario-adopcion />;
+  }
+};
