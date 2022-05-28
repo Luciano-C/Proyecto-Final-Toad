@@ -25,8 +25,8 @@ export const Contacto = () => {
 
   return (
     <div className="container">
-      <div className="row">
-        <form onSubmit={sendEmail}>
+      <form onSubmit={sendEmail}>
+        <div className="row">
           <div className="col-6" style={{ paddingTop: "20px" }}>
             <div className="contacto" style={{ textAlign: "left" }}>
               <h1 style={{ color: "red" }}>Contacto</h1>
@@ -87,8 +87,8 @@ export const Contacto = () => {
           <div className="col-6" style={{ paddingTop: "20px" }}>
             <img src="https://s03.s3c.es/imag/_v0/770x420/6/0/5/mascotas-archivo.png"></img>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
