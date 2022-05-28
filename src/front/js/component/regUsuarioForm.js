@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { useContext, useState } from "react/cjs/react.production.min";
+import React, { Component, useContext, useState } from "react";
+
 import { Context } from "../store/appContext";
 
-const { actions } = useContext(Context);
-
 const Registro = () => {
+  const { store, actions } = useContext(Context);
   const [inputNombre, setNombre] = useState("");
   const [inputApellido, setApellido] = useState("");
   const [inputEmail, setEmail] = useState("");
@@ -18,42 +17,42 @@ const Registro = () => {
 };
 
 export const RegUsuarioForm = () => (
-  <div class="container">
-    <div class="row align-items-start">
-      <div class="col"></div>
-      <div class="col">
+  <div className="container">
+    <div className="row align-items-start">
+      <div className="col"></div>
+      <div className="col">
         <form className="">
           <div>
             Nombre
-            <input type="text" class="form-control" />
+            <input type="text" className="form-control" />
             Apellido
-            <input type="text" class="form-control" />
+            <input type="text" className="form-control" />
           </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3">
+            <label for="exampleFormControlInput1" className="form-label">
               Email
             </label>
             <input
               type="email"
-              class="form-control"
+              className="form-control"
               placeholder="name@example.com"
             />
           </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3">
+            <label for="exampleFormControlInput1" className="form-label">
               Confirma tu email
             </label>
             <input
               type="email"
-              class="form-control"
+              className="form-control"
               placeholder="name@example.com"
             />
           </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3">
+            <label for="exampleFormControlInput1" className="form-label">
               Contraseña
             </label>
-            <input type="password" class="form-control" />
+            <input type="password" className="form-control" />
           </div>
           <div className="col-auto">
             <button

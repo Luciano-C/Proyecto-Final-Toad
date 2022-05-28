@@ -61,7 +61,7 @@ export const Home = () => {
           <div className="boton" style={{ paddingTop: "1rem" }}>
             <button
               type="button"
-              class="btn btn-outline-danger outline-info btn-lg"
+              className="btn btn-outline-danger outline-info btn-lg"
             >
               Quiero Donar
             </button>
