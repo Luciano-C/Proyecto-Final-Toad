@@ -17,6 +17,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       mascotas: [],
       respuestasDatosContacto: [],
       respuestasFormularioAdopcion: [],
+
+      // Temporal, hay que actualizar con token
+      usuarioActual: {
+        email: "test_user1@test.com",
+        password: "123456",
+        nombre: "Bob",
+        apellidos: "Martinez Lopez",
+        telefono: "1981234568",
+        direccion: "Callequenoexiste 123",
+      },
     },
     actions: {
       login: (email, password) => {
