@@ -62,7 +62,9 @@ export const FormularioAdopcion = () => {
               if (store.respuestasDatosContacto.includes("")) {
                 alert("Complete todos los campos");
               } else {
-                setIsDatoContacto(false);
+                actions.addCurrentUserId();
+                console.log(store);
+                //setIsDatoContacto(false);
               }
             }}
           >

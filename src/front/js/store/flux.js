@@ -56,6 +56,17 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ respuestasFormularioAdopcion: respuestas });
       },
 
+      addCurrentUserId: () => {
+        const store = getStore();
+
+        fetch(
+          process.env.BACKEND_URL + "/api/get-usuario/email=test_user1@test.com"
+        )
+          .then((response) => response.json())
+          .then((result) => setStore({ usuarioActual: result }))
+          .catch((error) => console.log("error", error));
+      },
+
       getMessage: () => {
         // fetching data from the backend
         fetch(process.env.BACKEND_URL + "/api/hello")

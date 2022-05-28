@@ -27,11 +27,9 @@ def get_usuarios():
     todos_usuarios = list(map(lambda x: x.serialize(), todos_usuarios))
     return jsonify(todos_usuarios), 200
 
-@api.route("/get-usuario-email", methods=["GET"])
-def get_user_by_email():
-    # Ejemplo Body: {"email": "test_user1@test.com"}
-    data = request.get_json()
-    usuario = Users.query.filter_by(email=data["email"]).first()
+@api.route("/get-usuario/email=<email>", methods=["GET"])
+def get_user_by_email(email):
+    usuario = Users.query.filter_by(email=email).first()
     if usuario:
         return jsonify(usuario.serialize()), 200
     else:
