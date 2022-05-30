@@ -24,6 +24,8 @@ export const FormularioAdopcion = () => {
     });
     actions.setRespuestasDatosContacto(respuestasDatosContacto);
     actions.setRespuestasFormularioAdopcion(respuestasFormulario);
+    // Hace fetch para buscar la id del usuario en base de datos correspondiente al email actual
+    actions.addCurrentUserId();
   }, []);
 
   return (
@@ -62,9 +64,15 @@ export const FormularioAdopcion = () => {
               if (store.respuestasDatosContacto.includes("")) {
                 alert("Complete todos los campos");
               } else {
-                actions.addCurrentUserId();
-                console.log(store);
-                //setIsDatoContacto(false);
+                console.log(store.usuarioActual);
+                actions.editUserContactData(
+                  store.usuarioActual.id,
+                  store.respuestasDatosContacto[0],
+                  store.respuestasDatosContacto[1],
+                  store.respuestasDatosContacto[2],
+                  store.respuestasDatosContacto[3]
+                );
+                setIsDatoContacto(false);
               }
             }}
           >

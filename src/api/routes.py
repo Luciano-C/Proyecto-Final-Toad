@@ -39,6 +39,7 @@ def get_user_by_email(email):
 @api.route("/editar-usuario", methods=["PUT"])
 def editar_usuario():
     data = request.get_json()
+    # Ejemplo Body: {"email": "mariob@aol.com", "password": 1234, "nombre": "mario", "apellidos": "bros", "direccion": "alguna tuberia", "telefono": "123456678"}
     usuario_a_editar = Users.query.filter_by(id=data["id"]).first()
     if usuario_a_editar:
         usuario_a_editar.email = data["email"]
@@ -57,7 +58,7 @@ def editar_usuario():
 @api.route("/crear-usuario", methods=["POST"])
 def crear_usuario():
     data = request.get_json()
-    # Ejemplo Body: {"email": "mariob@aol.com", "password": 1234, "nombre": "mario", "apellidos": "bros", "telefono": "123456678", "direccion": "alguna tuberia" }
+    # Ejemplo Body: {"email": "mariob@aol.com", "password": 1234, "nombre": "mario", "apellidos": "bros", "direccion": "alguna tuberia", "telefono": "123456678"}
     check_ususario = Users.query.filter_by(email=data["email"]).first()
     if check_ususario:
         return jsonify({"mensaje": "Usuario ya existe en base de datos"})

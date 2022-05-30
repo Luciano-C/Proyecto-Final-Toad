@@ -60,10 +60,50 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
 
         fetch(
-          process.env.BACKEND_URL + "/api/get-usuario/email=test_user1@test.com"
+          process.env.BACKEND_URL +
+            `/api/get-usuario/email=${store.usuarioActual.email}`
         )
           .then((response) => response.json())
-          .then((result) => setStore({ usuarioActual: result }))
+          .then((result) => {
+            let user = {
+              id: result.id,
+              email: result.email,
+              password: store.usuarioActual.password,
+              nombre: result.nombre,
+              apellidos: result.apellidos,
+              direccion: result.direccion,
+              telefono: result.telefono,
+            };
+            setStore({ usuarioActual: user });
+          })
+          .catch((error) => console.log("error", error));
+      },
+
+      editUserContactData: (id, nombre, apellidos, direccion, telefono) => {
+        const store = getStore();
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          id: id,
+          email: store.usuarioActual.email,
+          password: store.usuarioActual.password,
+          nombre: nombre,
+          apellidos: apellidos,
+          direccion: direccion,
+          telefono: telefono,
+        });
+        console.log(raw);
+        var requestOptions = {
+          method: "PUT",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(process.env.BACKEND_URL + "/api/editar-usuario", requestOptions)
+          .then((response) => response.json())
+          .then((result) => console.log(result))
           .catch((error) => console.log("error", error));
       },
 
