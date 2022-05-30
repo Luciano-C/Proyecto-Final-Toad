@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 import Axios from "axios";
 
 import "../../styles/crearMascota.css";
 
 export const CrearMascota = () => {
+  const { store, actions } = useContext(Context);
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
   const [especie, setEspecie] = useState("");
@@ -24,6 +26,10 @@ export const CrearMascota = () => {
   const [errorOtrosCuidados, setErrorOtrosCuidados] = useState("");
 
   const [idUsuario, setIdUsuario] = useState(1);
+
+  useEffect(() => {
+    actions.addCurrentUserId();
+  }, []);
 
   const inputHandler = (valor, funcion) => {
     funcion(valor);
@@ -121,7 +127,7 @@ export const CrearMascota = () => {
         var crearUsuarioMascotaHeaders = new Headers();
         crearUsuarioMascotaHeaders.append("Content-Type", "application/json");
         var crearUsuarioMascotaRaw = JSON.stringify({
-          id_usuario: idUsuario,
+          id_usuario: store.usuarioActual.id,
           id_mascota: idMascota,
         });
         var requestOptions = {

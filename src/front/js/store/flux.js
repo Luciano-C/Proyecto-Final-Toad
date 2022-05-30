@@ -27,6 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         telefono: "1981234568",
         direccion: "Callequenoexiste 123",
       },
+      idFormularioActual: "",
     },
     actions: {
       login: (email, password) => {
@@ -102,6 +103,63 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         fetch(process.env.BACKEND_URL + "/api/editar-usuario", requestOptions)
+          .then((response) => response.json())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      },
+
+      crearFormulario: () => {
+        const store = getStore();
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          pregunta_1: store.respuestasFormularioAdopcion[0],
+          pregunta_2: store.respuestasFormularioAdopcion[1],
+          pregunta_3: store.respuestasFormularioAdopcion[2],
+          pregunta_4: store.respuestasFormularioAdopcion[3],
+          pregunta_5: store.respuestasFormularioAdopcion[4],
+          pregunta_6: store.respuestasFormularioAdopcion[5],
+          pregunta_7: store.respuestasFormularioAdopcion[6],
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(process.env.BACKEND_URL + "/api/crear-formulario", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            setStore({ idFormularioActual: result.id });
+          })
+          .catch((error) => console.log("error", error));
+      },
+
+      crearCandidatoMascotaFormulario: (idUsuario, idMascota, idFormulario) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          id_usuario: idUsuario,
+          id_mascota: idMascota,
+          id_formulario: idFormulario,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(
+          process.env.BACKEND_URL + "/api/crear-candidato-mascota-formulario",
+          requestOptions
+        )
           .then((response) => response.json())
           .then((result) => console.log(result))
           .catch((error) => console.log("error", error));

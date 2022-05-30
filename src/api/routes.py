@@ -150,7 +150,7 @@ def crear_formulario():
 
     return jsonify(nuevo_formulario.serialize())
 
-@api.route("/crear-candidato-mascota-formulario")
+@api.route("/crear-candidato-mascota-formulario", methods=["POST"])
 def crear_candidato_mascota_formulario():
     data = request.get_json()
     # Ejemplo body: {"id_usuario": 1, "id_mascota": 10, "id_formulario": 1}

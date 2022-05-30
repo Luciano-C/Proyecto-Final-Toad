@@ -5,10 +5,13 @@ import { campos } from "../constants/camposDatosContacto";
 import { InputFormulario } from "../component/inputFormulario";
 import { InputDatosContacto } from "../component/inputDatosContacto";
 import perroCartel from "../../img/perro-cartel.png";
+import { useParams } from "react-router-dom";
+import { StrictMode } from "react/cjs/react.production.min";
 
 export const FormularioAdopcion = () => {
   const { store, actions } = useContext(Context);
-  const [isDatosContacto, setIsDatoContacto] = useState(true);
+  const [isDatosContacto, setIsDatoContacto] = useState(false);
+  const { idMascota } = useParams();
 
   // Añade un elemento vacío por pregunta a la lista de respuesta para que no hayan errores con los índices.
   useEffect(() => {
@@ -27,6 +30,16 @@ export const FormularioAdopcion = () => {
     // Hace fetch para buscar la id del usuario en base de datos correspondiente al email actual
     actions.addCurrentUserId();
   }, []);
+
+  useEffect(() => {
+    if (store.idFormularioActual !== "") {
+      actions.crearCandidatoMascotaFormulario(
+        store.usuarioActual.id,
+        (Number(idMascota) + 1).toString(),
+        store.idFormularioActual
+      );
+    }
+  }, [store.idFormularioActual]);
 
   return (
     <div className="container">
@@ -83,6 +96,7 @@ export const FormularioAdopcion = () => {
             className="btn btn-danger"
             onClick={() => {
               console.log(store.respuestasFormularioAdopcion);
+              actions.crearFormulario();
             }}
           >
             Confirmar

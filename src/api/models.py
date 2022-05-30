@@ -92,7 +92,7 @@ class Formulario_Adopcion(db.Model):
 
 class Candidato_Mascota_Formulario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_candidato = db.Column(db.Integer, db.ForeignKey("users.id"))
+    id_usuario = db.Column(db.Integer, db.ForeignKey("users.id"))
     id_mascota = db.Column(db.Integer, db.ForeignKey("mascota.id"))
     id_formulario = db.Column(db.Integer, db.ForeignKey("formulario__adopcion.id"))
     rel_usuario = db.relationship("Users")
