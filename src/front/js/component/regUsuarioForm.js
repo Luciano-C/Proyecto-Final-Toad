@@ -17,19 +17,13 @@ const Registro = () => {
 };
 
 export const RegUsuarioForm = () => (
-  <div className="container">
-    <div className="row align-items-start">
-      <div className="col"></div>
-      <div className="col">
-        <form className="">
-          <div>
-            Nombre
-            <input type="text" className="form-control" />
-            Apellido
-            <input type="text" className="form-control" />
-          </div>
-          <div className="mb-3">
-            <label for="exampleFormControlInput1" className="form-label">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col"></div>
+      <div class="col">
+        <form className="container">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">
               Email
             </label>
             <input

@@ -18,6 +18,7 @@ import { FormularioAdopcion } from "./pages/formularioAdopcion";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { RecupContraForm } from "./component/recupContraForm";
+import { Perfil } from "./component/perfil";
 
 //create your first component
 const Layout = () => {
@@ -46,7 +47,7 @@ const Layout = () => {
             <Route exact path="/login">
               <Login />
             </Route>
-            <Route exact path="/regusers">
+            <Route exact path="/regUsuario">
               <RegUsuario />
             </Route>
             <Route exact path="/resetpass">
@@ -63,6 +64,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/contacto">
               <Contacto />
+            </Route>
+            <Route exact path="/perfil">
+              <Perfil />
             </Route>
             <Route>
               <h1>Not found!</h1>

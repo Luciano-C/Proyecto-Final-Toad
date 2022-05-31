@@ -18,10 +18,6 @@ export const Pet = (props) => {
         />
         <div className="card-body">
           <h1 className="card-title">
-            {/*      <strong>{store.mascotas.map((id) => id.nombre)}</strong>
-            {store.mascotas.map(function (id) {
-              return <li> {id.nombre}</li>;
-            })} */}
             <strong>{store.mascotas[id]?.nombre}</strong>
           </h1>
           <h3 className="card-text">
