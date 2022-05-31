@@ -6,11 +6,11 @@ import { InputFormulario } from "../component/inputFormulario";
 import { InputDatosContacto } from "../component/inputDatosContacto";
 import perroCartel from "../../img/perro-cartel.png";
 import { useParams } from "react-router-dom";
-import { StrictMode } from "react/cjs/react.production.min";
+import { Link } from "react-router-dom";
 
 export const FormularioAdopcion = () => {
   const { store, actions } = useContext(Context);
-  const [isDatosContacto, setIsDatoContacto] = useState(false);
+  const [isDatosContacto, setIsDatoContacto] = useState(true);
   const { idMascota } = useParams();
 
   // Añade un elemento vacío por pregunta a la lista de respuesta para que no hayan errores con los índices.
@@ -92,15 +92,18 @@ export const FormularioAdopcion = () => {
             Continuar
           </button>
         ) : (
-          <button
-            className="btn btn-danger"
-            onClick={() => {
-              console.log(store.respuestasFormularioAdopcion);
-              actions.crearFormulario();
-            }}
-          >
-            Confirmar
-          </button>
+          <Link to="/">
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                console.log(store.respuestasFormularioAdopcion);
+                actions.crearFormulario();
+                alert("Formulario de adopción enviado al dueño.");
+              }}
+            >
+              Confirmar
+            </button>
+          </Link>
         )}
       </div>
     </div>

@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import Axios from "axios";
 
 import "../../styles/crearMascota.css";
+// Función diseñada para que la primera letra sea mayúscula
+import { capitalize } from "../constants/capitalize";
 
 export const CrearMascota = () => {
   const { store, actions } = useContext(Context);
@@ -108,9 +110,9 @@ export const CrearMascota = () => {
       nombre: nombre,
       edad: edad,
       especie: especie,
-      sexo: sexo,
-      tamaño: tamaño,
-      nivel_actividad: nivelActividad,
+      sexo: capitalize(sexo),
+      tamaño: capitalize(tamaño),
+      nivel_actividad: capitalize(nivelActividad),
       otros_cuidados: otrosCuidados,
       url_foto: URLFoto,
     });

@@ -61,7 +61,7 @@ export const Pet = (props) => {
             Regresar a Home
           </button>
         </Link>
-        <Link to="/">
+        <Link to={`/formulario-adopcion/${id}`}>
           <button className="cardButton btn btn-lg btn-danger outline-info">
             Adoptar
           </button>
