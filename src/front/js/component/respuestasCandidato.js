@@ -33,17 +33,16 @@ export const RespuestasCandidato = () => {
   const combinarPreguntasRespuestas = (preguntas, respuestas) => {
     let preguntas_respuestas = [];
     preguntas.forEach((x, i) => {
-      preguntas_respuestas.push({ pregunta: x, respuesta: respuestas[i] });
+      preguntas_respuestas.push({
+        pregunta: x.pregunta,
+        respuesta: respuestas[i],
+      });
     });
-    console.log(preguntas_respuestas);
     return preguntas_respuestas;
   };
   return (
     <ul>
-      {combinarPreguntasRespuestas(
-        preguntas.map((x) => x.pregunta),
-        respuestas
-      ).map((x, i) => (
+      {combinarPreguntasRespuestas(preguntas, respuestas).map((x, i) => (
         <div key={`d${i}`}>
           <p key={`p${i}`}>{`${i + 1}.-${x.pregunta}`}</p>
           <p key={`r${i}`}>{x.respuesta}</p>
