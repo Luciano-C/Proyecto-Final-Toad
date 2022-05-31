@@ -15,6 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       mascotas: [],
+
+      // Para generar formulario de adopción
       respuestasDatosContacto: [],
       respuestasFormularioAdopcion: [],
 
@@ -28,6 +30,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         direccion: "Callequenoexiste 123",
       },
       idFormularioActual: "",
+
+      idMascotasDelUsuario: [],
+      usuariosMascotasFormularios: [],
+
+      //Para ver respuestas de candidato
+      candidatoActual: {},
+      mascotaActual: {},
+      formularioActual: {},
     },
     actions: {
       login: (email, password) => {
@@ -162,6 +172,70 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      },
+
+      getUserPetsId: (id_usuario) => {
+        const store = getStore();
+        fetch(
+          process.env.BACKEND_URL +
+            `/api/get-usuario-mascota/id-usuario=${id_usuario}`
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            setStore({ idMascotasDelUsuario: result.map((x) => x.id_mascota) });
+            console.log(getStore());
+          })
+          .catch((error) => console.log("error", error));
+      },
+
+      getUsuarioMascotaFormulario: () => {
+        fetch(process.env.BACKEND_URL + `/api/get-usuario-mascota-formulario/`)
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            setStore({ usuariosMascotasFormularios: result });
+            console.log(getStore());
+          })
+          .catch((error) => console.log("error", error));
+      },
+
+      filtrarUsuarioMacotaFormularioPorIdMascota: (idMascota) => {
+        const usuarioFormularioFiltrados =
+          store.usuariosMascotasFormularios.filter(
+            (x) => x.id_mascota === idMascota
+          );
+        return usuarioFormularioFiltrados;
+      },
+
+      //Poner funciones para obtener by id usuario (candidato), mascota, formulario
+      getCandidatoById: (idUser) => {
+        fetch(process.env.BACKEND_URL + `/api/get-usuario/id=${idUser}`)
+          .then((response) => response.json())
+          .then((result) => {
+            setStore({ candidatoActual: result });
+          })
+          .catch((error) => console.log("error", error));
+      },
+
+      getMascotaById: (idMascota) => {
+        fetch(process.env.BACKEND_URL + `/api/get-mascota/id=${idMascota}`)
+          .then((response) => response.json())
+          .then((result) => {
+            setStore({ mascotaActual: result });
+          })
+          .catch((error) => console.log("error", error));
+      },
+
+      getFormularioById: (idFormulario) => {
+        fetch(
+          process.env.BACKEND_URL + `/api/get-formulario/id=${idFormulario}`
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            setStore({ formularioActual: result });
+          })
           .catch((error) => console.log("error", error));
       },
 

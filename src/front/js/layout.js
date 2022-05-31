@@ -14,6 +14,7 @@ import { Adopta } from "./pages/adopta";
 import { App } from "./pages/app";
 import { Contacto } from "./pages/contacto";
 import { FormularioAdopcion } from "./pages/formularioAdopcion";
+import { RespuestasCandidato } from "./component/respuestasCandidato";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -67,6 +68,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/perfil">
               <Perfil />
+            </Route>
+            <Route exact path="/respuestas-candidato/:idFormulario">
+              <RespuestasCandidato />
             </Route>
             <Route>
               <h1>Not found!</h1>

@@ -125,6 +125,8 @@ def añadir_usuario_mascota():
 
         return jsonify(nuevo_usuario_mascota.serialize())
 
+
+
 @api.route("/formularios", methods=["GET"])
 def get_formularios():
     todos_formularios = Formulario_Adopcion.query.all()
@@ -172,3 +174,50 @@ def crear_candidato_mascota_formulario():
         db.session.commit()
 
         return jsonify(nuevo_candidato_mascota_formulario.serialize())
+
+
+
+# Rutas para buscar respuesta de formulario
+@api.route("/get-usuario/id=<id_usuario>", methods=["GET"])
+def get_user_by_id(id_usuario):
+    usuario = Users.query.filter_by(id=id_usuario).first()
+    if usuario:
+        return jsonify(usuario.serialize()), 200
+    else:
+        return jsonify({"mensaje": "El usuario no existe en la base de datos"}), 200
+
+
+@api.route("/get-mascota/id=<id_mascota>", methods=["GET"])
+def get_mascota_by_id(id_mascota):
+    mascota = Mascota.query.filter_by(id=id_mascota).first()
+    if mascota:
+        return jsonify(mascota.serialize()), 200
+    else:
+        return jsonify({"mensaje": "La mascota no existe en la base de datos"}), 200
+
+@api.route("/get-formulario/id=<id_formulario>", methods=["GET"])
+def get_formulario_by_id(id_formulario):
+    formulario = Formulario_Adopcion.query.filter_by(id=id_formulario).first()
+    if formulario:
+        return jsonify(formulario.serialize()), 200
+    else:
+        return jsonify({"mensaje": "El formulario no existe en la base de datos"}), 200
+
+# Obtiene los id mascotas del usuario objetivo
+@api.route("/get-usuario-mascota/id-usuario=<id_usuario>", methods=["GET"])
+def get_usuario_mascota_by_id_usuario(id_usuario):
+    usuario_mascotas = Usuario_Mascota.query.filter_by(id_usuario=id_usuario).all()
+    return jsonify(list(map(lambda x: x.serialize(), usuario_mascotas)))
+
+
+## NO ES SEGURO SI ES NECESARIA
+@api.route("/get-usuario-mascota-formulario/id-mascota=<id_mascota>", methods=["GET"])
+def get_usuario_mascota_formulario_by_id_mascota(id_mascota):
+    usuario_mascotas_formulario = Candidato_Mascota_Formulario.query.filter_by(id_mascota=id_mascota).all()
+    return jsonify(list(map(lambda x: x.serialize(), usuario_mascotas_formulario)))
+
+@api.route("/get-usuario-mascota-formulario/", methods=["GET"])
+def get_usuario_mascota_formulario():
+    todos_usuarios_mascota_formulario = Candidato_Mascota_Formulario.query.all()
+    todos_usuarios_mascota_formulario = list(map(lambda x: x.serialize(), todos_usuarios_mascota_formulario))
+    return jsonify(todos_usuarios_mascota_formulario), 200
