@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 export const VerCandidatos = () => {
   const { store, actions } = useContext(Context);
@@ -32,33 +33,38 @@ export const VerCandidatos = () => {
   }, [store.idMascotasDelUsuario]);
 
   console.log(candidatosMascotasFormularios, "hola");
+
   const generateArrayToMap = () => {
-    let nombres = [];
+    let arrayToMap = [];
+
     candidatosMascotasFormularios.forEach((x) => {
       let objetosUsuario = store.usuarios.filter(
         (usuario) => usuario.id === x.id_usuario
       );
-      let nombreCompleto = objetosUsuario.map(
-        (x) => `${x.nombre} ${x.apellidos}`
+      let objetosMascota = store.mascotas.filter(
+        (mascota) => mascota.id === x.id_mascota
       );
-      nombres.push(...nombreCompleto);
-      // Nombres: [ "Bob Rojas Ahumada", "Jorge Martinez Lopez" ]
-    });
-    return nombres;
-  };
-  let arrray = generateArrayToMap();
-  console.log(arrray, "Arrray");
 
-  // candidatoMAscotasFormularios: [{ id: 15, id_formulario: 1, id_mascota: 11, id_usuario: 3 }, ...]
-  // Mapear esta array buscando los nombres de mascota y candidato en store.mascotas y store.usuarios (filtros)
-  let myArray = [
-    { nombre: "Doggo", candidato: "Juanito Lopez", link: "Link1" },
-    { nombre: "Chocolate", candidato: "Pepito Perez", link: "Link2" },
-  ];
-  //let myArray = [
+      let idFormulario = x.id_formulario;
+
+      arrayToMap.push({
+        mascota: objetosMascota[0],
+        candidato: objetosUsuario[0],
+        idFormulario: idFormulario,
+      });
+      console.log(store.mascotas);
+    });
+    return arrayToMap;
+  };
+
+  //let arrayToMap = [
   //{ mascota: {}, candidato: {usuario}, id_formulario },
   //{ mascota: {}, candidato: {usuario}, id_formulario },
   //];
+  let arrayToMap = generateArrayToMap();
+
+  // candidatoMAscotasFormularios: [{ id: 15, id_formulario: 1, id_mascota: 11, id_usuario: 3 }, ...]
+
   return (
     <div className="container">
       <table className="table text-center">
@@ -70,11 +76,15 @@ export const VerCandidatos = () => {
           </tr>
         </thead>
         <tbody>
-          {myArray.map((x, i) => (
+          {arrayToMap.map((x, i) => (
             <tr key={`tr${i}`}>
-              <td key={`n${i}`}>{x.nombre}</td>
-              <td key={`c${i}`}>{x.candidato}</td>
-              <td key={`l${i}`}>{x.link}</td>
+              <td key={`n${i}`}>{x.mascota.nombre}</td>
+              <td
+                key={`c${i}`}
+              >{`${x.candidato.nombre} ${x.candidato.apellidos}`}</td>
+              <Link to={`/respuestas-candidato/${x.idFormulario}`}>
+                <td key={`l${i}`}>Ver Respuestas</td>
+              </Link>
             </tr>
           ))}
         </tbody>

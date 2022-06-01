@@ -204,6 +204,7 @@ def get_mascota_by_id(id_mascota):
 @api.route("/get-formulario/id=<id_formulario>", methods=["GET"])
 def get_formulario_by_id(id_formulario):
     formulario = Formulario_Adopcion.query.filter_by(id=id_formulario).first()
+    
     if formulario:
         return jsonify(formulario.serialize()), 200
     else:
