@@ -126,6 +126,12 @@ def añadir_usuario_mascota():
         return jsonify(nuevo_usuario_mascota.serialize())
 
 
+@api.route("/usuario-mascota", methods=["GET"])
+def get_usuarios_mascotas():
+    todos_usuarios_mascotas = Usuario_Mascota.query.all()
+    todos_usuarios_mascotas = list(map(lambda x: x.serialize(), todos_usuarios_mascotas))
+    return jsonify(todos_usuarios_mascotas), 200
+
 
 @api.route("/formularios", methods=["GET"])
 def get_formularios():

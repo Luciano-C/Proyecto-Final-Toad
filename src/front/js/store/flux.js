@@ -15,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       mascotas: [],
+      usuarios: [],
 
       // Para generar formulario de adopción
       respuestasDatosContacto: [],
@@ -35,8 +36,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       usuariosMascotasFormularios: [],
 
       //Para ver respuestas de candidato
-      candidatoActual: {},
-      mascotaActual: {},
+      //candidatoActual: {},
+      //mascotaActual: {},
       formularioActual: {},
     },
     actions: {
@@ -202,6 +203,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       filtrarUsuarioMacotaFormularioPorIdMascota: (idMascota) => {
+        const store = getStore();
         const usuarioFormularioFiltrados =
           store.usuariosMascotasFormularios.filter(
             (x) => x.id_mascota === idMascota
@@ -209,8 +211,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         return usuarioFormularioFiltrados;
       },
 
+      getUsers: () => {
+        fetch(process.env.BACKEND_URL + "/api/usuarios")
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            setStore({ usuarios: result });
+          })
+          .catch((error) => console.log("error", error));
+      },
+
       //Poner funciones para obtener by id usuario (candidato), mascota, formulario
-      getCandidatoById: (idUser) => {
+      /*       getCandidatoById: (idUser) => {
         fetch(process.env.BACKEND_URL + `/api/get-usuario/id=${idUser}`)
           .then((response) => response.json())
           .then((result) => {
@@ -226,7 +238,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ mascotaActual: result });
           })
           .catch((error) => console.log("error", error));
-      },
+      }, */
 
       getFormularioById: (idFormulario) => {
         fetch(
