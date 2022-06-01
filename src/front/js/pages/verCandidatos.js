@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 
 export const VerCandidatos = () => {
   const { store, actions } = useContext(Context);
+  const [candidatosMascotasFormularios, setCandidatosMascotasFormularios] =
+    useState([]);
 
   useEffect(() => {
     actions.addCurrentUserId();
@@ -17,20 +19,46 @@ export const VerCandidatos = () => {
     console.log(store);
   }, [store.usuarioActual.id]);
 
-  let candidatosMascotasFormularios = [];
-  store.idMascotasDelUsuario.forEach((x) => {
-    candidatosMascotasFormularios.push(
-      ...actions.filtrarUsuarioMacotaFormularioPorIdMascota(x)
-    );
-  });
-  console.log(candidatosMascotasFormularios);
+  useEffect(() => {
+    let infoToPush = [];
+    if (store.idMascotasDelUsuario) {
+      store.idMascotasDelUsuario.forEach((x) => {
+        infoToPush.push(
+          ...actions.filtrarUsuarioMacotaFormularioPorIdMascota(x)
+        );
+      });
+      setCandidatosMascotasFormularios(infoToPush);
+    }
+  }, [store.idMascotasDelUsuario]);
+
+  console.log(candidatosMascotasFormularios, "hola");
+  const generateArrayToMap = () => {
+    let nombres = [];
+    candidatosMascotasFormularios.forEach((x) => {
+      let objetosUsuario = store.usuarios.filter(
+        (usuario) => usuario.id === x.id_usuario
+      );
+      let nombreCompleto = objetosUsuario.map(
+        (x) => `${x.nombre} ${x.apellidos}`
+      );
+      nombres.push(...nombreCompleto);
+      // Nombres: [ "Bob Rojas Ahumada", "Jorge Martinez Lopez" ]
+    });
+    return nombres;
+  };
+  let arrray = generateArrayToMap();
+  console.log(arrray, "Arrray");
+
   // candidatoMAscotasFormularios: [{ id: 15, id_formulario: 1, id_mascota: 11, id_usuario: 3 }, ...]
   // Mapear esta array buscando los nombres de mascota y candidato en store.mascotas y store.usuarios (filtros)
   let myArray = [
     { nombre: "Doggo", candidato: "Juanito Lopez", link: "Link1" },
     { nombre: "Chocolate", candidato: "Pepito Perez", link: "Link2" },
   ];
-
+  //let myArray = [
+  //{ mascota: {}, candidato: {usuario}, id_formulario },
+  //{ mascota: {}, candidato: {usuario}, id_formulario },
+  //];
   return (
     <div className="container">
       <table className="table text-center">
