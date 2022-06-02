@@ -13,13 +13,23 @@ export const VerMisPostulaciones = () => {
     actions.getUsers();
   }, []);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (store.usuarioActual.id) {
-      actions.getUserPetsId(store.usuarioActual.id);
+      let usuarioMascotaFormularioFiltrado = store.usuariosMascotasFormularios;
+      console.log(usuarioMascotaFormularioFiltrado, "hola");
+      console.log(store.usuarioActual.id);
+      console.log(store.usuariosMascotasFormularios);
     }
-  }, [store.usuarioActual.id]);
+  }, [store.usuarioActual.id]); */
+  const usuarioMascotasFormularioFiltrado =
+    store.usuariosMascotasFormularios.filter(
+      (x) => x.id_usuario === store.usuarioActual.id
+    );
+  console.log(usuarioMascotasFormularioFiltrado);
 
-  useEffect(() => {
+  // Se tiene usuario_mascota_formulario correspondiente a usuario actual
+
+  /*   useEffect(() => {
     let infoToPush = [];
     if (store.idMascotasDelUsuario) {
       store.idMascotasDelUsuario.forEach((x) => {
@@ -29,7 +39,7 @@ export const VerMisPostulaciones = () => {
       });
       setCandidatosMascotasFormularios(infoToPush);
     }
-  }, [store.idMascotasDelUsuario]);
+  }, [store.idMascotasDelUsuario]); */
 
   const generateArrayToMap = () => {
     let arrayToMap = [];
@@ -57,7 +67,19 @@ export const VerMisPostulaciones = () => {
   //{ mascota: {}, candidato: {}, id_formulario },
   //{ mascota: {}, candidato: {}, id_formulario },
   //];
-  let arrayToMap = generateArrayToMap();
+  //let arrayToMap = generateArrayToMap();
+  let arrayToMap = [
+    {
+      mascota: { nombre: "Chocolate" },
+      candidato: { nombre: "Candidato1" },
+      idFormulario: 1,
+    },
+    {
+      mascota: { nombre: "Orejas" },
+      candidato: { nombre: "Candidato2" },
+      idFormulario: 1,
+    },
+  ];
 
   // candidatoMAscotasFormularios: [{ id: 15, id_formulario: 1, id_mascota: 11, id_usuario: 3 }, ...]
 

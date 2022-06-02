@@ -35,6 +35,14 @@ def get_user_by_email(email):
     else:
         return jsonify({"mensaje": "El usuario no existe en la base de datos"}), 200
 
+@api.route("/get-password/email=<email>", methods=["GET"])
+def get_password_by_email(email):
+    usuario = Users.query.filter_by(email=email).first()
+    if usuario:
+        return jsonify(usuario.password), 200
+    else:
+        return jsonify({"mensaje": "El usuario no existe en la base de datos"}), 200
+
 
 @api.route("/editar-usuario", methods=["PUT"])
 def editar_usuario():

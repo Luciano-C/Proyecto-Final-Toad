@@ -35,6 +35,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       idMascotasDelUsuario: [],
       usuariosMascotasFormularios: [],
 
+      //Para mis postulaciones
+      usuariosMascotas: [],
+
       //Para ver respuestas de candidato
       //candidatoActual: {},
       //mascotaActual: {},
@@ -218,6 +221,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(result);
             setStore({ usuarios: result });
           })
+          .catch((error) => console.log("error", error));
+      },
+
+      getUsuariosMascotas: () => {
+        fetch(process.env.BACKEND_URL + "/api/usuario-mascota")
+          .then((response) => response.json())
+          .then((result) => setStore({ usuariosMascotas: result }))
           .catch((error) => console.log("error", error));
       },
 
