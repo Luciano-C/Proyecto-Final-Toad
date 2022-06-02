@@ -74,10 +74,10 @@ const Layout = () => {
             <Route exact path="/respuestas-candidato/:idFormulario">
               <RespuestasCandidato />
             </Route>
-            <Route exact path="/ver-candidatos">
+            <Route exact path="/mis-candidatos">
               <VerCandidatos />
             </Route>
-            <Route exact path="/ver-mis-postulaciones">
+            <Route exact path="/mis-postulaciones">
               <VerMisPostulaciones />
             </Route>
             <Route>

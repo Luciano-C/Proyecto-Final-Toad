@@ -3,72 +3,82 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 export const VerMisPostulaciones = () => {
+  /* ALGORITMO:
+  - Añadir id a current user
+  - Se consigue por fetch usuarioMascotaFormulario (candidato, mascota, formulario), todos los usuarios y todos los usuariosMascotas (dueños mascotas)
+  - arrayToMap tiene la siguiente estructura [{mascota: {}, candidato: {}, idFormulario: #},...]
+  - Se filtra usuarioMascotaFormulario para obtener una lista de los de usuarioActual.
+  - En la función arrayToMap se generan listas de idMascota, idDueños, idFormulario en base a usuarioMascotaFormulario filtrado.
+  - Con los id de mascota se buscan los id de sus dueños en usuarioMascota para generar lista de idDueños.
+  - Con id de mascota se buscan los objetos mascotas (store.mascotas). Con id de dueños se buscan los objetos usuarios (store.usuarios).
+  - Además se genera una lista con id de formularios.
+  - Para cada elemento de la lista de objetos mascotas se crea un objeto temporal con el formato {mascota: {}, dueño: {}, idFormulario: #} y se hace un push a una lista vacía.
+  - Al completar la iteración se fija la variable de estado arrayToMap y se mapea en jsx.
+  */
+
   const { store, actions } = useContext(Context);
   const [candidatosMascotasFormularios, setCandidatosMascotasFormularios] =
     useState([]);
+  const [arrayToMap, setArrayToMap] = useState([
+    { mascota: {}, dueño: {}, idFormulario: "" },
+  ]);
 
   useEffect(() => {
     actions.addCurrentUserId();
     actions.getUsuarioMascotaFormulario();
     actions.getUsers();
+    actions.getUsuariosMascotas();
   }, []);
 
-  /*   useEffect(() => {
-    if (store.usuarioActual.id) {
-      let usuarioMascotaFormularioFiltrado = store.usuariosMascotasFormularios;
-      console.log(usuarioMascotaFormularioFiltrado, "hola");
-      console.log(store.usuarioActual.id);
-      console.log(store.usuariosMascotasFormularios);
-    }
-  }, [store.usuarioActual.id]); */
-  const usuarioMascotasFormularioFiltrado =
-    store.usuariosMascotasFormularios.filter(
-      (x) => x.id_usuario === store.usuarioActual.id
-    );
-  console.log(usuarioMascotasFormularioFiltrado);
-
-  // Se tiene usuario_mascota_formulario correspondiente a usuario actual
-
-  /*   useEffect(() => {
-    let infoToPush = [];
-    if (store.idMascotasDelUsuario) {
-      store.idMascotasDelUsuario.forEach((x) => {
-        infoToPush.push(
-          ...actions.filtrarUsuarioMacotaFormularioPorIdMascota(x)
-        );
-      });
-      setCandidatosMascotasFormularios(infoToPush);
-    }
-  }, [store.idMascotasDelUsuario]); */
+  useEffect(() => {
+    generateArrayToMap();
+  }, [store.usuariosMascotas, store.usuarios, store.mascotas]);
 
   const generateArrayToMap = () => {
     let arrayToMap = [];
-
-    candidatosMascotasFormularios.forEach((x) => {
-      let objetosUsuario = store.usuarios.filter(
-        (usuario) => usuario.id === x.id_usuario
-      );
-      let objetosMascota = store.mascotas.filter(
-        (mascota) => mascota.id === x.id_mascota
+    const usuarioMascotasFormularioFiltrado =
+      store.usuariosMascotasFormularios.filter(
+        (x) => x.id_usuario === store.usuarioActual.id
       );
 
-      let idFormulario = x.id_formulario;
+    const idMascotas = usuarioMascotasFormularioFiltrado.map(
+      (x) => x.id_mascota
+    );
+    const idFormularios = usuarioMascotasFormularioFiltrado.map(
+      (x) => x.id_formulario
+    );
 
-      arrayToMap.push({
-        mascota: objetosMascota[0],
-        candidato: objetosUsuario[0],
-        idFormulario: idFormulario,
-      });
+    const idDueños = [];
+    idMascotas.forEach((x) => {
+      let idDueño = store.usuariosMascotas.filter((y) => y.id_mascota === x)[0]
+        .id_usuario;
+      idDueños.push(idDueño);
     });
-    return arrayToMap;
+
+    const objetosMascotas = [];
+    idMascotas.forEach((x) => {
+      let mascota = store.mascotas.filter((y) => y.id === x);
+      objetosMascotas.push(...mascota);
+    });
+
+    const objetosDueños = [];
+    idDueños.forEach((x) => {
+      let dueño = store.usuarios.filter((y) => y.id === x);
+      objetosDueños.push(...dueño);
+    });
+
+    objetosMascotas.forEach((x, i) => {
+      let infoToPush = {
+        mascota: x,
+        dueño: objetosDueños[i],
+        idFormulario: idFormularios[i],
+      };
+      arrayToMap.push(infoToPush);
+    });
+    setArrayToMap(arrayToMap);
   };
 
-  //let arrayToMap = [
-  //{ mascota: {}, candidato: {}, id_formulario },
-  //{ mascota: {}, candidato: {}, id_formulario },
-  //];
-  //let arrayToMap = generateArrayToMap();
-  let arrayToMap = [
+  /*   let arrayToMap = [
     {
       mascota: { nombre: "Chocolate" },
       candidato: { nombre: "Candidato1" },
@@ -79,7 +89,7 @@ export const VerMisPostulaciones = () => {
       candidato: { nombre: "Candidato2" },
       idFormulario: 1,
     },
-  ];
+  ]; */
 
   // candidatoMAscotasFormularios: [{ id: 15, id_formulario: 1, id_mascota: 11, id_usuario: 3 }, ...]
 
@@ -89,10 +99,7 @@ export const VerMisPostulaciones = () => {
         <thead>
           <tr>
             <th scope="col">Mascota</th>
-            <th scope="col">Candidato</th>
-            <th scope="col">Email</th>
-            <th scope="col">Teléfono</th>
-            <th scope="col">Dirección</th>
+            <th scope="col">Dueño</th>
             <th scope="col">Formulario</th>
           </tr>
         </thead>
@@ -100,12 +107,7 @@ export const VerMisPostulaciones = () => {
           {arrayToMap.map((x, i) => (
             <tr key={`tr${i}`}>
               <td key={`n${i}`}>{x.mascota.nombre}</td>
-              <td
-                key={`c${i}`}
-              >{`${x.candidato.nombre} ${x.candidato.apellidos}`}</td>
-              <td key={`e${i}`}>{x.candidato.email}</td>
-              <td key={`t${i}`}>{x.candidato.telefono}</td>
-              <td key={`dir${i}`}>{x.candidato.direccion}</td>
+              <td key={`c${i}`}>{`${x.dueño.nombre} ${x.dueño.apellidos}`}</td>
 
               <td key={`l${i}`}>
                 <Link to={`/respuestas-candidato/${x.idFormulario}`}>
