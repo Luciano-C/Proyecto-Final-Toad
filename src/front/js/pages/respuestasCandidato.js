@@ -44,7 +44,7 @@ export const RespuestasCandidato = () => {
     <ul>
       {combinarPreguntasRespuestas(preguntas, respuestas).map((x, i) => (
         <div key={`d${i}`}>
-          <p key={`p${i}`}>{`${i + 1}.-${x.pregunta}`}</p>
+          <p key={`p${i}`} className="fw-bold">{`${i + 1}.-${x.pregunta}`}</p>
           <p key={`r${i}`}>{x.respuesta}</p>
         </div>
       ))}
