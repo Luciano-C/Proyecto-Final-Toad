@@ -13,17 +13,17 @@ export const Perfil = () => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <div class="card mb-3" style={{}}>
-            <div class="row g-0">
-              <div class="col-md-4">
+          <div className="card mb-3" style={{}}>
+            <div className="row g-0">
+              <div className="col-md-4">
                 <img
                   src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                  class="img-fluid rounded-start"
+                  className="img-fluid rounded-start"
                   alt="..."
                 />
               </div>
-              <div class="col-md-8">
-                <div class="card-body">
+              <div className="col-md-8">
+                <div className="card-body">
                   <h1 className="card-title"> Mis Datos</h1>
                   <p className="card-text">
                     <strong>Nombre:</strong> Pepito
@@ -107,21 +107,21 @@ export const Perfil = () => {
 
             <h5>Postulaciones</h5>
           </div>
-          <div class="collapse" id="huella">
-            <div class="card card-body">
+          <div className="collapse" id="huella">
+            <div className="card card-body">
               <CrearMascota />
             </div>
           </div>
-          <div class="mascota" id="mascota">
-            <div class="card card-body">MASCOTAS</div>
+          <div className="mascota" id="mascota">
+            <div className="card card-body">MASCOTAS</div>
           </div>
 
-          <div class="collapse" id="candidatos">
-            <div class="card card-body">CANDIDATOS</div>
+          <div className="collapse" id="candidatos">
+            <div className="card card-body">CANDIDATOS</div>
           </div>
 
-          <div class="collapse" id="postulaciones">
-            <div class="card card-body">POSTULACIONES</div>
+          <div className="collapse" id="postulaciones">
+            <div className="card card-body">POSTULACIONES</div>
           </div>
         </div>
       </div>
