@@ -71,7 +71,10 @@ export const VerCandidatos = () => {
         <thead>
           <tr>
             <th scope="col">Mascota</th>
-            <th scope="col">Candidato </th>
+            <th scope="col">Candidato</th>
+            <th scope="col">Email</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Dirección</th>
             <th scope="col">Formulario</th>
           </tr>
         </thead>
@@ -82,9 +85,15 @@ export const VerCandidatos = () => {
               <td
                 key={`c${i}`}
               >{`${x.candidato.nombre} ${x.candidato.apellidos}`}</td>
-              <Link to={`/respuestas-candidato/${x.idFormulario}`}>
-                <td key={`l${i}`}>Ver Respuestas</td>
-              </Link>
+              <td key={`e${i}`}>{x.candidato.email}</td>
+              <td key={`t${i}`}>{x.candidato.telefono}</td>
+              <td key={`dir${i}`}>{x.candidato.direccion}</td>
+
+              <td key={`l${i}`}>
+                <Link to={`/respuestas-candidato/${x.idFormulario}`}>
+                  Ver Respuestas
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
