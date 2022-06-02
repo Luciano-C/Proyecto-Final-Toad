@@ -16,6 +16,7 @@ import { Contacto } from "./pages/contacto";
 import { FormularioAdopcion } from "./pages/formularioAdopcion";
 import { RespuestasCandidato } from "./pages/respuestasCandidato";
 import { VerCandidatos } from "./pages/verCandidatos";
+import { VerMisPostulaciones } from "./pages/verMisPostulaciones";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -75,6 +76,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/ver-candidatos">
               <VerCandidatos />
+            </Route>
+            <Route exact path="/ver-mis-postulaciones">
+              <VerMisPostulaciones />
             </Route>
             <Route>
               <h1>Not found!</h1>
