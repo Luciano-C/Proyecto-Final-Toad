@@ -6,7 +6,10 @@ import huella from "../../img/huella.png";
 import mascotas from "../../img/mascotas.png";
 import candidatos from "../../img/candidatos.png";
 import postulaciones from "../../img/postulaciones.png";
-import { CrearMascota } from "./../pages/crearMascota";
+import { CrearMascota } from "./crearMascota";
+import { VerCandidatos } from "./verCandidatos";
+import { VerMisMascotas } from "./verMisMascotas";
+import { VerMisPostulaciones } from "./verMisPostulaciones";
 
 export const Perfil = () => {
   return (
@@ -112,16 +115,22 @@ export const Perfil = () => {
               <CrearMascota />
             </div>
           </div>
-          <div className="mascota" id="mascota">
-            <div className="card card-body">MASCOTAS</div>
+          <div className="collapse" id="mascota">
+            <div className="card card-body">
+              <VerMisMascotas />
+            </div>
           </div>
 
           <div className="collapse" id="candidatos">
-            <div className="card card-body">CANDIDATOS</div>
+            <div className="card card-body">
+              <VerCandidatos />
+            </div>
           </div>
 
           <div className="collapse" id="postulaciones">
-            <div className="card card-body">POSTULACIONES</div>
+            <div className="card card-body">
+              <VerMisPostulaciones />
+            </div>
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ import { PetMisMascotas } from "./pages/petMisMascotas";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { RecupContraForm } from "./component/recupContraForm";
-import { Perfil } from "./component/perfil";
+import { Perfil } from "./pages/perfil";
 
 //create your first component
 const Layout = () => {
