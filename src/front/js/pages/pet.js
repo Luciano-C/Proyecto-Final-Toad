@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
@@ -7,7 +7,26 @@ import { Card } from "../component/card";
 export const Pet = (props) => {
   const { id } = useParams();
   const { store, actions } = useContext(Context);
+  const [isOwner, setIsOwner] = useState("");
 
+  useEffect(() => {
+    actions.addCurrentUserId();
+    actions.getUsuariosMascotas();
+  }, []);
+
+  const checkIfOwner = (idUsuario, idMascota) => {
+    const filterUsuarioMascota = store.usuariosMascotas.filter(
+      (x) => x.id_usuario === idUsuario && x.id_mascota === idMascota
+    );
+    if (filterUsuarioMascota.length > 0) {
+      console.log(filterUsuarioMascota);
+      return true;
+    } else {
+      console.log(filterUsuarioMascota);
+      return false;
+    }
+  };
+  //console.log(checkIfOwner(store.usuarioActual.id, Number(id)));
   return (
     <div className="container">
       <div className="card mb-5">
@@ -57,11 +76,26 @@ export const Pet = (props) => {
             Regresar a Home
           </button>
         </Link>
-        <Link to={`/formulario-adopcion/${id}`}>
+
+        {!checkIfOwner(store.usuarioActual.id, Number(id) + 1) ? (
+          <Link to={`/formulario-adopcion/${id}`}>
+            <button className="cardButton btn btn-lg btn-danger outline-info">
+              Adoptar
+            </button>
+          </Link>
+        ) : (
+          <Link to={`/formulario-adopcion/${id}`}>
+            <button className="cardButton btn btn-lg btn-danger outline-info">
+              Borrar
+            </button>
+          </Link>
+        )}
+
+        {/* <Link to={`/formulario-adopcion/${id}`}>
           <button className="cardButton btn btn-lg btn-danger outline-info">
             Adoptar
           </button>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

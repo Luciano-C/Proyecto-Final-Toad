@@ -236,3 +236,12 @@ def get_usuario_mascota_formulario():
     todos_usuarios_mascota_formulario = Candidato_Mascota_Formulario.query.all()
     todos_usuarios_mascota_formulario = list(map(lambda x: x.serialize(), todos_usuarios_mascota_formulario))
     return jsonify(todos_usuarios_mascota_formulario), 200
+
+
+@api.route("/get-mascotas-by-user/id-user=<id_user>",methods=["GET"])
+def get_mascota_by_user_id(id_user):
+    usuario_mascota = Usuario_Mascota.query.filter_by(id_usuario=id_user).all()
+    ids_mascotas = [x.id_mascota for x in usuario_mascota]
+    todas_las_mascotas = Mascota.query.all()
+    mascotas_usuario = [x for x in todas_las_mascotas if x.id in ids_mascotas]
+    return jsonify([x.serialize() for x in mascotas_usuario])

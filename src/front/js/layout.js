@@ -17,6 +17,7 @@ import { FormularioAdopcion } from "./pages/formularioAdopcion";
 import { RespuestasCandidato } from "./pages/respuestasCandidato";
 import { VerCandidatos } from "./pages/verCandidatos";
 import { VerMisPostulaciones } from "./pages/verMisPostulaciones";
+import { VerMisMascotas } from "./pages/verMisMascotas";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -79,6 +80,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/mis-postulaciones">
               <VerMisPostulaciones />
+            </Route>
+            <Route exact path="/mis-mascotas">
+              <VerMisMascotas />
             </Route>
             <Route>
               <h1>Not found!</h1>
