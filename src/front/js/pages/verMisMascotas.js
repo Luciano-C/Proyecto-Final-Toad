@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Card } from "../component/card";
+import { CardMisMascotas } from "../component/cardMisMascotas";
 
 export const VerMisMascotas = () => {
   const { store, actions } = useContext(Context);
@@ -17,7 +17,7 @@ export const VerMisMascotas = () => {
     <div>
       <div className="row">
         {store.mascotasUsuario.map(function (objeto, index) {
-          return <Card key={index} objeto={objeto} index={index} />;
+          return <CardMisMascotas key={index} objeto={objeto} index={index} />;
         })}
       </div>
     </div>

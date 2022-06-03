@@ -30,7 +30,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         telefono: "1981234568",
         direccion: "Callequenoexiste 123",
       },
-      idFormularioActual: "",
 
       idMascotasDelUsuario: [],
       usuariosMascotasFormularios: [],
@@ -125,7 +124,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log("error", error));
       },
 
-      crearFormulario: () => {
+      crearFormulario: (idUsuario, idMascota) => {
         const store = getStore();
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -147,38 +146,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(process.env.BACKEND_URL + "/api/crear-formulario", requestOptions)
-          .then((response) => response.json())
-          .then((result) => {
-            console.log(result);
-            setStore({ idFormularioActual: result.id });
-          })
-          .catch((error) => console.log("error", error));
-      },
-
-      crearCandidatoMascotaFormulario: (idUsuario, idMascota, idFormulario) => {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-          id_usuario: idUsuario,
-          id_mascota: idMascota,
-          id_formulario: idFormulario,
-        });
-
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
-
         fetch(
-          process.env.BACKEND_URL + "/api/crear-candidato-mascota-formulario",
+          process.env.BACKEND_URL +
+            `/api/crear-formulario/id-usuario=${idUsuario}/id-mascota=${idMascota}`,
           requestOptions
         )
           .then((response) => response.json())
-          .then((result) => console.log(result))
+          .then((result) => {
+            console.log(result);
+            /* setStore({ idFormularioActual: result.id }) */
+          })
           .catch((error) => console.log("error", error));
       },
 

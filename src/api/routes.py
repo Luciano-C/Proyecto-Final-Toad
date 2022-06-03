@@ -147,8 +147,9 @@ def get_formularios():
     todos_formularios = list(map(lambda x: x.serialize(), todos_formularios))
     return jsonify(todos_formularios), 200
 
-@api.route("/crear-formulario", methods=["POST"])
-def crear_formulario():
+
+@api.route("/crear-formulario/id-usuario=<id_usuario>/id-mascota=<id_mascota>", methods=["POST"])
+def crear_formulario(id_usuario, id_mascota):
     data = request.get_json()
     # Ejemplo Body: {"pregunta_1": "respuesta", "pregunta_2": "respuesta", "pregunta_3": "respuesta", "pregunta_4": "respuesta", "pregunta_5": "respuesta", "pregunta_6": "respuesta", "pregunta_7": "respuesta"}
    
@@ -160,34 +161,18 @@ def crear_formulario():
     nuevo_formulario.pregunta_5 = data["pregunta_5"]
     nuevo_formulario.pregunta_6 = data["pregunta_6"]
     nuevo_formulario.pregunta_7 = data["pregunta_7"]
- 
     db.session.add(nuevo_formulario)
     db.session.commit()
-
-    return jsonify(nuevo_formulario.serialize())
-
-@api.route("/crear-candidato-mascota-formulario", methods=["POST"])
-def crear_candidato_mascota_formulario():
-    data = request.get_json()
-    # Ejemplo body: {"id_usuario": 1, "id_mascota": 10, "id_formulario": 1}
-    id_u = data["id_usuario"]
-    id_m = data["id_mascota"]
-    id_f = data["id_formulario"]
-    check_candidato_mascota_formulario = Candidato_Mascota_Formulario.query.filter_by(id_usuario=id_u, id_mascota = id_m, id_formulario = id_f).first()
-    if check_candidato_mascota_formulario:
-        return jsonify({"mensaje": "Este candidato ya está postulando a adoptar esta mascota"})
     
-    else:
+    nuevo_candidato_mascota_formulario = Candidato_Mascota_Formulario()
+    nuevo_candidato_mascota_formulario.id_usuario = id_usuario
+    nuevo_candidato_mascota_formulario.id_mascota = id_mascota
+    nuevo_candidato_mascota_formulario.id_formulario = nuevo_formulario.serialize()["id"]
 
-        nuevo_candidato_mascota_formulario = Candidato_Mascota_Formulario()
-        nuevo_candidato_mascota_formulario.id_usuario = id_u
-        nuevo_candidato_mascota_formulario.id_mascota = id_m
-        nuevo_candidato_mascota_formulario.id_formulario = id_f
+    db.session.add(nuevo_candidato_mascota_formulario)
+    db.session.commit()
 
-        db.session.add(nuevo_candidato_mascota_formulario)
-        db.session.commit()
-
-        return jsonify(nuevo_candidato_mascota_formulario.serialize())
+    return jsonify(nuevo_formulario.serialize())    
 
 
 

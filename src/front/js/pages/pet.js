@@ -7,7 +7,7 @@ import { Card } from "../component/card";
 export const Pet = (props) => {
   const { id } = useParams();
   const { store, actions } = useContext(Context);
-  const [isOwner, setIsOwner] = useState("");
+  /*  const [isOwner, setIsOwner] = useState("");
 
   useEffect(() => {
     actions.addCurrentUserId();
@@ -25,7 +25,7 @@ export const Pet = (props) => {
       console.log(filterUsuarioMascota);
       return false;
     }
-  };
+  }; */
   //console.log(checkIfOwner(store.usuarioActual.id, Number(id)));
   return (
     <div className="container">
@@ -77,7 +77,7 @@ export const Pet = (props) => {
           </button>
         </Link>
 
-        {!checkIfOwner(store.usuarioActual.id, Number(id) + 1) ? (
+        {/*    {!checkIfOwner(store.usuarioActual.id, Number(id) + 1) ? (
           <Link to={`/formulario-adopcion/${id}`}>
             <button className="cardButton btn btn-lg btn-danger outline-info">
               Adoptar
@@ -89,13 +89,13 @@ export const Pet = (props) => {
               Borrar
             </button>
           </Link>
-        )}
+        )} */}
 
-        {/* <Link to={`/formulario-adopcion/${id}`}>
+        <Link to={`/formulario-adopcion/${id}`}>
           <button className="cardButton btn btn-lg btn-danger outline-info">
             Adoptar
           </button>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

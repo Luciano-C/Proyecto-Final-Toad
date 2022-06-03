@@ -19,27 +19,21 @@ export const FormularioAdopcion = () => {
     let respuestasFormulario = store.respuestasFormularioAdopcion;
 
     campos.forEach((x) => {
-      respuestasDatosContacto.push("");
+      if (!respuestasDatosContacto) {
+        respuestasDatosContacto.push("");
+      }
     });
 
     preguntas.forEach((x) => {
-      respuestasFormulario.push("");
+      if (!respuestasFormulario) {
+        respuestasFormulario.push("");
+      }
     });
     actions.setRespuestasDatosContacto(respuestasDatosContacto);
     actions.setRespuestasFormularioAdopcion(respuestasFormulario);
     // Hace fetch para buscar la id del usuario en base de datos correspondiente al email actual
     actions.addCurrentUserId();
   }, []);
-
-  useEffect(() => {
-    if (store.idFormularioActual !== "") {
-      actions.crearCandidatoMascotaFormulario(
-        store.usuarioActual.id,
-        (Number(idMascota) + 1).toString(),
-        store.idFormularioActual
-      );
-    }
-  }, [store.idFormularioActual]);
 
   return (
     <div className="container">
@@ -97,7 +91,10 @@ export const FormularioAdopcion = () => {
               className="btn btn-danger"
               onClick={() => {
                 console.log(store.respuestasFormularioAdopcion);
-                actions.crearFormulario();
+                actions.crearFormulario(
+                  store.usuarioActual.id,
+                  store.mascotas[Number(idMascota)].id
+                );
                 alert("Formulario de adopción enviado al dueño.");
               }}
             >
