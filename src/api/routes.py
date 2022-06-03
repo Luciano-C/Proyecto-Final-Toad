@@ -230,3 +230,33 @@ def get_mascota_by_user_id(id_user):
     todas_las_mascotas = Mascota.query.all()
     mascotas_usuario = [x for x in todas_las_mascotas if x.id in ids_mascotas]
     return jsonify([x.serialize() for x in mascotas_usuario])
+
+
+@api.route("/get-postulaciones-by-user/id-user=<id_user>", methods=["GET"])
+def get_postulaciones_by_user_id(id_user):
+    candidatos_mascotas_formularios = Candidato_Mascota_Formulario.query.filter_by(id_usuario=id_user).all()
+    dueños_mascotas = Usuario_Mascota.query.all()
+
+    id_mascotas = [x.id_mascota for x in candidatos_mascotas_formularios]
+    id_formularios = [x.id_formulario for x in candidatos_mascotas_formularios]
+    id_dueños = [x.id_usuario for x in dueños_mascotas if x.id_mascota in id_mascotas]
+    
+    
+    mascotas = []
+    for id in id_mascotas:
+        mascota_a_añadir = Mascota.query.filter_by(id=id).first()
+        mascotas.append(mascota_a_añadir.serialize())
+    
+    dueños = []
+    for id in id_dueños:
+        dueño_a_añadir = Users.query.filter_by(id=id).first()
+        dueños.append(dueño_a_añadir.serialize())
+    
+    lista_a_mapear = []
+
+    for i in range(len(mascotas)):
+        lista_a_mapear.append({"mascota": mascotas[i], "dueño": dueños[i], "idFormulario": id_formularios[i]})
+   
+    return jsonify(lista_a_mapear)
+
+

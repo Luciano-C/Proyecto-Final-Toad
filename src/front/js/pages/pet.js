@@ -63,11 +63,6 @@ export const Pet = (props) => {
             <strong>Otros cuidados: </strong>
             {store.mascotas[id]?.otros_cuidados}
           </p>
-          <p className="card-text">
-            <small className="text-muted">
-              Publicado el 18 de Mayo del 2022.
-            </small>
-          </p>
         </div>
       </div>
       <div className="d-grid gap-2 d-md-flex justify-content-md-end">

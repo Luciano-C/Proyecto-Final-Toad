@@ -36,6 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       //Para mis postulaciones
       usuariosMascotas: [],
+      misPostulaciones: [],
 
       //Para ver respuestas de candidato
       //candidatoActual: {},
@@ -218,6 +219,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((result) => setStore({ mascotasUsuario: result }))
+          .catch((error) => console.log("error", error));
+      },
+
+      getPostulacionesByUserId: (userId) => {
+        fetch(
+          process.env.BACKEND_URL +
+            `/api/get-postulaciones-by-user/id-user=${userId}`
+        )
+          .then((response) => response.json())
+          .then((result) => setStore({ misPostulaciones: result }))
           .catch((error) => console.log("error", error));
       },
 

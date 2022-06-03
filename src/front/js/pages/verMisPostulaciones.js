@@ -21,68 +21,16 @@ export const VerMisPostulaciones = () => {
 
   const { store, actions } = useContext(Context);
   const [isLoading, setIsLoading] = useState(true);
-  const [arrayToMap, setArrayToMap] = useState([
-    { mascota: {}, dueño: {}, idFormulario: "" },
-  ]);
 
   useEffect(() => {
     actions.addCurrentUserId();
-    actions.getUsuarioMascotaFormulario();
-    actions.getUsers();
-    actions.getUsuariosMascotas();
   }, []);
-
   useEffect(() => {
-    generateArrayToMap();
-  }, [store.usuariosMascotas, store.usuarios, store.mascotas]);
-
-  const generateArrayToMap = () => {
-    try {
-      let arrayToMap = [];
-      const usuarioMascotasFormularioFiltrado =
-        store.usuariosMascotasFormularios.filter(
-          (x) => x.id_usuario === store.usuarioActual.id
-        );
-
-      const idMascotas = usuarioMascotasFormularioFiltrado.map(
-        (x) => x.id_mascota
-      );
-      const idFormularios = usuarioMascotasFormularioFiltrado.map(
-        (x) => x.id_formulario
-      );
-
-      const idDueños = [];
-      idMascotas.forEach((x) => {
-        let idDueño = store.usuariosMascotas.filter(
-          (y) => y.id_mascota === x
-        )[0].id_usuario;
-        idDueños.push(idDueño);
-      });
-
-      const objetosMascotas = [];
-      idMascotas.forEach((x) => {
-        let mascota = store.mascotas.filter((y) => y.id === x);
-        objetosMascotas.push(...mascota);
-      });
-
-      const objetosDueños = [];
-      idDueños.forEach((x) => {
-        let dueño = store.usuarios.filter((y) => y.id === x);
-        objetosDueños.push(...dueño);
-      });
-
-      objetosMascotas.forEach((x, i) => {
-        let infoToPush = {
-          mascota: x,
-          dueño: objetosDueños[i],
-          idFormulario: idFormularios[i],
-        };
-        arrayToMap.push(infoToPush);
-      });
-      setArrayToMap(arrayToMap);
+    if (store.usuarioActual.id) {
+      actions.getPostulacionesByUserId(store.usuarioActual.id);
       setIsLoading(false);
-    } catch {}
-  };
+    }
+  }, [store.usuarioActual]);
 
   /*   let arrayToMap = [
     {
@@ -111,7 +59,7 @@ export const VerMisPostulaciones = () => {
             </tr>
           </thead>
           <tbody>
-            {arrayToMap.map((x, i) => (
+            {store.misPostulaciones.map((x, i) => (
               <tr key={`tr${i}`}>
                 <td key={`n${i}`}>{x.mascota.nombre}</td>
                 <td
