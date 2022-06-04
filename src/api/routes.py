@@ -259,4 +259,12 @@ def get_postulaciones_by_user_id(id_user):
    
     return jsonify(lista_a_mapear)
 
+@api.route("/check-if-owner/id-user=<id_user>/id-pet=<id_pet>", methods=["GET"])
+def check_if_user_owns_pet(id_user, id_pet):
+    check = Usuario_Mascota.query.filter_by(id_usuario=id_user, id_mascota=id_pet).all()
+    if len(check) == 0:
+        return jsonify({"mensaje": False})
+    else:
+        return jsonify({"mensaje": True})
+
 

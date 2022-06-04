@@ -45,6 +45,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       //Para mis mascotas:
       mascotasUsuario: [],
+
+      //Para verificar si usuario es dueño en pet.js
+      esDueño: "",
     },
     actions: {
       login: (email, password) => {
@@ -229,6 +232,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((result) => setStore({ misPostulaciones: result }))
+          .catch((error) => console.log("error", error));
+      },
+
+      checkIfOwner: (idUser, idPet) => {
+        fetch(
+          process.env.BACKEND_URL +
+            `/api/check-if-owner/id-user=${idUser}/id-pet=${idPet}`
+        )
+          .then((response) => response.json())
+          .then((result) => setStore({ esDueño: result.mensaje }))
           .catch((error) => console.log("error", error));
       },
 
