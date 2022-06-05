@@ -55,6 +55,13 @@ export const LoginForm = () => (
               ¿Quieres adoptar?... Regístrate 😻
             </a>
           </Link>
+          <div>
+            <Link to="/resetpass">
+              <a className="mb-3" href="#">
+                Recuperar contraseña
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

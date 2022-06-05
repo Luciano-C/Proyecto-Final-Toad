@@ -51,6 +51,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("este es el email y password", email, password);
       },
 
+      recuperar: (password) => {
+        console.log("este es el email y password", password);
+      },
+
       getMascotas: () => {
         fetch(process.env.BACKEND_URL + "/api/mascotas")
           .then((response) => response.json())
