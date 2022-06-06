@@ -7,6 +7,15 @@ export const PetMisMascotas = (props) => {
   const { index } = useParams();
   const { store, actions } = useContext(Context);
 
+  useEffect(() => {
+    actions.addCurrentUserId();
+  }, []);
+  useEffect(() => {
+    if (store.usuarioActual.id) {
+      actions.getMascotasByUserId(store.usuarioActual.id);
+    }
+  }, [store.usuarioActual]);
+
   //console.log(checkIfOwner(store.usuarioActual.id, Number(id)));
   return (
     <div className="container">
@@ -53,11 +62,25 @@ export const PetMisMascotas = (props) => {
           </button>
         </Link>
 
-        <Link to={`/formulario-adopcion/${index}`}>
-          <button className="cardButton btn btn-lg btn-danger outline-info">
+        <Link to={`/`}>
+          <button
+            className="cardButton btn btn-lg btn-danger outline-info"
+            onClick={() => {
+              actions.borrarMascota(store.mascotasUsuario[index].id);
+            }}
+          >
             Borrar
           </button>
         </Link>
+        {/* <button
+          className="cardButton btn btn-lg btn-danger outline-info"
+          onClick={() => {
+            console.log(store.mascotasUsuario[index].id);
+            actions.borrarMascota(store.mascotasUsuario[index].id);
+          }}
+        >
+          Borrar
+        </button> */}
       </div>
     </div>
   );

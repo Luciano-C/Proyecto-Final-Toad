@@ -275,6 +275,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log("error", error));
       },
 
+      borrarMascota: (idMascota) => {
+        var requestOptions = {
+          method: "DELETE",
+          redirect: "follow",
+        };
+
+        fetch(
+          process.env.BACKEND_URL + `/api/delete-pet/id-pet=${idMascota}`,
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      },
+
       getMessage: () => {
         // fetching data from the backend
         fetch(process.env.BACKEND_URL + "/api/hello")

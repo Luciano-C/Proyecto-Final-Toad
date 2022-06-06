@@ -288,4 +288,4 @@ def delete_pet(id_pet):
         db.session.delete(mascota_a_borrar)
         db.session.commit()
     
-    return {"mensaje": "Mascota borrada."}
+    return jsonify({"mensaje": "Mascota borrada."})
