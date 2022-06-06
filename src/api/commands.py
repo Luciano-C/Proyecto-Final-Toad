@@ -59,7 +59,7 @@ def setup_commands(app):
     
         for x in range(1, int(count) + 1):
             mascota = Mascota()
-            mascota.nombre = random.choice(nombres)
+            mascota.nombre = f"{random.choice(nombres)} {x}"
             mascota.edad = random.choice(edades)
             mascota.especie = "Perro"
             mascota.sexo = random.choice(sexos)
@@ -79,13 +79,13 @@ def setup_commands(app):
         print("Creando formularios")
         for x in range(1, int(count) + 1):
             formulario = Formulario_Adopcion()
-            formulario.pregunta_1 = "respuesta"
-            formulario.pregunta_2 = "respuesta"
-            formulario.pregunta_3 = "respuesta"
-            formulario.pregunta_4 = "respuesta"
-            formulario.pregunta_5 = "respuesta"
-            formulario.pregunta_6 = "respuesta"
-            formulario.pregunta_7 = "respuesta"
+            formulario.pregunta_1 = f"respuesta {x}-1"
+            formulario.pregunta_2 = f"respuesta {x}-2"
+            formulario.pregunta_3 = f"respuesta {x}-3"
+            formulario.pregunta_4 = f"respuesta {x}-4"
+            formulario.pregunta_5 = f"respuesta {x}-5"
+            formulario.pregunta_6 = f"respuesta {x}-6"
+            formulario.pregunta_7 = f"respuesta {x}-7"
 
             db.session.add(formulario)
             db.session.commit()

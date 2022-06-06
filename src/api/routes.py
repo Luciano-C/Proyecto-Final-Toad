@@ -268,3 +268,24 @@ def check_if_user_owns_pet(id_user, id_pet):
         return jsonify({"mensaje": True})
 
 
+@api.route("delete-pet/id-pet=<id_pet>", methods=["DELETE"])
+def delete_pet(id_pet):
+    # Se debe borrar formularios de adopción asociados, y relación de dueño.
+    todos_candidato_mascota_formulario = Candidato_Mascota_Formulario.query.filter_by(id_mascota=id_pet).all()
+    for elemento in todos_candidato_mascota_formulario:
+        if elemento:
+            db.session.delete(elemento)
+            db.session.commit()
+
+
+    usuario_mascota = Usuario_Mascota.query.filter_by(id_mascota=id_pet).first()
+    if usuario_mascota:
+        db.session.delete(usuario_mascota)
+        db.session.commit()
+
+    mascota_a_borrar = Mascota.query.filter_by(id=id_pet).first()
+    if mascota_a_borrar:
+        db.session.delete(mascota_a_borrar)
+        db.session.commit()
+    
+    return {"mensaje": "Mascota borrada."}
