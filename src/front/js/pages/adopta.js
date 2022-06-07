@@ -8,48 +8,34 @@ export const Adopta = () => {
       <div className="title" style={{ textAlign: "center", color: "red" }}>
         <h1>Adoptar a una mascota</h1>
       </div>
-      <div
-        className="subtitle"
-        style={{ margin: "3rem", textJustify: "inter-character" }}
-      >
-        <h5>¿Buscas adoptar y dar hogar a un animal rescatado?</h5>
+      <div className="subtitle" style={{ textJustify: "inter-character" }}>
+        <h5>¿Buscas adoptar?</h5>
       </div>
       <div className="parrafo">
         <p>
-          Todos ellos eran animales abandonados en las calles que fueron
-          rescatados y rehabilitados, recibiendo atención para mejorar su salud
-          física y emocional. Todos están listos para encontrar a una nueva
-          familia que los quiera y los cuide.
-        </p>
-        <p>
           Está App busca promover la adopción de mascotas de manera responsable,
-          es decir, que cuando una persona quiere adoptar un perro debe asumir
-          varios compromisos y estar realmente seguro de que quiere llevar una
-          nueva mascota a su hogar.
+          es decir, que cuando una persona quiere adoptar una mascota debe
+          asumir varios compromisos y estar realmente seguro de que quiere
+          llevar una nueva mascota a su hogar.
         </p>
         <p>
-          Por eso no se debe entregar el perro en de forma inmediata, sino que
-          son sólo una instancia para que la gente conozca y tenga contacto. Si
+          Por eso no se debe entregar la mascota de forma inmediata, sino que
+          generar una instancia para que la gente conozca y tenga contacto. Si
           alguien está interesado en adoptar con nosotros debe llenar un
           formulario de pre-adopción, donde se le preguntan cosas sobre el hogar
           donde vivirá la mascota, la composición de la familia, el tiempo que
           le dedicarán, etc.
         </p>
         <p>
-          La idea de este formulario, es poder evaluar si esa familia es
-          adecuada para el perro en cuestión, que los postulantes también
-          reflexionen sobre todo lo que implica adoptar una mascota. Luego de
-          eso, si el formulario cumple con los requisitos, se contacta a la
-          persona a través de la misma App mediante una notificación de aprobado
-          o rechazado.
-        </p>
-        <p>
-          En caso de ser aceptado se aclaran dudas mutuas, para luego coordinar
-          la entrega. Los perros son entregados al domicilio y se les hace un
-          seguimiento después.
+          La idea de este formulario, es permitir a la persona que ponga en
+          adopción su mascota evaluar si esa familia es adecuada para la mascota
+          en cuestión y que los postulantes también reflexionen sobre todo lo
+          que implica adoptar una mascota. Luego de eso, si el candidato cumple
+          con los requisitos, el dueño de la mascota podrá contactarlo para
+          coordinar detalles finales y la entrega.
         </p>
       </div>
-      <div
+      {/* <div
         className="d-grid gap-2 col-6 mx-auto"
         style={{
           marginTop: "10rem",
@@ -93,7 +79,7 @@ export const Adopta = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

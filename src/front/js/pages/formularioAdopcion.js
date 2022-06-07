@@ -65,7 +65,7 @@ export const FormularioAdopcion = () => {
       <div className="d-flex justify-content-end">
         {isDatosContacto ? (
           <button
-            className="btn btn-danger"
+            className="btn btn-danger btn-lg outline-info"
             onClick={() => {
               console.log(store.respuestasDatosContacto);
               if (store.respuestasDatosContacto.includes("")) {
@@ -88,7 +88,7 @@ export const FormularioAdopcion = () => {
         ) : (
           <Link to="/">
             <button
-              className="btn btn-danger"
+              className="btn btn-danger btn-lg outline-info"
               onClick={() => {
                 console.log(store.respuestasFormularioAdopcion);
                 actions.crearFormulario(

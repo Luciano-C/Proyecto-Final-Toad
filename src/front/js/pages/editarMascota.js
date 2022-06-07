@@ -138,13 +138,11 @@ export const EditarMascota = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
+        alert("Mascota editada.");
       })
       .catch((error) => {
         console.log("error", error);
         alert("Llene todos los campos requeridos.");
-        if (!error) {
-          alert("Mascota editada.");
-        }
       });
   };
 

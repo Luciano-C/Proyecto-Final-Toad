@@ -20,6 +20,7 @@ import { VerMisPostulaciones } from "./pages/verMisPostulaciones";
 import { VerMisMascotas } from "./pages/verMisMascotas";
 import { PetMisMascotas } from "./pages/petMisMascotas";
 import { EditarMascota } from "./pages/editarMascota";
+import { NoEncontrada } from "./pages/noEncontrada";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -96,7 +97,7 @@ const Layout = () => {
               <EditarMascota />
             </Route>
             <Route>
-              <h1>Not found!</h1>
+              <NoEncontrada />
             </Route>
           </Switch>
           <Footer />
