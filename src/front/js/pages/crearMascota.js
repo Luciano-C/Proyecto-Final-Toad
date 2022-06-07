@@ -293,7 +293,10 @@ export const CrearMascota = () => {
             }}
           />
         </div>
-        <button className="btn btn-primary" onClick={() => añadirMascotaDB()}>
+        <button
+          className="btn btn-danger btn-lg outline-info"
+          onClick={() => añadirMascotaDB()}
+        >
           Añadir Mascota
         </button>
       </div>

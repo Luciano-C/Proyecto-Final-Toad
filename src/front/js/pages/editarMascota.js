@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "../../styles/crearMascota.css";
 // Función diseñada para que la primera letra sea mayúscula
@@ -283,7 +284,11 @@ export const EditarMascota = () => {
             }}
           />
         </div>
-        <button className="btn btn-primary" onClick={() => editarMascotaDB()}>
+
+        <button
+          className="btn btn-danger btn-lg outline-info"
+          onClick={() => editarMascotaDB()}
+        >
           Editar
         </button>
       </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 
-export const PetMisMascotas = (props) => {
+export const PetMisMascotas = () => {
   const { index } = useParams();
   const { store, actions } = useContext(Context);
 
