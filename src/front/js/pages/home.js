@@ -47,6 +47,8 @@ export const Home = () => {
 
               {page && Number(page) < Math.ceil(store.mascotas.length / 8) ? (
                 <Link to={`${Number(page) + 1}`}>Next</Link>
+              ) : !page && store.paginasHome.includes(2) ? (
+                <Link to={`home/page/${2}`}>Next</Link>
               ) : (
                 <p>Next</p>
               )}
