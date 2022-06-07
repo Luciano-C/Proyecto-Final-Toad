@@ -43,6 +43,8 @@ export const LoginForm = () => {
                   Ingresar 😸
                 </button>
                 <br />
+                <br />
+
                 <a className="mb-3" href="/regusers">
                   ¿Quieres adoptar?... Regístrate 😻
                 </a>

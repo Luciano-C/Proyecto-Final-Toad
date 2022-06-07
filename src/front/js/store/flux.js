@@ -38,7 +38,11 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       login: (email, password) => {
-        setStore({});
+        let store = getStore();
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
         console.log("email y password desde flux", email, password);
       },
 

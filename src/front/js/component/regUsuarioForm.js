@@ -29,9 +29,7 @@ export const RegUsuarioForm = () => (
             <input type="text" className="form-control" />
           </div>
           <div className="mb-3">
-            <label for="exampleFormControlInput1" className="form-label">
-              Email
-            </label>
+            <label className="form-label">Email</label>
             <input
               type="email"
               className="form-control"
@@ -39,9 +37,7 @@ export const RegUsuarioForm = () => (
             />
           </div>
           <div className="mb-3">
-            <label for="exampleFormControlInput1" className="form-label">
-              Confirma tu email
-            </label>
+            <label className="form-label">Confirma tu email</label>
             <input
               type="email"
               className="form-control"
@@ -49,15 +45,13 @@ export const RegUsuarioForm = () => (
             />
           </div>
           <div className="mb-3">
-            <label for="exampleFormControlInput1" className="form-label">
-              Contraseña
-            </label>
+            <label className="form-label">Contraseña</label>
             <input type="password" className="form-control" />
           </div>
           <div className="col-auto">
             <button
               type="submit"
-              className="btn btn-primary mb-3"
+              className="btn btn-outline-danger outline-info btn-lg"
               onClick={() => {
                 actions.login(mail, password);
               }}
