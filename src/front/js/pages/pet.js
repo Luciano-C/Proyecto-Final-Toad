@@ -96,7 +96,7 @@ export const Pet = (props) => {
     );
   } else {
     return (
-      <div className="spinner-grow text-primary" role="status">
+      <div className="spinner-grow text-primary spinner-grow-sm" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>
     );
