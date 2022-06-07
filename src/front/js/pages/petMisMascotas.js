@@ -72,6 +72,12 @@ export const PetMisMascotas = (props) => {
             Borrar
           </button>
         </Link>
+        <Link to={`/editar-mascota/${index}`}>
+          <button className="cardButton btn btn-lg btn-danger outline-info">
+            Editar
+          </button>
+        </Link>
+
         {/* <button
           className="cardButton btn btn-lg btn-danger outline-info"
           onClick={() => {

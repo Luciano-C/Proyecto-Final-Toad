@@ -289,3 +289,23 @@ def delete_pet(id_pet):
         db.session.commit()
     
     return jsonify({"mensaje": "Mascota borrada."})
+
+
+@api.route("/editar-mascota/id-pet=<id_pet>", methods=["PUT"])
+def editar_mascota(id_pet):
+    #Ejemplo Body = {"nombre": "Juanito", "edad": 2, "especie": "perro", "sexo": "Macho", "tamaño": "Mediano", "nivel_actividad": "Alto", "otros_cuidados": "Ninguno", "url_foto": "https://res.cloudinary.com/dnwy0nzzr/image/upload/v1652914840/qxe66pkjkgrfu6z7f6t2.jpg"}
+    data = request.get_json()
+    mascota_a_editar = Mascota.query.filter_by(id=id_pet).first()
+    mascota_a_editar.nombre = data["nombre"]
+    mascota_a_editar.edad = data["edad"]
+    mascota_a_editar.especie = data["especie"]
+    mascota_a_editar.sexo = data["sexo"]
+    mascota_a_editar.tamaño = data["tamaño"]
+    mascota_a_editar.nivel_actividad = data["nivel_actividad"]
+    mascota_a_editar.otros_cuidados = data["otros_cuidados"]
+    mascota_a_editar.url_foto = data["url_foto"]
+
+    
+    db.session.commit()
+
+    return jsonify(mascota_a_editar.serialize())

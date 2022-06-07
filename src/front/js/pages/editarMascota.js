@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import Axios from "axios";
+import { useParams } from "react-router-dom";
 
 import "../../styles/crearMascota.css";
 // Función diseñada para que la primera letra sea mayúscula
 import { capitalize } from "../constants/capitalize";
 
-export const CrearMascota = () => {
+export const EditarMascota = () => {
   const { store, actions } = useContext(Context);
+  const { index } = useParams();
+
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
   const [especie, setEspecie] = useState("");
@@ -16,9 +19,7 @@ export const CrearMascota = () => {
   const [nivelActividad, setNivelActividad] = useState("");
   const [otrosCuidados, setOtrosCuidados] = useState("");
   const [foto, setFoto] = useState("");
-  const [URLFoto, setURLFoto] = useState(
-    `https://res.cloudinary.com/${process.env.CLOUDINARE_CLOUD_NAME}/image/upload/v1652804030/fkr55gcbx3uywcij7f2z.jpg`
-  );
+  const [URLFoto, setURLFoto] = useState("");
   const [errorNombre, setErrorNombre] = useState("");
   const [errorEdad, setErrorEdad] = useState("");
   const [errorEspecie, setErrorEspecie] = useState("");
@@ -32,6 +33,12 @@ export const CrearMascota = () => {
   useEffect(() => {
     actions.addCurrentUserId();
   }, []);
+
+  useEffect(() => {
+    if (store.usuarioActual.id) {
+      actions.getMascotasByUserId(store.usuarioActual.id);
+    }
+  }, [store.usuarioActual]);
 
   const inputHandler = (valor, funcion) => {
     funcion(valor);
@@ -103,10 +110,10 @@ export const CrearMascota = () => {
   };
 
   // Fetch para crear mascota
-  const fetchCrearMascota = () => {
-    var crearMascotaHeaders = new Headers();
-    crearMascotaHeaders.append("Content-Type", "application/json");
-    var crearMascotaRaw = JSON.stringify({
+  const fetchEditarMascota = () => {
+    var editarMascotaHeaders = new Headers();
+    editarMascotaHeaders.append("Content-Type", "application/json");
+    var editarMascotaRaw = JSON.stringify({
       nombre: nombre ? nombre : null,
       edad: edad ? edad : null,
       especie: especie ? especie : null,
@@ -114,61 +121,41 @@ export const CrearMascota = () => {
       tamaño: tamaño ? capitalize(tamaño) : null,
       nivel_actividad: nivelActividad ? capitalize(nivelActividad) : null,
       otros_cuidados: otrosCuidados,
-      url_foto: URLFoto,
+      url_foto: URLFoto ? URLFoto : store.mascotasUsuario[index].url_foto,
     });
     var requestOptions = {
-      method: "POST",
-      headers: crearMascotaHeaders,
-      body: crearMascotaRaw,
+      method: "PUT",
+      headers: editarMascotaHeaders,
+      body: editarMascotaRaw,
       redirect: "follow",
     };
-    fetch(process.env.BACKEND_URL + "/api/crear-mascota", requestOptions)
+    fetch(
+      process.env.BACKEND_URL +
+        `/api/editar-mascota/id-pet=${store.mascotasUsuario[index]?.id}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
-        let idMascota = result.id;
-        var crearUsuarioMascotaHeaders = new Headers();
-        crearUsuarioMascotaHeaders.append("Content-Type", "application/json");
-        var crearUsuarioMascotaRaw = JSON.stringify({
-          id_usuario: store.usuarioActual.id,
-          id_mascota: idMascota,
-        });
-        var requestOptions = {
-          method: "POST",
-          headers: crearUsuarioMascotaHeaders,
-          body: crearUsuarioMascotaRaw,
-          redirect: "follow",
-        };
-        fetch(
-          process.env.BACKEND_URL + "/api/crear-usuario-mascota/",
-          requestOptions
-        )
-          .then((response) => response.json())
-          .then((result) => console.log(result))
-          .catch((error) => {
-            console.log("error", error);
-          });
+        console.log(result);
       })
       .catch((error) => {
         console.log("error", error);
         alert("Llene todos los campos requeridos.");
         if (!error) {
-          alert("Mascota creada.");
+          alert("Mascota editada.");
         }
       });
   };
 
   // useEffect que re-renderiza cuando cambia la URL de la foto
   useEffect(() => {
-    if (
-      URLFoto !=
-      `https://res.cloudinary.com/${process.env.CLOUDINARE_CLOUD_NAME}/image/upload/v1652804030/fkr55gcbx3uywcij7f2z.jpg`
-    ) {
-      fetchCrearMascota();
+    if (URLFoto != "") {
+      fetchEditarMascota();
     }
   }, [URLFoto]);
 
   //Realiza fetch a api interna
-  const añadirMascotaDB = () => {
+  const editarMascotaDB = () => {
     const hayError =
       errorNombre &&
       errorEdad &&
@@ -181,7 +168,7 @@ export const CrearMascota = () => {
       if (foto) {
         handleUpload();
       } else {
-        fetchCrearMascota();
+        fetchEditarMascota();
       }
     } else {
       alert("Por favor llene los campos requeridos.");
@@ -190,7 +177,10 @@ export const CrearMascota = () => {
 
   return (
     <div className="d-flex justify-content-around">
-      <img className="fotoDoggo" src={URLFoto} />
+      <img
+        className="fotoDoggo"
+        src={URLFoto ? URLFoto : store.mascotasUsuario[index]?.url_foto}
+      />
 
       <div className="d-flex flex-column">
         <div className="mb-3 inputCampo">
@@ -293,8 +283,8 @@ export const CrearMascota = () => {
             }}
           />
         </div>
-        <button className="btn btn-primary" onClick={() => añadirMascotaDB()}>
-          Añadir Mascota
+        <button className="btn btn-primary" onClick={() => editarMascotaDB()}>
+          Editar
         </button>
       </div>
     </div>

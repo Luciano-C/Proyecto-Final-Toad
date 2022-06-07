@@ -12,12 +12,12 @@ export const Pet = (props) => {
   useEffect(() => {
     actions.addCurrentUserId();
   }, []);
-  const idMascota = Number(id) + 1;
 
   useEffect(() => {
     if (store.usuarioActual.id) {
-      actions.checkIfOwner(store.usuarioActual.id, idMascota);
+      actions.checkIfOwner(store.usuarioActual.id, store.mascotas[id]?.id);
       setIsLoading(false);
+      console.log(store.esDueño);
     }
   }, [store.usuarioActual.id]);
 
@@ -74,8 +74,13 @@ export const Pet = (props) => {
               </button>
             </Link>
           ) : (
-            <Link to={`/formulario-adopcion/${id}`}>
-              <button className="cardButton btn btn-lg btn-danger outline-info">
+            <Link to={`/`}>
+              <button
+                className="cardButton btn btn-lg btn-danger outline-info"
+                onClick={() => {
+                  actions.borrarMascota(store.mascotas[id].id);
+                }}
+              >
                 Borrar
               </button>
             </Link>
