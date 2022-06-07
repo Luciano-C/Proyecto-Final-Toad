@@ -19,7 +19,11 @@ export const Home = () => {
         {store.mascotas
           .slice(!page ? 0 : Number(page) * 8 - 8, !page ? 8 : Number(page) * 8)
           .map((objeto, index) => (
-            <Card key={index} objeto={objeto} index={index} />
+            <Card
+              key={index}
+              objeto={objeto}
+              index={page ? 8 * Number(page) - 8 + index : index}
+            />
           ))}
       </div>
       <div className="page">
