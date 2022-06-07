@@ -3,68 +3,50 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Card } from "../component/card";
 import { Carousel } from "../component/carousel";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const { page } = useParams();
+
   return (
     <div className="text-center">
       <div className="carousel">
         <Carousel />
       </div>
       <div className="row">
-        {store.mascotas.map(function (objeto, index) {
-          return <Card key={index} objeto={objeto} index={index} />;
-        })}
+        {store.mascotas
+          .slice(!page ? 0 : Number(page) * 8 - 8, !page ? 8 : Number(page) * 8)
+          .map((objeto, index) => (
+            <Card key={index} objeto={objeto} index={index} />
+          ))}
       </div>
       <div className="page">
         <nav aria-label="page">
-          <ul className="pagination justify-content-center">
-            <li className="page-item disabled">
-              <a className="page-link">Previous</a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                Next
-              </a>
-            </li>
-          </ul>
-          <div className="Logo" style={{ paddingTop: "4rem" }}>
-            <h5>¿Quieres ayudar de otra forma? </h5>
-            <small style={{ justify: "center", width: "" }}>
-              Si no puedes adoptar a uno de nuestros animales rescatados, ¡no te
-              preocupes! existen varias maneras en que puedes contribuir a
-              mejorar su calidad de vida.
-            </small>
-            <div>
-              <img
-                src="https://fundacionhuellaanimal.cl/wp-content/uploads/2021/02/paw-print.svg"
-                className="rounded mx-auto"
-                style={{ width: "4rem", paddingTop: "1rem" }}
-              ></img>
-            </div>
-          </div>
-          <div className="boton" style={{ paddingTop: "1rem" }}>
-            <button
-              type="button"
-              className="btn btn-outline-danger outline-info btn-lg"
+          <div className="d-flex flex-column align-items-center">
+            <ul
+              className="pagination justify-content-around"
+              style={{ width: "20%" }}
             >
-              Quiero Donar
-            </button>
+              {page && Number(page) > 1 ? (
+                <Link to={`${Number(page) - 1}`}>Previous</Link>
+              ) : (
+                <p>Previous</p>
+              )}
+
+              {store.paginasHome.map((x, i) => (
+                <Link key={i} to={page ? `${x}` : `home/page/${x}`}>
+                  {x}
+                </Link>
+              ))}
+
+              {page && Number(page) < Math.ceil(store.mascotas.length / 8) ? (
+                <Link to={`${Number(page) + 1}`}>Next</Link>
+              ) : (
+                <p>Next</p>
+              )}
+            </ul>
           </div>
         </nav>
       </div>

@@ -17,6 +17,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       mascotas: [],
       usuarios: [],
 
+      //Paginas
+      paginasHome: [],
+
       // Para generar formulario de adopción
       respuestasDatosContacto: [],
       respuestasFormularioAdopcion: [],
@@ -60,6 +63,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((result) => {
             console.log(result);
             setStore({ mascotas: result });
+            let numeroPaginas = Math.ceil(result.length / 8);
+            let pages = [];
+            for (let i = 1; i <= numeroPaginas; i++) {
+              pages.push(i);
+            }
+            setStore({ paginasHome: pages });
           })
           .catch((error) => console.log("error", error));
       },
