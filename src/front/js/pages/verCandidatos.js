@@ -59,6 +59,10 @@ export const VerCandidatos = () => {
   //];
   let arrayToMap = generateArrayToMap();
 
+  useEffect(() => {
+    arrayToMap = generateArrayToMap();
+  }, [store.usuariosMascotasFormularios]);
+
   // candidatoMAscotasFormularios: [{ id: 15, id_formulario: 1, id_mascota: 11, id_usuario: 3 }, ...]
 
   return (

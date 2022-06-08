@@ -12,13 +12,13 @@ export const VerMisMascotas = () => {
     if (store.usuarioActual.id) {
       actions.getMascotasByUserId(store.usuarioActual.id);
     }
-  }, [store.usuarioActual]);
+  }, [store.usuarioActual, store.mascotasUsuario]);
   return (
     <div>
       <div className="row">
-        {store.mascotasUsuario.map(function (objeto, index) {
-          return <CardMisMascotas key={index} objeto={objeto} index={index} />;
-        })}
+        {store.mascotasUsuario.map((objeto, index) => (
+          <CardMisMascotas key={index} objeto={objeto} index={index} />
+        ))}
       </div>
     </div>
   );
