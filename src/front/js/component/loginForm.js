@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LoginButton } from "./loginButton";
 import "../../styles/login.css";
 
 export const LoginForm = () => (
@@ -47,6 +48,7 @@ export const LoginForm = () => (
               Ingresar 😸
             </button>
           </Link>
+          <LoginButton />
           <br />
         </div>
         <div className="registro" style={{ marginTop: "2rem" }}>

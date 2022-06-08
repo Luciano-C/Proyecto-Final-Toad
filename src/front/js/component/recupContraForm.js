@@ -7,6 +7,27 @@ import { Context } from "../store/appContext";
 
 export const RecupContraForm = () => {
   const { store, actions } = useContext(Context);
+  const [email, setEmail] = useState(null);
+  const [errrorEmail, setErrorEmail] = useState(null);
+  const [loading, setLoading] = useState(null);
+
+  const onSubmit = () => {
+    if (!validateData()) {
+      return;
+    }
+    console.log("recuperación exitosa!");
+  };
+
+  const validateData = () => {
+    setErrorEmail(null);
+    let valid = true;
+
+    if (!validateEmail(email)) {
+      setErrorEmail("Debes ingresar un email válido");
+      valid = false;
+    }
+    return valid;
+  };
 
   function recuperarContraseña(e) {
     e.preventDefault();
@@ -31,13 +52,21 @@ export const RecupContraForm = () => {
   return (
     <div className="login">
       <div className="row">
-        <div className="card mb-3">
+        <div
+          className="card"
+          style={{
+            width: "50rem",
+            height: "55rem",
+            padding: "2rem",
+            margin: "2rem",
+          }}
+        >
           <form onSubmit={recuperarContraseña}>
-            <div className="title" style={{ margin: "1rem" }}>
+            <div className="title" style={{ marginTop: "2rem" }}>
               <h1>Restaurar tu contraseña</h1>
             </div>
 
-            <div className="mb-3" style={{ margin: "1rem" }}>
+            <div className="mb-3" style={{ marginTop: "2rem" }}>
               <label for="exampleFormControlInput1" className="form-label">
                 <h4> Email</h4>
               </label>
@@ -45,18 +74,27 @@ export const RecupContraForm = () => {
                 type="email"
                 className="form-control"
                 id="exampleFormControlInput1"
-                placeholder="name@example.com"
+                placeholder="Ingresa tu email"
+                onChange={(e) => setEmail(e.nativeEvent.text)}
+                defaultValue={email}
+                errorMessage={errrorEmail}
+                keyboardType="email-address"
                 name="user_email"
               />
             </div>
-            <div className="col-auto" style={{ margin: "1rem" }}>
-              <button type="submit" className="btn btn-primary mb-3">
+            <div className="col-auto" style={{ marginTop: "2rem" }}>
+              <button
+                type="submit"
+                title="Recuperar Contraseña"
+                onPress={onSubmit}
+                className="cardButton btn btn-lg btn-danger outline-info"
+              >
                 Enviar 🐰
               </button>
             </div>
             <div
               className="regresar"
-              style={{ margin: "1rem", justifyContent: "start" }}
+              style={{ marginTop: "2rem", justifyContent: "start" }}
             >
               <Link to="/login">
                 <span>Regresar</span>
@@ -64,7 +102,6 @@ export const RecupContraForm = () => {
             </div>
           </form>
         </div>
-        <div className="col"></div>
       </div>
     </div>
   );
