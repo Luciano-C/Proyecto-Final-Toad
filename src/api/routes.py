@@ -309,3 +309,28 @@ def editar_mascota(id_pet):
     db.session.commit()
 
     return jsonify(mascota_a_editar.serialize())
+        
+
+@api.route("/login", methods=["GET"])
+def login_user():
+    data = request.get_json()
+    user = User.query.filter_by(email=data['email'], password =data["password"]).first()
+    if(user):
+        exp = datetime.timedelta(minutes=30)
+        acceso = create_access_token(identity={"email":user.email, "password":user.password, "is_active":user.is_active}, expires_delta=exp)
+        response={"token": acceso, "expira":exp.total_seconds(), "email":user_email}
+        return "usuario válido"
+    else:
+        return "usuario no existe"
+
+
+
+""" @api.route("/get-usuario-email", methods=["GET"])
+def get_user_by_email():
+    # Ejemplo Body: {"email": "test_user1@test.com"}
+    data = request.get_json()
+    usuario = Users.query.filter_by(email=data["email"]).first()
+    if usuario:
+        return jsonify(usuario.serialize()), 200
+    else:
+        return jsonify({"mensaje": "El usuario no existe en la base de datos"}), 200 """

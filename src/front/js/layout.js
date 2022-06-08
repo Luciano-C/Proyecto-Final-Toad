@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import notfound from "../img/notfound.gif";
 
 import { Home } from "./pages/home";
 import { Pet } from "./pages/pet";

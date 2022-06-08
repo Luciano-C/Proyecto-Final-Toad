@@ -14,6 +14,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      user: [
+        {
+          currentEmail: "",
+          currentPassword: "",
+          //token:"",
+        },
+      ],
+
       mascotas: [],
       usuarios: [],
 
@@ -54,7 +62,12 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       login: (email, password) => {
-        console.log("este es el email y password", email, password);
+        let store = getStore();
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        console.log("email y password desde flux", email, password);
       },
 
       getMascotas: () => {

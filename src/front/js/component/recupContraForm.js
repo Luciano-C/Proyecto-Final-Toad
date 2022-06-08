@@ -7,18 +7,18 @@ export const RecupContraForm = () => (
       <div class="col">
         <form className="">
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">
-              Email
-            </label>
+            <label class="form-label">Email</label>
             <input
               type="email"
               class="form-control"
-              id="exampleFormControlInput1"
               placeholder="name@example.com"
             />
           </div>
           <div className="col-auto">
-            <button type="submit" className="btn btn-primary mb-3">
+            <button
+              type="submit"
+              className="btn btn-outline-danger outline-info btn-lg"
+            >
               Enviar 🐰
             </button>
           </div>
