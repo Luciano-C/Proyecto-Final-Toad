@@ -84,10 +84,10 @@ export const VerCandidatos = () => {
               <td key={`n${i}`}>{x.mascota.nombre}</td>
               <td
                 key={`c${i}`}
-              >{`${x.candidato.nombre} ${x.candidato.apellidos}`}</td>
-              <td key={`e${i}`}>{x.candidato.email}</td>
-              <td key={`t${i}`}>{x.candidato.telefono}</td>
-              <td key={`dir${i}`}>{x.candidato.direccion}</td>
+              >{`${x.candidato?.nombre} ${x.candidato?.apellidos}`}</td>
+              <td key={`e${i}`}>{x.candidato?.email}</td>
+              <td key={`t${i}`}>{x.candidato?.telefono}</td>
+              <td key={`dir${i}`}>{x.candidato?.direccion}</td>
 
               <td key={`l${i}`}>
                 <Link to={`/respuestas-candidato/${x.idFormulario}`}>

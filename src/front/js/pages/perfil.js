@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
@@ -12,6 +12,22 @@ import { VerMisMascotas } from "./verMisMascotas";
 import { VerMisPostulaciones } from "./verMisPostulaciones";
 
 export const Perfil = () => {
+  const [mode, setMode] = useState(undefined);
+  /* Modos
+- crearMascota
+- mascotas
+- candidatos
+- postulaciones
+*/
+
+  const clickHandler = (nuevoModo) => {
+    if (mode !== nuevoModo) {
+      setMode(nuevoModo);
+    } else {
+      setMode(undefined);
+    }
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -55,67 +71,78 @@ export const Perfil = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-3">
-            <a>
-              <img
-                src={huella}
-                className="imagen"
-                data-bs-toggle="collapse"
-                href="#huella"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              ></img>
-            </a>
-            <h5> Añadir Mascotas</h5>
-          </div>
-          <div className="col-3">
-            <a>
-              <img
-                src={mascotas}
-                className="imagen"
-                data-bs-toggle="collapse"
-                href="#mascota"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              ></img>
-            </a>
-            <h5> Mis mascotas</h5>
-          </div>
-          <div className="col-3">
-            <a>
-              <img
-                src={candidatos}
-                className="imagen"
-                data-bs-toggle="collapse"
-                data-bs-target="#candidatos"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              ></img>
-            </a>
-            <h5> Candidatos</h5>
-          </div>
-          <div className="col-3">
-            <a>
-              <img
-                src={postulaciones}
-                className="imagen"
-                data-bs-toggle="collapse"
-                data-bs-target="#postulaciones"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              ></img>
-            </a>
+          <div className="col-3 d-flex flex-column align-items-center">
+            <img
+              src={huella}
+              className="imagen"
+              data-bs-toggle="collapse"
+              href="#huella"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              onClick={() => clickHandler("crearMascota")}
+            ></img>
 
-            <h5>Postulaciones</h5>
+            <h5 className="text-center">Añadir Mascotas</h5>
           </div>
-          <div className="collapse" id="huella">
+          <div className="col-3 d-flex flex-column align-items-center">
+            <img
+              src={mascotas}
+              className="imagen"
+              data-bs-toggle="collapse"
+              href="#mascota"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              onClick={() => clickHandler("mascotas")}
+            ></img>
+
+            <h5 className="text-center">Mis Mascotas</h5>
+          </div>
+          <div className="col-3 d-flex flex-column align-items-center">
+            <img
+              src={candidatos}
+              className="imagen"
+              data-bs-toggle="collapse"
+              data-bs-target="#candidatos"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              onClick={() => clickHandler("candidatos")}
+            ></img>
+
+            <h5 className="text-center">Ver Candidatos</h5>
+          </div>
+          <div className="col-3 d-flex flex-column align-items-center">
+            <img
+              src={postulaciones}
+              className="imagen"
+              data-bs-toggle="collapse"
+              data-bs-target="#postulaciones"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              onClick={() => clickHandler("postulaciones")}
+            ></img>
+
+            <h5 className="text-center">Mis Postulaciones</h5>
+          </div>
+          <div>
             <div className="card card-body">
-              <CrearMascota />
+              {mode === "crearMascota" ? (
+                <CrearMascota />
+              ) : mode === "mascotas" ? (
+                <VerMisMascotas />
+              ) : mode === "candidatos" ? (
+                <VerCandidatos />
+              ) : mode === "postulaciones" ? (
+                <VerMisPostulaciones />
+              ) : (
+                <></>
+              )}
             </div>
           </div>
-          <div className="collapse" id="mascota">
+          {/* <div className="collapse" id="mascota">
             <div className="card card-body">
               <VerMisMascotas />
             </div>
@@ -131,7 +158,7 @@ export const Perfil = () => {
             <div className="card card-body">
               <VerMisPostulaciones />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
