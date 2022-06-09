@@ -73,11 +73,14 @@
 		]
 	},
 	"dependencies": {
+		"@auth0/auth0-react": "^1.10.1",
 		"axios": "^0.27.2",
 		"emailjs-com": "^3.2.0",
+		"firebase": "^9.8.2",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
+		"react-native-element": "^1.2.1",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^5.2.0"
 	}

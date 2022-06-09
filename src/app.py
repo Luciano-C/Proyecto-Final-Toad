@@ -74,43 +74,43 @@ def serve_any_other_file(path):
     return response
 
 # Registrar usuario
-    @app.route("/registro", methods=['POST'])
-    def registra_usuario():
-        data = request.get_json()
-        newUser = User()
-        newUser.nombre = data['nombre']
-        newUser.apellidos = data['apellidos']
-        newUser.email = data['email']
-        newUser.password = data['password']
-        newUser.direccion = data['direccion']
-        newUser.is_activw=True
-        db.session.add(newUser)
-        db.session.commit()
+@app.route("/registro", methods=['POST'])
+def registra_usuario():
+    data = request.get_json()
+    newUser = User()
+    newUser.nombre = data['nombre']
+    newUser.apellidos = data['apellidos']
+    newUser.email = data['email']
+    newUser.password = data['password']
+    newUser.direccion = data['direccion']
+    newUser.is_activw=True
+    db.session.add(newUser)
+    db.session.commit()
 
-        return "Ususario registrado correctamente"
+    return "Ususario registrado correctamente"
 
 # Login Usuario
-    @app.route("/login", methods=['POST'])
-    def logear():
-        data = request.get_json()
-        oneUser = User.query.filter_by(email=data['email'], password= data['password']).first()
-        if(oneUser):
-            expire = datetime.timedelta(minutes=1)
-            acceso = create_access_token(identity=oneUser.email, expires_delta=expire)
-            response = {"Token":acceso, "expiracion":expire.total_seconds(), "email":oneUser.mail}
+@app.route("/login", methods=['POST'])
+def logear():
+    data = request.get_json()
+    oneUser = Users.query.filter_by(email=data['email'], password= data['password']).first()
+    if(oneUser):
+        expire = datetime.timedelta(minutes=1)
+        acceso = create_access_token(identity=oneUser.email, expires_delta=expire)
+        response = {"Token":acceso, "expiracion":expire.total_seconds(), "email":oneUser.email}
 
-            return jsonify(response)
-        else:
-            return "mail o contraseña no son válidos"
+        return jsonify(response)
+    else:
+        return "mail o contraseña no son válidos"
 
 # Acceso a perfil usuario
-    @app.route("/perfil", methods=['GET'])
-    @jwt_required()
-    def acceso_perfil():
-        token = get_jwt_identity()
-        return jsonify({
-            "mensaje": "Bienvenido",
-            usuario:token
+@app.route("/perfil", methods=['GET'])
+@jwt_required()
+def acceso_perfil():
+    token = get_jwt_identity()
+    return jsonify({
+    "mensaje": "Bienvenido",
+    "usuario":token
         })
 
 

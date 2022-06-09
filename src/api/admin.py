@@ -17,5 +17,6 @@ def setup_admin(app):
     admin.add_view(ModelView(Formulario_Adopcion, db.session))
     admin.add_view(ModelView(Candidato_Mascota_Formulario, db.session))
 
+
     # You can duplicate that line to add mew models
     # admin.add_view(ModelView(YourModelName, db.session))

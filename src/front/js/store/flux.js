@@ -62,12 +62,48 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       login: (email, password) => {
+<<<<<<< HEAD
         let store = getStore();
+=======
+        console.log("este es el email y password", email, password);
+>>>>>>> 60a21f7faef2297d50c23d82ceaa593e92b124a5
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
+<<<<<<< HEAD
         console.log("email y password desde flux", email, password);
+=======
+        var raw = JSON.stringify({
+          email: email,
+          password: password,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(process.env.BACKEND_URL + "/login", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            if (result.Token) {
+              sessionStorage.setItem("Token", result.Token);
+              sessionStorage.setItem("logeado", "ok");
+              window.location.href = "/perfil";
+            } else {
+              alert("inicio de sesion fallido");
+            }
+          })
+          .catch((error) => console.log("error", error));
+      },
+
+      recuperar: (password) => {
+        console.log("este es el email y password", password);
+>>>>>>> 60a21f7faef2297d50c23d82ceaa593e92b124a5
       },
 
       getMascotas: () => {

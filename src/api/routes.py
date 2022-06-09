@@ -21,6 +21,7 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+
 @api.route("/usuarios", methods=["GET"])
 def get_usuarios():
     todos_usuarios = Users.query.all()
@@ -35,7 +36,7 @@ def get_user_by_email(email):
     else:
         return jsonify({"mensaje": "El usuario no existe en la base de datos"}), 200
 
-@api.route("/get-password/email=<email>", methods=["GET"])
+@api.route("/get-password/email=<email>", methods=["GET", "POST", "PUT"])
 def get_password_by_email(email):
     usuario = Users.query.filter_by(email=email).first()
     if usuario:
