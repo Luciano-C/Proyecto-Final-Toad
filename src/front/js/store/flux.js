@@ -54,8 +54,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-          email: "test_user1@test.com",
-          password: "123456",
+          email: email,
+          password: password,
         });
 
         var requestOptions = {
@@ -65,11 +65,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(
-          "https://3001-lucianoc-proyectofinalt-9yti8yktt0a.ws-us47.gitpod.io/login",
-          requestOptions
-        )
-          .then((response) => response.text())
+        fetch(process.env.BACKEND_URL + "/login", requestOptions)
+          .then((response) => response.json())
           .then((result) => console.log(result))
           .catch((error) => console.log("error", error));
       },
