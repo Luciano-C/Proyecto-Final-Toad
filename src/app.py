@@ -93,11 +93,11 @@ def registra_usuario():
 @app.route("/login", methods=['POST'])
 def logear():
     data = request.get_json()
-    oneUser = User.query.filter_by(email=data['email'], password= data['password']).first()
+    oneUser = Users.query.filter_by(email=data['email'], password= data['password']).first()
     if(oneUser):
         expire = datetime.timedelta(minutes=1)
         acceso = create_access_token(identity=oneUser.email, expires_delta=expire)
-        response = {"Token":acceso, "expiracion":expire.total_seconds(), "email":oneUser.mail}
+        response = {"Token":acceso, "expiracion":expire.total_seconds(), "email":oneUser.email}
 
         return jsonify(response)
     else:
