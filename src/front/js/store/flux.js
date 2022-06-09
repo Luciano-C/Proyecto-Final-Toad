@@ -65,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(fetch(process.env.BACKEND_URL + "/login"), requestOptions)
+        fetch(process.env.BACKEND_URL + "/login", requestOptions)
           .then((response) => response.json())
           .then((result) => console.log(result))
           .catch((error) => console.log("error", error));
