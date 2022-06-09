@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export const Card = (props) => {
   const { store, actions } = useContext(Context);
   return (
-    <div className="col">
+    <div className="col-md-3">
       <div className="card" style={{ width: "18rem" }}>
         <img src={props.objeto.url_foto} className="card-img-top" alt="..." />
         <div className="card-body">
