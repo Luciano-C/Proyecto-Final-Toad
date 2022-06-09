@@ -64,8 +64,6 @@ export const LoginForm = () => {
               {" "}
               Ingresar 😸
             </button>
-
-            <LoginButton />
             <br />
           </div>
           <div className="registro" style={{ marginTop: "2rem" }}>
