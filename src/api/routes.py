@@ -21,6 +21,7 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+
 @api.route("/usuarios", methods=["GET"])
 def get_usuarios():
     todos_usuarios = Users.query.all()

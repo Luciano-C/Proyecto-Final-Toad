@@ -49,14 +49,33 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       login: (email, password) => {
         console.log("este es el email y password", email, password);
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          email: "test_user1@test.com",
+          password: "123456",
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(
+          "https://3001-lucianoc-proyectofinalt-9yti8yktt0a.ws-us47.gitpod.io/login",
+          requestOptions
+        )
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
       },
 
       recuperar: (password) => {
         console.log("este es el email y password", password);
-      },
-
-      getRecuperar: () => {
-        fetch();
       },
 
       getMascotas: () => {

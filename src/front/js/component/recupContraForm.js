@@ -7,7 +7,8 @@ import { Context } from "../store/appContext";
 
 export const RecupContraForm = () => {
   const { store, actions } = useContext(Context);
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errrorEmail, setErrorEmail] = useState(null);
   const [loading, setLoading] = useState(null);
 
@@ -75,7 +76,7 @@ export const RecupContraForm = () => {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Ingresa tu email"
-                onChange={(e) => setEmail(e.nativeEvent.text)}
+                onChange={(e) => setEmail(e.target.value)}
                 defaultValue={email}
                 errorMessage={errrorEmail}
                 keyboardType="email-address"
