@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { LoginButton } from "./loginButton";
 import { useState } from "react";
 import "../../styles/login.css";
@@ -10,7 +10,7 @@ export const LoginForm = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory();
   return (
     <div className="login">
       <div className="row">
@@ -54,6 +54,11 @@ export const LoginForm = () => {
               href="#"
               onClick={() => {
                 actions.login(email, password);
+                // if (sessionStorage.getItem("logeado") === "ok") {
+                //   history.push("/perfil");
+                // } else {
+                //   alert("login falló :(");
+                // }
               }}
             >
               {" "}
