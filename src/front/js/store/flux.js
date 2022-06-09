@@ -67,7 +67,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         fetch(process.env.BACKEND_URL + "/login", requestOptions)
           .then((response) => response.json())
-          .then((result) => console.log(result))
+          .then((result) => {
+            console.log(result);
+            if (result.Token) {
+              sessionStorage.setItem("Token", result.Token);
+              sessionStorage.setItem("logeado", "ok");
+              window.location.href = "/perfil";
+            } else {
+              alert("inicio de sesion fallido");
+            }
+          })
           .catch((error) => console.log("error", error));
       },
 
