@@ -45,7 +45,7 @@ export const RecupContraForm = () => {
         alert("Revise su Bandeja de entrada.");
         console.log(res);
       })
-      .cath((error) => {
+      .catch((error) => {
         console.log(error);
       });
   }

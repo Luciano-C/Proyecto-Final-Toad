@@ -32,8 +32,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       respuestasDatosContacto: [],
       respuestasFormularioAdopcion: [],
 
-      infoUser: {},
-
       // Temporal, hay que actualizar con token
       usuarioActual: {
         /*  email: "test_user1@test.com",
@@ -102,7 +100,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
           .then((result) => {
-            setStore({ infoUser: result });
             console.log(result);
           })
           .catch((error) => console.log("error", error));
