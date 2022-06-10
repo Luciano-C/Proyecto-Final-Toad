@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { LoginButton } from "./loginButton";
 import { useState } from "react";
 import "../../styles/login.css";
 import { useContext } from "react";
@@ -34,6 +33,7 @@ export const LoginForm = () => {
               id="exampleFormControlInput1"
               placeholder="correo@example.com"
               onChange={(e) => setEmail(e.target.value)}
+              name="user_email"
             />
           </div>
           <div className="mb-3">

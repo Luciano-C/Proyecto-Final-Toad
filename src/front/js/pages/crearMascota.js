@@ -183,7 +183,11 @@ export const CrearMascota = () => {
 
   return (
     <div className="d-flex justify-content-around">
-      <img className="fotoDoggo" src={URLFoto} />
+      <img
+        className="fotoDoggo"
+        style={{ padding: "1rem", borderRadius: "30px" }}
+        src={URLFoto}
+      />
 
       <div className="d-flex flex-column">
         <div className="mb-3 inputCampo">
