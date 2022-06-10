@@ -10,10 +10,11 @@ import { CrearMascota } from "./crearMascota";
 import { VerCandidatos } from "./verCandidatos";
 import { VerMisMascotas } from "./verMisMascotas";
 import { VerMisPostulaciones } from "./verMisPostulaciones";
+import { useAuth0 } from "@auth0/auth0-react";
+import { LogoutButton } from "../component/logoutButton";
 
 export const Perfil = () => {
   const [mode, setMode] = useState(undefined);
-  const { store, actions } = useContext(Context);
   /* Modos
 - crearMascota
 - mascotas
@@ -29,8 +30,21 @@ export const Perfil = () => {
     }
   };
 
+  const { store, actions } = useContext(Context);
+  const { email, isAuthenticated, isLoading } = useAuth0();
+
+  useEffect(() => {
+    actions.addCurrentUserId();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="container">
+      <div className="logoutButton">
+        <LogoutButton />
+      </div>
       <div className="row">
         <div className="col">
           <div className="card mb-3" style={{}}>
@@ -46,19 +60,21 @@ export const Perfil = () => {
                 <div className="card-body">
                   <h1 className="card-title"> Mis Datos</h1>
                   <p className="card-text">
-                    <strong>Nombre:</strong> {store.usuarioActual?.nombre}
+                    <strong>Nombre: </strong> {store.usuarioActual?.nombre}
                   </p>
                   <p className="card-text">
-                    <strong>Apellidos:</strong> {store.usuarioActual?.apellidos}
+                    <strong>Apellidos: </strong>
+                    {store.usuarioActual?.apellidos}
                   </p>
                   <p className="card-text">
-                    <strong>Email:</strong> {store.usuarioActual?.email}
+                    <strong>Email: </strong> {store.usuarioActual?.email}
                   </p>
                   <p className="card-text">
-                    <strong>Dirección:</strong> {store.usuarioActual?.direccion}
+                    <strong>Dirección: </strong>
+                    {store.usuarioActual?.direccion}
                   </p>
                   <p className="card-text">
-                    <strong>Email:</strong> {store.usuarioActual?.email}
+                    <strong>Teléfono: </strong> {store.usuarioActual?.telefono}
                   </p>
                 </div>
               </div>

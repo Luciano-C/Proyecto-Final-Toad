@@ -107,7 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       registroUsuario: (nombre, apellidos, email, password, direccion) => {
         console.log(
-          "Registro de Usuario exitoso",
+          "Datos recibidos",
           nombre,
           apellidos,
           email,
@@ -137,19 +137,22 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
-            if (
-              (result.nombre,
-              result.apellidos,
-              result.email,
-              result.password,
-              result.direccion)
+            window.location.href = "/login";
+            /* if (
+              result.nombre &&
+              result.apellidos &&
+              result.email &&
+              result.password &&
+              result.direccion
             ) {
               window.location.href = "/login";
             } else {
               alert("Resgistro no exitoso");
-            }
+            } */
           })
+
           .catch((error) => console.log("error", error));
+        return true;
       },
 
       recuperar: (password) => {

@@ -85,13 +85,24 @@ export const RegUsuarioForm = () => {
                 type="submit"
                 className="btn btn-primary mb-3"
                 onClick={() => {
-                  actions.registroUsuario(
+                  if (
+                    actions.registroUsuario(
+                      nombre,
+                      apellidos,
+                      email,
+                      password,
+                      direccion
+                    )
+                  ) {
+                    history.push("/login");
+                  }
+                  /* actions.registroUsuario(
                     nombre,
                     apellidos,
                     email,
                     password,
                     direccion
-                  );
+                  ); */
                 }}
               >
                 {" "}
