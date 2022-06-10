@@ -55,7 +55,7 @@ export const Contacto = () => {
               />
             </div>
             <div className="mb-6" style={{ paddingTop: "20px" }}>
-              <label for="exampleFormControlInput1" className="form-label">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
                 Correo electrónico
               </label>
               <input
@@ -67,7 +67,10 @@ export const Contacto = () => {
               />
             </div>
             <div className="mb-6" style={{ paddingTop: "20px" }}>
-              <label for="exampleFormControlTextarea1" className="form-label">
+              <label
+                htmlFor="exampleFormControlTextarea1"
+                className="form-label"
+              >
                 Mensaje
               </label>
               <textarea

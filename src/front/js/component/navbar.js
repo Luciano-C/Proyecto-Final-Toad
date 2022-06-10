@@ -38,7 +38,9 @@ export const Navbar = () => {
               </button>
             </Link>
           ) : (
-            "cerrar sesion"
+            <button className="btn btn-dark" href="/login">
+              <i className="fas fa-user"> Cerrar sesión </i>
+            </button>
           )}
         </div>
       </nav>

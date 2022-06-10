@@ -87,7 +87,7 @@ def registra_usuario():
     db.session.add(newUser)
     db.session.commit()
 
-    return "Ususario registrado correctamente"
+    return jsonify({"mensaje": "Ususario registrado correctamente"})
 
 # Login Usuario
 @app.route("/login", methods=['POST'])

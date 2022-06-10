@@ -26,13 +26,13 @@ export const App = () => {
                 alt="..."
               />
             </div>
-            <div className="carousel-item">
+            {/*    <div className="carousel-item">
               <img
                 src="https://www.ustedpregunta.com/data/articulos/cuales-son-los-beneficios-de-los-perros-como-mascotas/60dd85997081f.jpg"
                 className="d-block w-100"
                 alt="..."
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

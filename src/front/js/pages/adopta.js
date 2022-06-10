@@ -12,6 +12,15 @@ export const Adopta = () => {
         <h5>¿Buscas adoptar?</h5>
       </div>
       <div className="parrafo">
+        <p style={{ justifyItems: "legacy" }}>
+          Estos son animales que por algún motivo su protector actual ha
+          rescatado por abandono en las calles, recibiendo atención para mejorar
+          su salud física y emocional. Con la finalidad de poder conseguir un
+          candidato que cumpla los requisitos para adoptar a través de este
+          sitio web. También se cuenta con mascotas que cuyos dueños actuales,
+          se les imposibilita el cuidado. Todos están listos para encontrar a
+          una nueva familia que los quiera y los cuide.
+        </p>
         <p>
           Está App busca promover la adopción de mascotas de manera responsable,
           es decir, que cuando una persona quiere adoptar una mascota debe
@@ -19,10 +28,10 @@ export const Adopta = () => {
           llevar una nueva mascota a su hogar.
         </p>
         <p>
-          Por eso no se debe entregar la mascota de forma inmediata, sino que
-          generar una instancia para que la gente conozca y tenga contacto. Si
-          alguien está interesado en adoptar con nosotros debe llenar un
-          formulario de pre-adopción, donde se le preguntan cosas sobre el hogar
+          Por eso no se debe entregar el perro en de forma inmediata, sino que
+          son sólo una instancia para que la gente conozca y tenga contacto. Si
+          alguien está interesado en adoptar a traves de está app debe llenar un
+          formulario de adopción, donde se le hacen preguntan sobre el hogar
           donde vivirá la mascota, la composición de la familia, el tiempo que
           le dedicarán, etc.
         </p>
@@ -44,7 +53,7 @@ export const Adopta = () => {
       >
         <a
           class="btn btn-outline-danger outline-info btn-lg"
-          href="/regUsuario"
+          href="/respuestas-candidato/:idFormulario"
           role="button"
         >
           {" "}
