@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../styles/home.css";
 
 export const Navbar = () => {
+  const history = useHistory();
   return (
     <div className="display-flex">
       <nav className="navbar navbar bg-light mb-3">
@@ -38,7 +39,14 @@ export const Navbar = () => {
               </button>
             </Link>
           ) : (
-            <button className="btn btn-dark" href="/login">
+            <button
+              className="btn btn-dark"
+              href="/login"
+              onClick={() => {
+                sessionStorage.setItem("Token", "");
+                history.push("/");
+              }}
+            >
               <i className="fas fa-user"> Cerrar sesión </i>
             </button>
           )}

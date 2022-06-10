@@ -13,6 +13,7 @@ import { VerMisPostulaciones } from "./verMisPostulaciones";
 
 export const Perfil = () => {
   const [mode, setMode] = useState(undefined);
+  const { store, actions } = useContext(Context);
   /* Modos
 - crearMascota
 - mascotas
@@ -45,26 +46,20 @@ export const Perfil = () => {
                 <div className="card-body">
                   <h1 className="card-title"> Mis Datos</h1>
                   <p className="card-text">
-                    <strong>Nombre:</strong> Pepito
+                    <strong>Nombre:</strong> {store.usuarioActual?.nombre}
                   </p>
                   <p className="card-text">
-                    <strong>Apellidos:</strong> Pepito
+                    <strong>Apellidos:</strong> {store.usuarioActual?.apellidos}
                   </p>
                   <p className="card-text">
-                    <strong>Email:</strong> Pepito
+                    <strong>Email:</strong> {store.usuarioActual?.email}
                   </p>
                   <p className="card-text">
-                    <strong>Dirección:</strong> Pepito
+                    <strong>Dirección:</strong> {store.usuarioActual?.direccion}
                   </p>
                   <p className="card-text">
-                    <strong>Email:</strong> Pepito
+                    <strong>Email:</strong> {store.usuarioActual?.email}
                   </p>
-                  <a
-                    href="https://api.whatsapp.com/send?phone=+56950705762&text=Hola,%20muchas%20gracias%20por%20contactarme.%20Si%20est%C3%A1%20interesado%20en%20la%20mascota%20en%20adopci%C3%B3n%20me%20pondr%C3%A9%20en%20contacto%20en%20caso%20de%20ser%20aprobado%20o%20rechazar.%20"
-                    className=" btn btn-success fab fa-whatsapp"
-                  >
-                    <span> Ir a whatsapp</span>
-                  </a>
                 </div>
               </div>
             </div>
