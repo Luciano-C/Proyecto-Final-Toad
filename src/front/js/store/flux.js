@@ -80,6 +80,53 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log("error", error));
       },
 
+      registroUsuario: (nombre, apellidos, email, password, direccion) => {
+        console.log(
+          "Registro de Usuario exitoso",
+          nombre,
+          apellidos,
+          email,
+          password,
+          direccion
+        );
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          nombre: "Evadne",
+          apellidos: "Olivo",
+          email: "evadne28@gmail.com",
+          password: "123",
+          direccion: "Serrano",
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(process.env.BACKEND_URL + "/registro", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            if (
+              (result.nombre,
+              result.apellidos,
+              result.email,
+              result.password,
+              result.direccion)
+            ) {
+              window.location.href = "/login";
+            } else {
+              alert("Resgistro no exitoso");
+            }
+          })
+          .catch((error) => console.log("error", error));
+      },
+
       recuperar: (password) => {
         console.log("este es el email y password", password);
       },

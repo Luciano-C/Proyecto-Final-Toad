@@ -38,7 +38,7 @@ export const Navbar = () => {
               </button>
             </Link>
           ) : (
-            <button className="btn btn-dark">
+            <button className="btn btn-dark" href="/login">
               <i className="fas fa-user"> Cerrar sección </i>
             </button>
           )}
