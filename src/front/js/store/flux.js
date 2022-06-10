@@ -71,7 +71,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(result);
             if (result.Token) {
               sessionStorage.setItem("Token", result.Token);
-              sessionStorage.setItem("logeado", "ok");
               window.location.href = "/perfil";
             } else {
               alert("inicio de sesion fallido");

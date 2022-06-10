@@ -30,11 +30,16 @@ export const Navbar = () => {
           </Link>
         </div>
         <div className="ml-auto">
-          <Link to="/login">
-            <button className="btn btn-dark" href="/login">
-              <i className="fas fa-user"> Iniciar sesión </i>
-            </button>
-          </Link>
+          {!sessionStorage.getItem("Token") ||
+          sessionStorage.getItem("Token") == "" ? (
+            <Link to="/login">
+              <button className="btn btn-dark" href="/login">
+                <i className="fas fa-user"> Iniciar sesión </i>
+              </button>
+            </Link>
+          ) : (
+            "cerrar sesion"
+          )}
         </div>
       </nav>
     </div>
