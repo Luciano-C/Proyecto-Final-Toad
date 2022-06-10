@@ -85,12 +85,6 @@ export const Perfil = () => {
                         <strong>Teléfono: </strong>{" "}
                         {store.usuarioActual.telefono}
                       </p>
-                      <a
-                        href="https://api.whatsapp.com/send?phone=+56950705762&text=Hola,%20muchas%20gracias%20por%20contactarme.%20Si%20est%C3%A1%20interesado%20en%20la%20mascota%20en%20adopci%C3%B3n%20me%20pondr%C3%A9%20en%20contacto%20en%20caso%20de%20ser%20aprobado%20o%20rechazar.%20"
-                        className=" btn btn-success fab fa-whatsapp"
-                      >
-                        <span> Ir a whatsapp</span>
-                      </a>
                     </div>
                   </div>
                 </div>
