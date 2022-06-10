@@ -77,13 +77,13 @@ def serve_any_other_file(path):
 @app.route("/registro", methods=['POST'])
 def registra_usuario():
     data = request.get_json()
-    newUser = User()
+    newUser = Users()
     newUser.nombre = data['nombre']
     newUser.apellidos = data['apellidos']
     newUser.email = data['email']
     newUser.password = data['password']
     newUser.direccion = data['direccion']
-    newUser.is_activw=True
+    newUser.is_active=True
     db.session.add(newUser)
     db.session.commit()
 
