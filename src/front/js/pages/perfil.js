@@ -42,9 +42,6 @@ export const Perfil = () => {
   }
   return (
     <div className="container">
-      <div className="logoutButton">
-        <LogoutButton />
-      </div>
       <div className="row">
         <div className="col">
           <div className="card mb-3" style={{}}>
