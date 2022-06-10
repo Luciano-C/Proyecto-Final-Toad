@@ -91,7 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(result);
             if (result.Token) {
               sessionStorage.setItem("Token", result.Token);
-              sessionStorage.setItem("logeado", "ok");
+
               sessionStorage.setItem("email", result.email);
 
               window.location.href = "/perfil";
