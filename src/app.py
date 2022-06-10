@@ -97,7 +97,7 @@ def logear():
     if(oneUser):
         expire = datetime.timedelta(minutes=1)
         acceso = create_access_token(identity=oneUser.email, expires_delta=expire)
-        response = {"Token":acceso, "expiracion":expire.total_seconds(), "email":oneUser.email}
+        response = {"Token":acceso, "expiracion":expire.total_seconds(), "email":oneUser.email, "nombre": oneUser.nombre}
 
         return jsonify(response)
     else:

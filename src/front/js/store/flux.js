@@ -32,14 +32,22 @@ const getState = ({ getStore, getActions, setStore }) => {
       respuestasDatosContacto: [],
       respuestasFormularioAdopcion: [],
 
+      infoUser: {},
+
       // Temporal, hay que actualizar con token
       usuarioActual: {
-        email: "test_user1@test.com",
+        /*  email: "test_user1@test.com",
         password: "123456",
         nombre: "Bob",
         apellidos: "Martinez Lopez",
         telefono: "1981234568",
-        direccion: "Callequenoexiste 123",
+        direccion: "Callequenoexiste 123", */
+        email: "",
+        password: "",
+        nombre: "",
+        apellidos: "",
+        telefono: "",
+        direccion: "",
       },
 
       idMascotasDelUsuario: [],
@@ -62,18 +70,11 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       login: (email, password) => {
-<<<<<<< HEAD
-        let store = getStore();
-=======
         console.log("este es el email y password", email, password);
->>>>>>> 60a21f7faef2297d50c23d82ceaa593e92b124a5
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-<<<<<<< HEAD
-        console.log("email y password desde flux", email, password);
-=======
         var raw = JSON.stringify({
           email: email,
           password: password,
@@ -93,17 +94,22 @@ const getState = ({ getStore, getActions, setStore }) => {
             if (result.Token) {
               sessionStorage.setItem("Token", result.Token);
               sessionStorage.setItem("logeado", "ok");
+              sessionStorage.setItem("email", result.email);
+
               window.location.href = "/perfil";
             } else {
               alert("inicio de sesion fallido");
             }
+          })
+          .then((result) => {
+            setStore({ infoUser: result });
+            console.log(result);
           })
           .catch((error) => console.log("error", error));
       },
 
       recuperar: (password) => {
         console.log("este es el email y password", password);
->>>>>>> 60a21f7faef2297d50c23d82ceaa593e92b124a5
       },
 
       getMascotas: () => {
@@ -140,7 +146,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         fetch(
           process.env.BACKEND_URL +
-            `/api/get-usuario/email=${store.usuarioActual.email}`
+            `/api/get-usuario/email=${sessionStorage.getItem("email")}`
         )
           .then((response) => response.json())
           .then((result) => {

@@ -7,9 +7,12 @@ export const LogoutButton = () => {
   return (
     <button
       className="cardButton btn btn-lg btn-danger outline-info btn-sm"
-      onClick={() => logout({ returnTo: window.location.origin })}
+      onClick={() => {
+        //logout({ returnTo: window.location.origin });
+        logout({ returnTo: process.env.BACKEND_URL + "/" });
+      }}
     >
-      Cerrar Sección
+      Cerrar Sesión
     </button>
   );
 };

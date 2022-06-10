@@ -5,31 +5,6 @@ import emailjs, { sendForm } from "emailjs-com";
 import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
-<<<<<<< HEAD
-export const RecupContraForm = () => (
-  <div class="container">
-    <div class="row align-items-start">
-      <div class="col"></div>
-      <div class="col">
-        <form className="">
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              placeholder="name@example.com"
-            />
-          </div>
-          <div className="col-auto">
-            <button
-              type="submit"
-              className="btn btn-outline-danger outline-info btn-lg"
-            >
-              Enviar 🐰
-            </button>
-          </div>
-        </form>
-=======
 export const RecupContraForm = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
@@ -128,7 +103,6 @@ export const RecupContraForm = () => {
             </div>
           </form>
         </div>
->>>>>>> 60a21f7faef2297d50c23d82ceaa593e92b124a5
       </div>
     </div>
   );
