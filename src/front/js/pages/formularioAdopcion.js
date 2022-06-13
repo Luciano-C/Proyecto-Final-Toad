@@ -28,15 +28,12 @@ export const FormularioAdopcion = () => {
       respuestasFormulario.push("");
     });
 
-    console.log(store.respuestasDatosContacto, "store.respuestasDatosContacto");
-    console.log(respuestasDatosContacto, "respuestasDatosContacto");
+    
 
     actions.setRespuestasDatosContacto(respuestasDatosContacto);
     actions.setRespuestasFormularioAdopcion(respuestasFormulario); */
     actions.setRespuestasDatosContacto(["", "", "", ""]);
     actions.setRespuestasFormularioAdopcion(["", "", "", "", "", "", ""]);
-
-    console.log(store.respuestasDatosContacto, "store.respuestasDatosContacto");
 
     // Hace fetch para buscar la id del usuario en base de datos correspondiente al email actual
     actions.addCurrentUserId();
