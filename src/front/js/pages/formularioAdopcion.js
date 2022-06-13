@@ -17,7 +17,7 @@ export const FormularioAdopcion = () => {
 
   // Añade un elemento vacío por pregunta a la lista de respuesta para que no hayan errores con los índices.
   useEffect(() => {
-    let respuestasDatosContacto = store.respuestasDatosContacto;
+    /* let respuestasDatosContacto = store.respuestasDatosContacto;
     let respuestasFormulario = store.respuestasFormularioAdopcion;
 
     campos.forEach((x) => {
@@ -28,8 +28,15 @@ export const FormularioAdopcion = () => {
       respuestasFormulario.push("");
     });
 
+    console.log(store.respuestasDatosContacto, "store.respuestasDatosContacto");
+    console.log(respuestasDatosContacto, "respuestasDatosContacto");
+
     actions.setRespuestasDatosContacto(respuestasDatosContacto);
-    actions.setRespuestasFormularioAdopcion(respuestasFormulario);
+    actions.setRespuestasFormularioAdopcion(respuestasFormulario); */
+    actions.setRespuestasDatosContacto(["", "", "", ""]);
+    actions.setRespuestasFormularioAdopcion(["", "", "", "", "", "", ""]);
+
+    console.log(store.respuestasDatosContacto, "store.respuestasDatosContacto");
 
     // Hace fetch para buscar la id del usuario en base de datos correspondiente al email actual
     actions.addCurrentUserId();

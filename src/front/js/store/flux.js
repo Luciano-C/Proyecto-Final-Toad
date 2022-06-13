@@ -219,7 +219,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         var raw = JSON.stringify({
           id: id,
           email: store.usuarioActual.email,
-          password: store.usuarioActual.password,
+          //password: store.usuarioActual.password,
           nombre: nombre,
           apellidos: apellidos,
           direccion: direccion,
