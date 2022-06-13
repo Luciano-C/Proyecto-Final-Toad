@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Card } from "../component/card";
@@ -9,6 +9,10 @@ import { useParams } from "react-router-dom";
 export const Home = () => {
   const { store, actions } = useContext(Context);
   const { page } = useParams();
+
+  useEffect(() => {
+    actions.getMascotas();
+  }, []);
 
   return (
     <div className="text-center">

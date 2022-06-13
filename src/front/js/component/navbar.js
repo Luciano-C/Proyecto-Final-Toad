@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../styles/home.css";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const history = useHistory();
+  const { store, actions } = useContext(Context);
   return (
     <div className="display-flex">
       <nav className="navbar navbar bg-light mb-3">
@@ -44,6 +46,8 @@ export const Navbar = () => {
               href="/login"
               onClick={() => {
                 sessionStorage.setItem("Token", "");
+                sessionStorage.setItem("email", "");
+                actions.resetUsuarioActual();
                 history.push("/");
               }}
             >

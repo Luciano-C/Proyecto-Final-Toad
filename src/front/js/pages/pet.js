@@ -18,6 +18,8 @@ export const Pet = (props) => {
       actions.checkIfOwner(store.usuarioActual.id, store.mascotas[id]?.id);
       setIsLoading(false);
       console.log(store.esDueño);
+    } else {
+      setIsLoading(false);
     }
   }, [store.usuarioActual.id]);
 
@@ -67,7 +69,7 @@ export const Pet = (props) => {
             </button>
           </Link>
 
-          {!store.esDueño ? (
+          {!store.esDueño || !store.usuarioActual.id ? (
             <Link to={`/formulario-adopcion/${id}`}>
               <button className="cardButton btn btn-lg btn-danger outline-info">
                 Adoptar

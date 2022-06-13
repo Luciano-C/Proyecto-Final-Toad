@@ -48,11 +48,10 @@ def get_password_by_email(email):
 @api.route("/editar-usuario", methods=["PUT"])
 def editar_usuario():
     data = request.get_json()
-    # Ejemplo Body: {"email": "mariob@aol.com", "password": 1234, "nombre": "mario", "apellidos": "bros", "direccion": "alguna tuberia", "telefono": "123456678"}
+    # Ejemplo Body: {"email": "mariob@aol.com", "nombre": "mario", "apellidos": "bros", "direccion": "alguna tuberia", "telefono": "123456678"}
     usuario_a_editar = Users.query.filter_by(id=data["id"]).first()
     if usuario_a_editar:
         usuario_a_editar.email = data["email"]
-        usuario_a_editar.password = data["password"]
         usuario_a_editar.nombre = data["nombre"]
         usuario_a_editar.apellidos = data["apellidos"]
         usuario_a_editar.telefono = data["telefono"]

@@ -200,7 +200,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             let user = {
               id: result.id,
               email: result.email,
-              password: store.usuarioActual.password,
               nombre: result.nombre,
               apellidos: result.apellidos,
               direccion: result.direccion,
@@ -208,6 +207,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             };
             setStore({ usuarioActual: user });
           })
+          .then(console.log(store))
           .catch((error) => console.log("error", error));
       },
 
@@ -399,6 +399,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => console.log(result))
           .catch((error) => console.log("error", error));
+      },
+
+      resetUsuarioActual: () => {
+        setStore({
+          usuarioActual: {
+            email: "",
+            password: "",
+            nombre: "",
+            apellidos: "",
+            telefono: "",
+            direccion: "",
+          },
+        });
       },
 
       getMessage: () => {
