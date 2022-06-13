@@ -15,7 +15,6 @@ export const FormularioAdopcion = () => {
   const { idMascota } = useParams();
   const history = useHistory();
 
-  // Añade un elemento vacío por pregunta a la lista de respuesta para que no hayan errores con los índices.
   useEffect(() => {
     /* let respuestasDatosContacto = store.respuestasDatosContacto;
     let respuestasFormulario = store.respuestasFormularioAdopcion;
