@@ -32,28 +32,75 @@ export const Navbar = () => {
             </button>
           </Link>
         </div>
-        <div className="ml-auto">
-          {!sessionStorage.getItem("Token") ||
-          sessionStorage.getItem("Token") == "" ? (
-            <Link to="/login">
-              <button className="btn btn-dark" href="/login">
-                <i className="fas fa-user"> Iniciar sesión </i>
-              </button>
-            </Link>
-          ) : (
+        <div className="col-2">
+          <div className="dropdown">
             <button
-              className="btn btn-dark"
-              href="/login"
-              onClick={() => {
-                sessionStorage.setItem("Token", "");
-                sessionStorage.setItem("email", "");
-                actions.resetUsuarioActual();
-                history.push("/");
-              }}
+              className="cardButton btn btn-ls btn-danger outline-info dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-              <i className="fas fa-user"> Cerrar sesión </i>
+              {" "}
+              <i className="fa fa-user"></i>
+              <span> Login</span>
             </button>
-          )}
+            <ul
+              className="dropdown-menu"
+              aria-labelledby="dropdownMenuButton1"
+              style={{ border: "solid 1px black" }}
+            >
+              <li className="ms-1">
+                <Link to="/perfil">
+                  <button
+                    className="btn btn-ligth"
+                    href="/perfil"
+                    onClick={() => {
+                      sessionStorage.setItem("Token", "");
+                      history.push("/");
+                    }}
+                  >
+                    <i className="fas fa-id-badge"> Perfil</i>
+                  </button>
+                </Link>
+              </li>
+              <li className="ms-1">
+                <div className="ml-auto">
+                  {!sessionStorage.getItem("Token") ||
+                  sessionStorage.getItem("Token") == "" ? (
+                    <Link to="/login">
+                      <button
+                        className="btn btn-ligth"
+                        type="button"
+                        href="/login"
+                      >
+                        <i className="fas fa-user"> Iniciar sesión </i>
+                      </button>
+                    </Link>
+                  ) : (
+                    <button
+                      className="btn btn-dark"
+                      href="/login"
+                      onClick={() => {
+                        sessionStorage.setItem("Token", "");
+                        sessionStorage.setItem("email", "");
+                        actions.resetUsuarioActual();
+                        history.push("/");
+                      }}
+                    >
+                      <i className="fas fa-user"> Cerrar sesión </i>
+                    </button>
+                  )}
+                </div>
+              </li>
+              <li className="">
+                <Link className="dropdown-item" to="/regUsuario">
+                  {" "}
+                  <i className="fas fa-users"> Regístrate</i>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </div>
