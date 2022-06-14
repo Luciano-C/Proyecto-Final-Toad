@@ -16,6 +16,7 @@ import iniciaSesion from "../../img/inicia-sesion.png";
 export const Perfil = () => {
   const [mode, setMode] = useState(undefined);
   const { store, actions } = useContext(Context);
+
   const history = useHistory();
   /* Modos
 - crearMascota
@@ -156,7 +157,8 @@ export const Perfil = () => {
         </div>
       </div>
     );
-  } else if (!isLoading && !store.usuarioActual.id) {
+  }
+  if (!isLoading) {
     return (
       <div className="container d-flex justify-content-center">
         <img src={iniciaSesion} style={{ width: "35em", height: "35em" }} />
