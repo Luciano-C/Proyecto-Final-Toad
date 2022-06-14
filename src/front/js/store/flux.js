@@ -51,6 +51,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       idMascotasDelUsuario: [],
       usuariosMascotasFormularios: [],
 
+      // Para mis candidatos
+      candidatosDelUsuario: [],
+
       //Para mis postulaciones
       usuariosMascotas: [],
       misPostulaciones: [],
@@ -412,6 +415,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             direccion: "",
           },
         });
+      },
+
+      getCandidatosByUserId: (idUsuario) => {
+        fetch(
+          process.env.BACKEND_URL +
+            `/api/get-candidatos-by-user/id-user=${idUsuario}`
+        )
+          .then((response) => response.json())
+          .then((result) => setStore({ candidatosDelUsuario: result }))
+          .catch((error) => console.log("error", error));
       },
 
       getMessage: () => {

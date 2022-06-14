@@ -41,7 +41,8 @@ export const Perfil = () => {
 
   if (isLoading) {
     return <div>Loading...</div>;
-  } else if (store.usuarioActual.id) {
+  }
+  if (store.usuarioActual.id) {
     return (
       <div className="container">
         <div className="row">

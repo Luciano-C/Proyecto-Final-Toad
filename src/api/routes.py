@@ -325,12 +325,43 @@ def login_user():
 
 
 
-""" @api.route("/get-usuario-email", methods=["GET"])
-def get_user_by_email():
-    # Ejemplo Body: {"email": "test_user1@test.com"}
-    data = request.get_json()
-    usuario = Users.query.filter_by(email=data["email"]).first()
-    if usuario:
-        return jsonify(usuario.serialize()), 200
-    else:
-        return jsonify({"mensaje": "El usuario no existe en la base de datos"}), 200 """
+
+@api.route("/get-candidatos-by-user/id-user=<id_user>", methods=["GET"])
+def get_candidatos_by_user_id(id_user):
+    
+    usuarios_mascota = Usuario_Mascota.query.filter_by(id_usuario=id_user).all()
+    id_mascotas = [x.id_mascota for x in usuarios_mascota]
+    
+    candidatos_mascotas_formularios = Candidato_Mascota_Formulario.query.all()
+    id_formularios = [x.id_formulario for x in candidatos_mascotas_formularios if x.id_mascota in id_mascotas]
+    id_candidatos = [x.id_usuario for x in candidatos_mascotas_formularios if x.id_mascota in id_mascotas]
+    
+    mascotas = []
+    for id in id_mascotas:
+        mascota_a_añadir = Mascota.query.filter_by(id=id).first()
+        mascotas.append(mascota_a_añadir.serialize())
+
+    
+    candidatos = []
+    for id in id_candidatos:
+        candidato_a_añadir = Users.query.filter_by(id=id).first()
+        candidatos.append(candidato_a_añadir.serialize())
+
+    lista_a_mapear = []
+    for i in range(len(candidatos)):
+        lista_a_mapear.append({"mascota": mascotas[i], "candidato": candidatos[i], "idFormulario": id_formularios[i]})
+    
+    return jsonify(lista_a_mapear)
+
+   
+
+
+
+
+""" let arrayToMap = [
+  { mascota: {}, candidato: {}, id_formulario },
+  { mascota: {}, candidato: {}, id_formulario },
+  ]; """
+
+
+

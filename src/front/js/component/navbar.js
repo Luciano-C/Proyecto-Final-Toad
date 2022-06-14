@@ -55,10 +55,10 @@ export const Navbar = () => {
                   <button
                     className="btn btn-ligth"
                     href="/perfil"
-                    onClick={() => {
+                    /* onClick={() => {
                       sessionStorage.setItem("Token", "");
                       history.push("/");
-                    }}
+                    }} */
                   >
                     <i className="fas fa-id-badge"> Perfil</i>
                   </button>

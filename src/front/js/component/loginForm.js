@@ -22,7 +22,10 @@ export const LoginForm = () => {
             margin: "2rem",
           }}
         >
-          <h1>Inicia sesión</h1>
+          <div>
+            <h1>Inicia sesión</h1>
+          </div>
+
           <div className="mb-3" style={{ marginTop: "2rem" }}>
             <label htmlFor="exampleFormControlInput1" className="form-label">
               <h4> Email</h4>

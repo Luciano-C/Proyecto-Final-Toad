@@ -83,7 +83,7 @@ export const RecupContraForm = () => {
         >
           <form onSubmit={recuperarContraseña}>
             <div className="title" style={{ marginTop: "2rem" }}>
-              <h1>Restaurar tu contraseña</h1>
+              <h1 style={{ background: "white" }}>Recuperar tu contraseña</h1>
             </div>
 
             <div className="mb-3" style={{ marginTop: "2rem" }}>
