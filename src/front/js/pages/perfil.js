@@ -159,7 +159,9 @@ export const Perfil = () => {
       </div>
     );
   }
-  if (!isLoading) {
+
+  /* AL INICIAR SESIÓN SE MUESTRA BREVEMENTE EL PERRO ANTES DE QUE CARGUE */
+  if (!store.usuarioActual.id) {
     return (
       <div className="container d-flex justify-content-center">
         <img src={iniciaSesion} style={{ width: "35em", height: "35em" }} />
