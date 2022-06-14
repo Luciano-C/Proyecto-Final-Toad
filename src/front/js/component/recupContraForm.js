@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/login.css";
 import emailjs, { sendForm } from "emailjs-com";
-import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const RecupContraForm = () => {
@@ -12,37 +11,57 @@ export const RecupContraForm = () => {
   const [errrorEmail, setErrorEmail] = useState(null);
   const [loading, setLoading] = useState(null);
 
+  // Funcionalidad para buscar contraseña en base de datos y almacenar en password
+  useEffect(() => {
+    getPasswordByEmail(email);
+  }, [email]);
+
+  const getPasswordByEmail = (email) => {
+    fetch(process.env.BACKEND_URL + `/api/get-password/email=${email}`)
+      .then((response) => response.json())
+      .then((result) => {
+        setPassword(result);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  // Valida email verificando si hay "@" en el input
   const onSubmit = () => {
     if (!validateData()) {
       return;
     }
-    console.log("recuperación exitosa!");
   };
 
   const validateData = () => {
     setErrorEmail(null);
     let valid = true;
 
-    if (!validateEmail(email)) {
+    if (!email.includes("@")) {
       setErrorEmail("Debes ingresar un email válido");
       valid = false;
     }
     return valid;
   };
 
+  // Función que interactúa con EmailJS, manda un objeto con las variables requeridas en la plantilla
   function recuperarContraseña(e) {
+    getPasswordByEmail(email);
     e.preventDefault();
-
+    const parameters = {
+      user_email: email,
+      from_name: "Appdopta",
+      password: password,
+    };
     emailjs
-      .sendForm(
+      .send(
         "service_hmyjggt",
         "template_y16zf9q",
-        e.target,
+        parameters,
         "7mmIhv5U2jO59TOvV"
       )
 
       .then((res) => {
-        alert("Revise su Bandeja de entrada.");
+        alert("Revise su bandeja de entrada.");
         console.log(res);
       })
       .catch((error) => {
@@ -68,7 +87,7 @@ export const RecupContraForm = () => {
             </div>
 
             <div className="mb-3" style={{ marginTop: "2rem" }}>
-              <label for="exampleFormControlInput1" className="form-label">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
                 <h4> Email</h4>
               </label>
               <input
@@ -77,17 +96,15 @@ export const RecupContraForm = () => {
                 id="exampleFormControlInput1"
                 placeholder="Ingresa tu email"
                 onChange={(e) => setEmail(e.target.value)}
-                defaultValue={email}
-                errorMessage={errrorEmail}
-                keyboardType="email-address"
                 name="user_email"
+                value={email}
               />
             </div>
             <div className="col-auto" style={{ marginTop: "2rem" }}>
               <button
                 type="submit"
                 title="Recuperar Contraseña"
-                onPress={onSubmit}
+                onClick={onSubmit}
                 className="cardButton btn btn-lg btn-danger outline-info"
               >
                 Enviar 🐰
