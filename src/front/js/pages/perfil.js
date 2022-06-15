@@ -39,7 +39,9 @@ export const Perfil = () => {
     actions.addCurrentUserId();
   }, []);
 
-  let isLogged = sessionStorage.getItem("Token") !== "";
+  let isLogged =
+    sessionStorage.getItem("Token") !== "" && sessionStorage.getItem("Token");
+  console.log(isLogged);
 
   if (isLoading) {
     return (
