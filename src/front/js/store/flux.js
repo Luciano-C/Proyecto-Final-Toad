@@ -140,7 +140,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
-            window.location.href = "/login";
+            //window.location.href = "/login";
             /* if (
               result.nombre &&
               result.apellidos &&

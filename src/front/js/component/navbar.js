@@ -43,7 +43,7 @@ export const Navbar = () => {
             >
               {" "}
               <i className="fa fa-user"></i>
-              <span> Login</span>
+              <span> Cuenta</span>
             </button>
             <ul
               className="dropdown-menu"

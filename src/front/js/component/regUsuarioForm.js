@@ -76,7 +76,7 @@ export const RegUsuarioForm = () => {
               className="form-control"
               id="inputAddress"
               onChange={(e) => setDireccion(e.target.value)}
-              placeholder="Región, Comuna, Calle, número"
+              placeholder="Región, Comuna, Calle, Número"
             />
           </div>
           <div className="row">
@@ -84,18 +84,33 @@ export const RegUsuarioForm = () => {
               <button
                 type="submit"
                 className="btn btn-primary mb-3"
-                onClick={() => {
-                  if (
-                    actions.registroUsuario(
-                      nombre,
-                      apellidos,
-                      email,
-                      password,
-                      direccion
-                    )
-                  ) {
-                    history.push("/login");
+                onClick={(e) => {
+                  e.preventDefault();
+                  let respuestas = [
+                    nombre,
+                    apellidos,
+                    email,
+                    password,
+                    direccion,
+                  ];
+
+                  if (respuestas.includes("")) {
+                    alert("Complete todos los campos");
+                  } else {
+                    if (
+                      actions.registroUsuario(
+                        nombre,
+                        apellidos,
+                        email,
+                        password,
+                        direccion
+                      )
+                    ) {
+                      alert("Usuario registrado");
+                      history.push("/login");
+                    }
                   }
+
                   /* actions.registroUsuario(
                     nombre,
                     apellidos,
