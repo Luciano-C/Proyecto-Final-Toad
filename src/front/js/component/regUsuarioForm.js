@@ -25,8 +25,8 @@ export const RegUsuarioForm = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Last name"
-              aria-label="Last name"
+              placeholder="Nombre"
+              aria-label="nombre"
               onChange={(e) => setNombre(e.target.value)}
             />
           </div>
@@ -37,8 +37,8 @@ export const RegUsuarioForm = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Last name"
-              aria-label="Last name"
+              placeholder="Apellidos"
+              aria-label="apellidos"
               onChange={(e) => setApellidos(e.target.value)}
             />
           </div>
