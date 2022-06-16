@@ -18,7 +18,7 @@ export const Navbar = () => {
         <div className="col">
           <Link to="/app">
             <button className="btn btn-ligth" type="button">
-              Quiénes somos?
+              ¿Quiénes somos?
             </button>
           </Link>
           <Link to="/adopta">
