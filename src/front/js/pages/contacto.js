@@ -18,7 +18,7 @@ export const Contacto = () => {
         alert("Email enviado exitosamente.");
         console.log(res);
       })
-      .cath((error) => {
+      .catch((error) => {
         console.log(error);
       });
   }

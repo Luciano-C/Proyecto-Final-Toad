@@ -330,17 +330,20 @@ def login_user():
 def get_candidatos_by_user_id(id_user):
     
     usuarios_mascota = Usuario_Mascota.query.filter_by(id_usuario=id_user).all()
-    id_mascotas = [x.id_mascota for x in usuarios_mascota]
+    id_mascotas_usuario = [x.id_mascota for x in usuarios_mascota]
     
     candidatos_mascotas_formularios = Candidato_Mascota_Formulario.query.all()
-    id_formularios = [x.id_formulario for x in candidatos_mascotas_formularios if x.id_mascota in id_mascotas]
-    id_candidatos = [x.id_usuario for x in candidatos_mascotas_formularios if x.id_mascota in id_mascotas]
+    id_formularios = [x.id_formulario for x in candidatos_mascotas_formularios if x.id_mascota in id_mascotas_usuario]
+    id_candidatos = [x.id_usuario for x in candidatos_mascotas_formularios if x.id_mascota in id_mascotas_usuario]
+    id_mascotas = [x.id_mascota for x in candidatos_mascotas_formularios if x.id_mascota in id_mascotas_usuario]
+
+    
     
     mascotas = []
     for id in id_mascotas:
         mascota_a_añadir = Mascota.query.filter_by(id=id).first()
         mascotas.append(mascota_a_añadir.serialize())
-
+    
     
     candidatos = []
     for id in id_candidatos:

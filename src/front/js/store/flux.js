@@ -108,13 +108,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log("error", error));
       },
 
-      registroUsuario: (nombre, apellidos, email, password, direccion) => {
+      registroUsuario: (
+        nombre,
+        apellidos,
+        email,
+        password,
+        telefono,
+        direccion
+      ) => {
         console.log(
           "Datos recibidos",
           nombre,
           apellidos,
           email,
           password,
+          telefono,
           direccion
         );
 
@@ -126,6 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           apellidos: apellidos,
           email: email,
           password: password,
+          telefono: telefono,
           direccion: direccion,
         });
 

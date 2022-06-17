@@ -82,6 +82,7 @@ def registra_usuario():
     newUser.apellidos = data['apellidos']
     newUser.email = data['email']
     newUser.password = data['password']
+    newUser.telefono = data['telefono']
     newUser.direccion = data['direccion']
     db.session.add(newUser)
     db.session.commit()

@@ -11,6 +11,7 @@ export const RegUsuarioForm = () => {
   const [apellidos, setApellidos] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [telefono, setTelefono] = useState("");
   const [direccion, setDireccion] = useState("");
   const history = useHistory();
 
@@ -67,7 +68,20 @@ export const RegUsuarioForm = () => {
             />
           </div>
 
-          <div className="col-12">
+          <div className="col-6">
+            <label htmlFor="inputAddress" className="form-label">
+              Teléfono
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="inputTelefono"
+              onChange={(e) => setTelefono(e.target.value)}
+              placeholder="Teléfono"
+            />
+          </div>
+
+          <div className="col-6">
             <label htmlFor="inputAddress" className="form-label">
               Dirección
             </label>
@@ -91,6 +105,7 @@ export const RegUsuarioForm = () => {
                     apellidos,
                     email,
                     password,
+                    telefono,
                     direccion,
                   ];
 
@@ -103,6 +118,7 @@ export const RegUsuarioForm = () => {
                         apellidos,
                         email,
                         password,
+                        telefono,
                         direccion
                       )
                     ) {
